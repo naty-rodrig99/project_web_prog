@@ -26,7 +26,7 @@ The framework used in this project are: Mobx & React
 
 ### :white_check_mark: Todo List
 - [x] [Proposal](https://docs.google.com/document/d/10R-qr9olemBIWb9dPIicvgsI6YAHza-MuSa7YS3MT2s/edit).
-- [ ] [Figama prototype](https://www.figma.com/file/kJ23yXcy9CZXzRKTMyCIcd/EndangeredAtalas?type=design&node-id=0%3A1&mode=design&t=M5trgEpuOWiQpI7P-1).
+- [x] [Figama prototype](https://www.figma.com/file/kJ23yXcy9CZXzRKTMyCIcd/EndangeredAtalas?type=design&node-id=0%3A1&mode=design&t=M5trgEpuOWiQpI7P-1).
 - [ ] User Study
 - [ ] API Trial
 - [ ] Web framework building
