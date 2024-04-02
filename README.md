@@ -1,4 +1,4 @@
-# EndangeredAtlas Website :panda_face: :koala: :raccoon: :sloth: :dolphin:
+# Pokemon Website :panda_face: :koala: :raccoon: :sloth: :dolphin:
 
 
 ### :muscle: Group Member: 
@@ -15,6 +15,9 @@ The framework used in this project are: Mobx & React
 
 
 ### :bookmark: API
+- [Pokemon](https://pokeapi.co/docs/v2)
+
+not used
 - [IUCN red list](https://apiv3.iucnredlist.org/api/v3/docs#countries-species).
 - [Endangered animals](https://rapidapi.com/luisvilla/api/animals-endangered-environmentalism/).
 - [Google Map](https://developers.google.com/maps/documentation/javascript/overview).
@@ -27,14 +30,14 @@ The framework used in this project are: Mobx & React
 ### :white_check_mark: Todo List
 - [x] [Proposal](https://docs.google.com/document/d/10R-qr9olemBIWb9dPIicvgsI6YAHza-MuSa7YS3MT2s/edit).
 - [x] [Figama prototype](https://www.figma.com/file/kJ23yXcy9CZXzRKTMyCIcd/EndangeredAtalas?type=design&node-id=0%3A1&mode=design&t=M5trgEpuOWiQpI7P-1).
-- [ ] User Study
+- [x] User Study
 - [ ] API Trial
 - [ ] Web framework building
 
 
 ### :scroll: Work Links
 - [Proposal](https://docs.google.com/document/d/10R-qr9olemBIWb9dPIicvgsI6YAHza-MuSa7YS3MT2s/edit).
-- [Figama protitype](https://www.figma.com/file/kJ23yXcy9CZXzRKTMyCIcd/EndangeredAtalas?type=design&node-id=0%3A1&mode=design&t=M5trgEpuOWiQpI7P-1).
+- [Figama prototype](https://www.figma.com/file/kJ23yXcy9CZXzRKTMyCIcd/EndangeredAtalas?type=design&node-id=0%3A1&mode=design&t=M5trgEpuOWiQpI7P-1).
 
 
 ### :bulb: Useful Documents
