@@ -8,6 +8,7 @@ export function NavbarView(props){
                     <li class="float_right"><a href="#/main">ProfilePicture</a></li>
                     <li class="float_right"><a href="#/main">Donate</a></li>
                     <li class="float_right"><a href="#/main">Map</a></li>
+                    <li class="float_right"><a href="#/details">Details</a></li>
                     <li class="float_right"><a href="#/main">Home</a></li>
                     <li class="float_left"><a href="#/main">Endangered Atlas</a></li>
                 </ul>
