@@ -7,7 +7,7 @@ export function NavbarView(props){
         <body>
             <nav class='navbar'>
                 <ul>
-                    <li class="float_right"><a href="#/main"><i class="fa-solid fa-user"></i></a></li>
+                    <li class="float_right"><a href="#/user"><i class="fa-solid fa-user"></i></a></li>
                     <li class="float_right"><a href="#/main">Map</a></li>
                     <li class="float_right"><a href="#/details">Details</a></li>
                     <li class="float_right"><a href="#/main">Home</a></li>

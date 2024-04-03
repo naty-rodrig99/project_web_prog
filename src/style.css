@@ -137,6 +137,14 @@ body{
         height: 60px;
         overflow: hidden;
     }
+    .favoriteList ul{
+        list-style-type: none;
+        margin: 10px;
+        padding: 0px;
+        height: min-content;
+        overflow: hidden;
+        scrollbar-width: ;
+    }
 
     .resultCardName{
         float: left;
