@@ -18,6 +18,8 @@ const model = {
         //if(animalId != this.currentAnimalId){
             //getPokemonDetials()
             resolvePromise(getPokemonDetials(),this.currentAnimalPromiseState);
+            //console.log("promise:",this.currentAnimalPromiseState);
+
         //}
         //this.currentAnimalId= animalId;
     },

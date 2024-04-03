@@ -1,11 +1,29 @@
 import { DetailsView } from "./views/detailsView";
 import { observer } from "mobx-react-lite";
+import React, { useEffect } from "react"; //change this later
 
 const Details = observer(
     function DetialsRender(props){
+        
+        useEffect(() => {
+            props.model.setCurrentAnimalId(10); 
+            // Call setCurrentAnimalId only once during component initialization
+        }, []);
+
+        function searchPokemonACB(){
+            props.model.setCurrentAnimalId(10);
+        }
+
+        if(!props.model.currentAnimalPromiseState.promise){
+            return "no data"
+        }
+        if(props.model.currentAnimalPromiseState.error){
+            return props.model.currentAnimalPromiseState.error
+        }
+        if(!props.model.currentAnimalPromiseState.data){return <img src="https://brfenergi.se/iprog/loading.gif"></img>}
         return <DetailsView
-        pokemon = {props.model.setCurrentAnimalId(10)}
-        //pokemon = {props.model.currentAnimalPromiseState.data}
+        pokemonFunction = {searchPokemonACB}
+        pokemon = {props.model.currentAnimalPromiseState.data}
         />
 
     }

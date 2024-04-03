@@ -1,32 +1,100 @@
 body{
     margin: 0;
+    font-family: 'Inter', sans-serif;
 }
-h1{
-    text-align: center;
-}
-.navbar ul{
-    list-style-type: none;
-    background-color: grey;
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-}
-.navbar a{
-    color: white;
-    text-decoration: none;
-    padding: 15px;
-    display: block;
-    text-align: center;
-}
-.navbar a:hover{
-    background-color: blue;
-}
-.float_left{
-    float: left;
-    padding-left: 20px;
-    font-size: 20px;
-}
-.float_right{
-    float: right;
-    padding: 2px;
+
+@media (min-width: 250px){
+    .flexParent{
+        display:flex;
+        flex-direction:row;
+        height:100%;
+        flex-wrap: wrap;
+    }
+    .navbar ul{
+        list-style-type: none;
+        background-color: grey;
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+    }
+    .navbar a{
+        color: white;
+        text-decoration: none;
+        padding: 15px;
+        display: block;
+        text-align: center;
+    }
+    .navbar a:hover{
+        background-color: blue;
+    }
+    .float_left{
+        float: left;
+        padding-left: 20px;
+        font-size: 20px;
+    }
+    .float_right{
+        float: right;
+        padding: 2px;
+    }
+
+    .details_part1 {
+        display: flex;
+        align-items: center; 
+        justify-content: center; 
+    }
+
+    .details_part1_name {
+        color: black;
+        font-size: 25px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+    }
+
+    .details_part1_img1 {
+        width: 300px;
+        height: auto;
+        margin-right: 50px;
+    }
+
+    .details_part1_img2 {
+        width: 20px;
+        height: auto;
+        margin-left: 28px;
+    }
+
+    .details_part2 {
+        position: relative;
+    }
+
+    .details_part2_abilities {
+        width: 76px; 
+        height: 35px; 
+        text-align: right;
+        color: black;
+        font-size: 25px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        word-wrap: break-word;
+        margin-left: 55px;
+        text-decoration: none;
+    }
+
+    .details_part2_line {
+        position: absolute;
+        margin-left: 30px;
+        width: 1200;  
+        height: 0;
+        border-top: 2px #D1C9C9 solid;
+        z-index: 1;
+    }
+
+    .details_part2_smallLine {
+        position: absolute;
+        margin-left: 30px;
+        width: 130;
+        height: 0;
+        border: 2px #FF0000 solid;
+        z-index: 2;
+    }
+
 }
