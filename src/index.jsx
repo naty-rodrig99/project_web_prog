@@ -8,7 +8,7 @@ const reactiveModel= observable(model);
 
 //reactiveModel.setSearchName("cheetah")
 reactiveModel.setSearchText("ditto");
-reactiveModel.doSearch(reactiveModel.searchParams);
+reactiveModel.doSearch(reactiveModel.searchParams.name);
 
 import { createElement } from "react";
 window.React= {createElement:createElement}; // needed in the lab because it works with both React and Vue

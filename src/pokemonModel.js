@@ -10,6 +10,7 @@ const model = {
     pokemons: [],
     currentPokemonId: null,  // null means "intentionally empty"
     searchParams: {},
+    queryParams: {},
     searchResultsPromiseState: {},
     currentPokemonPromiseState: {},
 
@@ -25,15 +26,17 @@ const model = {
     },
 
     setSearchText(name){
-        this.searchParams = name;
+        this.searchParams.name = name;
     },
 
     doSearch(params){
         //console.log("this.searchResultsPromiseState", this.searchResultsPromiseState)
         resolvePromise(searchPokemon(params), this.searchResultsPromiseState);
     },
-    
     // more methods will be added here, don't forget to separate them with comma!
+    setQueryTypeDefaultOrShiny(queryType){
+        this.queryParams.defaultOrShiny = queryType
+    }
 };
 
 export {model};
