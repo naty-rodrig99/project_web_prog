@@ -1,4 +1,4 @@
-import { BASE_URL } from './apiConfig.js';
+//import { BASE_URL } from './apiConfig.js';
 
 export function searchAnimal(searchParams){
 

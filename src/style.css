@@ -97,4 +97,18 @@ body{
         z-index: 2;
     }
 
+    .details_part2_headline1 {
+        margin-top: 30;
+        margin-left: 50px;
+        width: 135;
+        height: 35; 
+        text-align: 'right'; 
+        color: 'black';
+        font-size: 20;
+        font-family: 'Inter';
+        font-weight: '700'; 
+        word-wrap: 'break-word';
+    }
+    
+
 }

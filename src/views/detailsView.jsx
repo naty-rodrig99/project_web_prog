@@ -17,7 +17,8 @@ export function DetailsView(props){
                 <a href="#/main" class="details_part2_abilities">Abilities</a>
                 <div class="details_part2_line"></div>
                 <div class="details_part2_smallLine"></div>
-                <div style={{width: 135, height: 35, textAlign: 'right', color: 'black', fontSize: 25, fontFamily: 'Inter', fontWeight: '700', wordWrap: 'break-word'}}>Population</div>
+                <div class="details_part2_headline1">Ability: </div>
+                <div>{props.pokemon.base_experience}</div>
 
 
 
