@@ -6,7 +6,6 @@ const Main = observer(function MainRender(props){
     console.log("props",props);
     return (
         <div>
-            <NavbarView/>
             <MainView
                 test = {setTestACB}
                 search = {searchACB}
