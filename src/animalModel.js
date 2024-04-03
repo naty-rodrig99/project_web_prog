@@ -27,7 +27,7 @@ const model = {
     },
 
     doSearch(params){
-        console.log("searchparams",this.searchParams);
+        //console.log("searchparams",this.searchParams);
         console.log("this.searchResultsPromiseState", this.searchResultsPromiseState)
         resolvePromise(searchAnimal(params), this.searchResultsPromiseState);
     },

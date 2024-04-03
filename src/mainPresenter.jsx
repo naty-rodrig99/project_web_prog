@@ -1,16 +1,16 @@
-import { MainView } from "./views/mainView";
-import { NavbarView } from "./views/navbarView";
 import { observer } from "mobx-react-lite";
 
+import { MainView } from "./views/mainView";
+import { SearchResultsView } from "./views/searchResultsView";
+
 const Main = observer(function MainRender(props){
-    console.log("props",props);
     return (
         <div>
             <MainView
                 test = {setTestACB}
                 search = {searchACB}
             />
-            {conditionalRenderingResult(props.model.searchResultsPromiseState)}
+            {conditionalRender(props.model.searchResultsPromiseState)}
         </div>
     )
     function setTestACB(evt){
@@ -19,17 +19,28 @@ const Main = observer(function MainRender(props){
     function searchACB(evt){
         props.model.doSearch(evt);
     }
-    function conditionalRenderingResult(promiseState){
-        if(!promiseState.promise){
-            return "no data"
+    function conditionalRender(promiseState) {
+        function promiseNoData(promiseState) {
+          if (promiseState == null || promiseState.promise == null) {
+            return <div>No data</div>;
+          } else if (promiseState.error == null) {
+            return <img src="https://brfenergi.se/iprog/loading.gif"></img>;
+          } else {
+            return <div>{String(promiseState.error)}</div>;
+          }
         }
-        if(promiseState.error){
-            return props.model.searchResultsPromiseState.error
+        function promiseHasData(promiseState) {
+          if (promiseState.data != null) {
+            return (
+              <SearchResultsView
+                searchResults={promiseState.data}
+                //userSearchDish={userSearchDish}
+              />
+            );
+          }
         }
-        if(!promiseState.data){
-            return <img src="https://brfenergi.se/iprog/loading.gif"></img>
-        }
-    }
+        return promiseHasData(promiseState) || promiseNoData(promiseState);
+      }
 }
 )
 
