@@ -24,7 +24,7 @@ const Main = observer(function MainRender(props){
         props.model.setSearchText(evt);
     }
     function searchACB(evt){
-        props.model.doSearch(evt);
+      props.model.doSearch(props.model.searchParams);
     }
     function conditionalRender(promiseState) {
         function promiseNoData(promiseState) {

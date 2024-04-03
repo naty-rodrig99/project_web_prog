@@ -10,6 +10,7 @@ const Search = observer(             // needed for the presenter to update (its 
         }
 
         function searchNowACB(){
+            console.log("search");
             props.model.doSearch(props.model.searchParams);
         }
 
