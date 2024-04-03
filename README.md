@@ -1,4 +1,4 @@
-# Pokemon Website :panda_face: :koala: :raccoon: :sloth: :dolphin:
+# 🌟 Welcome to The Pokémon Encyclopedia! 🌟
 
 
 ### :muscle: Group Member: 
@@ -9,30 +9,34 @@
 
 
 ### :eyes: Brief Introduction
-This website aims to provide a quick and easy way to get endangered information about animals, including the name, category, description, and spatial information like the Google Maps location where you can find these animals. 
-We will also provide the donation link for the users who wanna donate for the animals. 
-The framework used in this project are: Mobx & React
+Pokémon Encyclopedia is  comprehensive webpage designed to be your ultimate guide to all things Pokémon!
+
+🔍 **Explore and Discover:** Search through a vast database of Pokémon species, uncovering their abilities, images, names, and more! Find your favorite Pokémon and learn everything about them in one convenient location.  
+
+🏆 **Create Your Dream Team:** Unleash your creativity and strategic prowess by crafting the perfect Pokémon team. Compare different combinations, optimize your lineup, and dominate battles like never before!  
+
+❤️ **Personalized Favorites:** Keep track of your most beloved Pokémon by adding them to your personalized favorites list. Your selections are securely stored with your user account, ensuring your Pokémon companions are always close at hand.  
+
+Whether you're a seasoned trainer or just starting your journey, The Pokémon Encyclopedia is your ultimate companion in the quest to become the very best. Start exploring now and embark on an unforgettable adventure!  
+
+The framework used in this project are: Mobx & React  
 
 
 ### :bookmark: API
 - [Pokemon](https://pokeapi.co/docs/v2)
-
-not used
-- [IUCN red list](https://apiv3.iucnredlist.org/api/v3/docs#countries-species).
-- [Endangered animals](https://rapidapi.com/luisvilla/api/animals-endangered-environmentalism/).
-- [Google Map](https://developers.google.com/maps/documentation/javascript/overview).
-- [Pictures](https://animality.xyz/endpoints).
-- [General info](https://api-ninjas.com/api/animals).
-- [MoveBank](https://github.com/movebank/movebank-api-doc).
-- [Donation Link - Red List](https://www.iucnredlist.org/support/donate).
 
 
 ### :white_check_mark: Todo List
 - [x] [Proposal](https://docs.google.com/document/d/10R-qr9olemBIWb9dPIicvgsI6YAHza-MuSa7YS3MT2s/edit).
 - [x] [Figama prototype](https://www.figma.com/file/kJ23yXcy9CZXzRKTMyCIcd/EndangeredAtalas?type=design&node-id=0%3A1&mode=design&t=M5trgEpuOWiQpI7P-1).
 - [x] User Study
-- [ ] API Trial
-- [ ] Web framework building
+- [x] API Trial
+- [x] Web framework building
+- [ ] Home Page - filter search and result (pending)
+- [ ] User login via google accounts (pending)
+- [ ] Details Page - forum (pending)
+- [ ] Details Page - about (pending)
+- [ ] Team Page -> maybe later
 
 
 ### :scroll: Work Links
