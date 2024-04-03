@@ -14,6 +14,11 @@ const Search = observer(             // needed for the presenter to update (its 
             props.model.doSearch(props.model.searchParams);
         }
 
+        function setSearchTypeACB(evt){
+            props.model.setSearchType(evt);
+        }
+
+
         function conditionalRenderingResult(promiseState){
             if(!promiseState.promise){
                 return "no data"
@@ -36,6 +41,7 @@ const Search = observer(             // needed for the presenter to update (its 
         name={props.model.searchParams.name}
         searchTypeCB={setSearchNameACB}
         searchNowACB={searchNowACB}
+        setsearchTypeCB={setSearchTypeACB}
         />
         {conditionalRenderingResult(props.model.searchResultsPromiseState)}
         </div>

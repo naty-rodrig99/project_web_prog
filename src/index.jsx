@@ -15,7 +15,7 @@ window.React= {createElement:createElement}; // needed in the lab because it wor
 
 import { createRoot } from "react-dom/client";
 import { ReactRoot } from "./ReactRoot.jsx";
-
+<script src="https://kit.fontawesome.com/6af1e368ac.js" crossorigin="anonymous"></script>
 
 createRoot(document.getElementById('root'))
     .render(<ReactRoot model={reactiveModel}/>);
