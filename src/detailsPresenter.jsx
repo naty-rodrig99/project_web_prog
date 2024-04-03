@@ -6,24 +6,30 @@ const Details = observer(
     function DetialsRender(props){
         
         useEffect(() => {
-            props.model.setCurrentpokemonId(10); 
+            props.model.setcurrentPokemonId(10); 
             // Call setCurrentpokemonId only once during component initialization
         }, []);
 
         function searchPokemonACB(){
-            props.model.setCurrentpokemonId(10);
+            props.model.setcurrentPokemonId(10);
         }
 
-        if(!props.model.currentAnimalPromiseState.promise){
+        function searchAbilityACB(){
+            props.model.getAbilities("friend-guard");
+        }
+
+        if(!props.model.currentPokemonPromiseState.promise){
             return "no data"
         }
-        if(props.model.currentAnimalPromiseState.error){
-            return props.model.currentAnimalPromiseState.error
+        if(props.model.currentPokemonPromiseState.error){
+            return props.model.currentPokemonPromiseState.error
         }
-        if(!props.model.currentAnimalPromiseState.data){return <img src="https://brfenergi.se/iprog/loading.gif"></img>}
+        if(!props.model.currentPokemonPromiseState.data){return <img src="https://brfenergi.se/iprog/loading.gif"></img>}
         return <DetailsView
         pokemonFunction = {searchPokemonACB}
-        pokemon = {props.model.currentAnimalPromiseState.data}
+        pokemon = {props.model.currentPokemonPromiseState.data}
+        ability = {props.model.abilitiesPromiseState.data}
+        abilitiesFunction = {searchAbilityACB}
         />
 
     }

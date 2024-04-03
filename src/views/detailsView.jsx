@@ -5,6 +5,10 @@ export function DetailsView(props){
         props.pokemonFunction()
     }
 
+    function showAbilitiesACB(){
+        props.abilitiesFunction()
+    }
+
     return (
         <div>
             <button onClick={showDetailsACB}>Show</button>
@@ -14,16 +18,24 @@ export function DetailsView(props){
                 <img class="details_part1_img2" src='src\icons\empty_heart.png'></img>
             </div>
             <div class="details_part2">
-                <a href="#/main" class="details_part2_abilities">Abilities</a>
+                <button onClick={showAbilitiesACB} class="details_part2_abilities">Details</button>
                 <div class="details_part2_line"></div>
                 <div class="details_part2_smallLine"></div>
-                <div class="details_part2_headline1">Ability: </div>
-                <div>{props.pokemon.base_experience}</div>
+                <div class="details_part2_headline1">Abilities </div>
+            </div>
 
-
-
+            <div class="details_part2_abilities1">
+                {props.pokemon.abilities.map(abilitiesACB)}
             </div>
             
+            
         </div>
-    )
+    );
+
+    function abilitiesACB(ability){
+        return <div key={ability.slot} className="ability-item" >
+            <div ><span class="details_part2_abilityName">Ability:</span> {ability.ability.name}</div>
+            <div><span class="details_part2_abilityName">Hidden:</span> {ability.is_hidden ? 'Yes' : 'No'}</div>
+        </div>;
+    }
 }

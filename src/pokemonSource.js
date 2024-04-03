@@ -22,12 +22,43 @@ export function searchPokemon(searchParams){
         if (!response.ok) {
             throw new Error('not ok');
         }
-        console.log("json", response)
-        return response.json();
+        const result = response.json();
+        //console.log("json", result)
+        return result;
     } 
 
     function someACB(objectResponse){
         //console.log("results", objectResponse)
+        return objectResponse; 
+    }
+}
+
+
+export function getPokemonAbilities(abilityName){
+    console.log("searchParams", abilityName)
+    const URL = `${BASE_URL}/ability/${abilityName}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:8080/',
+            'Access-Control-Allow-Credentials': 'true'
+        }
+    };
+
+    return fetch(URL).then(gotResponseACB).then(someACB);
+
+    function gotResponseACB(response) {
+        if (!response.ok) {
+            throw new Error('not ok');
+        }
+        const result = response.json();
+        //console.log("ability", result)
+        return result;
+    } 
+
+    function someACB(objectResponse){
         return objectResponse; 
     }
 }

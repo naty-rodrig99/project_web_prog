@@ -2,8 +2,7 @@
    The Model keeps the state of the application (Application State). 
    It is an abstract object, i.e. it knows nothing about graphics and interaction.
 */
-import { searchPokemon } from './pokemonSource.js';
-import { getPokemonDetials } from './getPokemon.js';
+import { searchPokemon, getPokemonAbilities } from './pokemonSource.js';
 import { resolvePromise } from './resolvePromise.js';
 
 const model = {  
@@ -12,16 +11,17 @@ const model = {
     searchParams: {},
     searchResultsPromiseState: {},
     currentPokemonPromiseState: {},
+    abilitiesPromiseState: {},
 
     setcurrentPokemonId(pokemonId){
-    //setcurrentPokemonId(){
-        //if(pokemonId != this.currentPokemonId){
-            //getPokemonDetials()
-            resolvePromise(getPokemonDetials(),this.currentPokemonPromiseState);
-            //console.log("promise:",this.currentPokemonPromiseState);
+        if(pokemonId != this.currentPokemonId){
+            resolvePromise(searchPokemon(17 /*pokemonId*/),this.currentPokemonPromiseState);
+        }
+        this.currentPokemonId= pokemonId;
+    },
 
-        //}
-        //this.currentPokemonId= pokemonId;
+    getAbilities(){
+        resolvePromise(getPokemonAbilities("friend-guard" /*pokemonId*/),this.abilitiesPromiseState);
     },
 
     setSearchText(name){
