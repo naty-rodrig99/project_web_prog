@@ -3,10 +3,11 @@ export function SearchResultsView(props){
     return (
         <div className="searchResultsView">
             <div className="resultCard">
-                    {props.searchResults.name}
-                    <br></br>
-                    {spriteDefaultOrShinyACB()}
-                    <button>Learn More</button>
+                {spriteDefaultOrShinyACB()}
+                <ul>
+                    <li className="resultCardName">{props.searchResults.name}</li>
+                    <li><button>Learn More</button></li>
+                </ul>
             </div>
         </div>
     );

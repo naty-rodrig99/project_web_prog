@@ -21,6 +21,7 @@ export function SearchFormView(props){
 
     return (
         <div className="searchFormView">
+            {/* <div className="mainPagePic"> <img alt="picture of pokemon" src="https://wallpapers-clan.com/wp-content/uploads/2023/10/cute-pikachu-flowers-pokemon-desktop-wallpaper-cover.jpg"></img></div> */}
             <div className="searchBar">
                 <input type="text" value={props.text || ""} onChange={setSearchTextACB}/>
                 <button onClick={sendSearchNowACB}><i class="fa-solid fa-magnifying-glass"></i></button>

@@ -12,73 +12,157 @@ body{
     }
     .navbar ul{
         list-style-type: none;
-        background-color: grey;
+        background-color: #2A74BA;
         margin: 0px;
         padding: 0px;
+        height: 60px;
         overflow: hidden;
     }
     .navbar a{
         color: white;
         text-decoration: none;
-        padding: 15px;
+        padding: 15px 15px;
         display: block;
+        font-size: large;
         text-align: center;
     }
-    .navbar a:hover{
-        background-color: blue;
+    .navbar i{
+        font-size: 30px;
     }
+    .navbar img{
+        height:50px;
+        margin: 5px 10px;
+    }
+    /* .navbar a:hover{
+        background-color: blue;
+    } */
 
     .searchFormView {
-        width: 100vw;
-        height:150px;
+        width: 90vw;
+        margin: 20px 5vw;
+        height:min-content;
     }
+    /* .mainPagePic{
+        width: 80vw;
+        align-self: center;
+        margin: 20px 10vw;
+    }
+    .mainPagePic .img{
+        align-self: center;
+        width: 400px;
+    } */
     .searchBar{
         background-color: #EBEBEB;
         border: 2px solid rgb(189, 189, 189);
         border-radius: 20px;
         height: 40px;
-        width: 80vw;
+        width: 100%;
         align-content: center;
-        margin: 10px 10vw;
+        margin: 20px 0;
     }
     /* .searchFormView button{
         background-color: ;
         border: 0px;
         height: 40px;
     } */
-    .searchFormView button i{
-        height: 40px;
-        width: 40px;
+    .searchBar input{
         border: 0px;
+        height:35px;
+        margin: 2px 15px;
+        font-size: 20px;
+        width: 600px;
+        background-color: #EBEBEB;
+    }
+
+    .searchBar input:focus {
+        outline: none;
+    }
+    .searchBar i{
+        height: 30px;
+        border: 0px;
+        background-color: #EBEBEB;
+        margin: 0px 5px;
+        font-size: 25px;
+    }
+
+    .searchBar button{
+        background-color: #EBEBEB;
+        height: min-content;
+        border: 0px;
+        float: right;
+        margin-right: 10px;
+        margin-top: 5px;
     }
 
 
     .searchFilter{
         height: 40px;
-        width: 80vw;
+        width: 100%;
         align-content: center;
-        margin: 10px 10vw;
     }
     .searchFilter select{
         border: 2px solid rgb(189, 189, 189);
-        border-radius: 5px;
+        border-radius: 20px;
         height: 40px;
         width:250px;
     }
+
+    .searchResultsView {
+        width: 90vw;
+        margin: 40px 5vw;
+        height:min-content;
+    }
+
     .resultCard{
         background-color:#EBEBEB;
         border: 2px solid rgb(189, 189, 189);
         border-radius: 15px;
-        margin: 10px 5px;
+        margin: 20px 5px;
         width: 280px;
         height: 350px;
     }
+
     .resultCard img{
-        height: 200px;
+        width: 260px;
+        margin: 10px;
+        object-fit: cover;
+        border-radius: 15px;
+        background-color: #ffffff;
     }
+
+    .resultCard ul{
+        list-style-type: none;
+        margin: 10px;
+        padding: 0px;
+        height: 60px;
+        overflow: hidden;
+    }
+
+    .resultCardName{
+        float: left;
+        margin: 2px 10px;
+        font-weight: bolder;
+        font-size: 28px;
+    }
+
+    .resultCard button{
+        background-color:#2e7bc3;
+        float: right;
+        height: 45px;
+        width: 120px;
+        font-size: 18px;
+        border-radius: 25px;
+        border: 0;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+
+    }
+
     .float_left{
         float: left;
         padding-left: 20px;
+        text-align: center;
         font-size: 20px;
     }
     .float_right{
