@@ -1,12 +1,10 @@
-//import {dishTypeOptions, text, type} from "/src/utilities.js";
-
 export function SearchFormView(props){
     //console.log("form",props);
-    function sendSearchTextACB(evt){
+    function setSearchTextACB(evt){
         props.searchTextACB(evt.target.value);
     }
 
-    function sendsearchNowACB(evt){
+    function sendSearchNowACB(evt){
         props.searchNowACB();
     }
 
@@ -17,10 +15,10 @@ export function SearchFormView(props){
 
     return (
         <div className="searchFormView">
-            <td>Search for a pokenmon:</td>
+            <td>Search for a pokémon:</td>
 
-            <input type="text" value={props.text || ""} onChange={sendSearchTextACB}/>
-            <button onClick={sendsearchNowACB}>Search!</button>
+            <input type="text" value={props.text || ""} onChange={setSearchTextACB}/>
+            <button onClick={sendSearchNowACB}>Search!</button>
           
         </div>
     );

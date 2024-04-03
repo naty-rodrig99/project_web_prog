@@ -1,5 +1,5 @@
 // (1) ------------ application state (model) -----------
-import { model } from '/src/animalModel.js';
+import { model } from '/src/pokemonModel.js';
 // uncomment to make the app update when the model changes:
 
 import { reaction, observable, configure } from "mobx";

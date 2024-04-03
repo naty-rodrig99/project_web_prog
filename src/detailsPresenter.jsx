@@ -6,12 +6,12 @@ const Details = observer(
     function DetialsRender(props){
         
         useEffect(() => {
-            props.model.setCurrentAnimalId(10); 
-            // Call setCurrentAnimalId only once during component initialization
+            props.model.setCurrentpokemonId(10); 
+            // Call setCurrentpokemonId only once during component initialization
         }, []);
 
         function searchPokemonACB(){
-            props.model.setCurrentAnimalId(10);
+            props.model.setCurrentpokemonId(10);
         }
 
         if(!props.model.currentAnimalPromiseState.promise){

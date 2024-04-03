@@ -2,26 +2,26 @@
    The Model keeps the state of the application (Application State). 
    It is an abstract object, i.e. it knows nothing about graphics and interaction.
 */
-import { searchAnimal } from './annimalSource.js';
+import { searchPokemon } from './pokemonSource.js';
 import { getPokemonDetials } from './getPokemon.js';
 import { resolvePromise } from './resolvePromise.js';
 
 const model = {  
-    animals: [],
-    currentAnimalId: null,  // null means "intentionally empty"
+    pokemons: [],
+    currentPokemonId: null,  // null means "intentionally empty"
     searchParams: {},
     searchResultsPromiseState: {},
-    currentAnimalPromiseState: {},
+    currentPokemonPromiseState: {},
 
-    setCurrentAnimalId(animalId){
-    //setCurrentAnimalId(){
-        //if(animalId != this.currentAnimalId){
+    setcurrentPokemonId(pokemonId){
+    //setcurrentPokemonId(){
+        //if(pokemonId != this.currentPokemonId){
             //getPokemonDetials()
-            resolvePromise(getPokemonDetials(),this.currentAnimalPromiseState);
-            //console.log("promise:",this.currentAnimalPromiseState);
+            resolvePromise(getPokemonDetials(),this.currentPokemonPromiseState);
+            //console.log("promise:",this.currentPokemonPromiseState);
 
         //}
-        //this.currentAnimalId= animalId;
+        //this.currentPokemonId= pokemonId;
     },
 
     setSearchText(name){
@@ -30,7 +30,7 @@ const model = {
 
     doSearch(params){
         //console.log("this.searchResultsPromiseState", this.searchResultsPromiseState)
-        resolvePromise(searchAnimal(params), this.searchResultsPromiseState);
+        resolvePromise(searchPokemon(params), this.searchResultsPromiseState);
     },
     
     // more methods will be added here, don't forget to separate them with comma!

@@ -1,6 +1,6 @@
 import { BASE_URL } from './apiConfig.js';
 
-export function searchAnimal(searchParams){
+export function searchPokemon(searchParams){
     console.log("searchParams", searchParams)
     const URL = `${BASE_URL}/pokemon/${searchParams}`;
     const options = {
@@ -13,7 +13,6 @@ export function searchAnimal(searchParams){
         }
     };
 
-    const URL1="https://pokeapi.co/api/v2/pokemon/ditto"
     return fetch(URL).then(gotResponseACB).then(someACB);
 
     //return fetch(URL, options).then(gotResponseACB).then(someACB);

@@ -1,16 +1,11 @@
 import { observer } from "mobx-react-lite";
 
-import { MainView } from "./views/mainView";
 import { SearchResultsView } from "./views/searchResultsView";
 import { SearchFormView } from "./views/searchFormView";
 
 const Main = observer(function MainRender(props){
     return (
         <div>
-            {/* <MainView
-                test = {setTestACB}
-                search = {searchACB}
-            /> */}
             <SearchFormView
                 text={props.model.searchParams}
                 searchTextACB = {setSearchTextACB}
