@@ -4,6 +4,16 @@ import { observer } from "mobx-react-lite";
 
 const Main = observer(function MainRender(props){
     console.log("props",props);
+    return (
+        <div>
+            <NavbarView/>
+            <MainView
+                test = {setTestACB}
+                search = {searchACB}
+            />
+            {conditionalRenderingResult(props.model.searchResultsPromiseState)}
+        </div>
+    )
     function setTestACB(evt){
         props.model.animals(evt)
     }
@@ -20,26 +30,7 @@ const Main = observer(function MainRender(props){
         if(!promiseState.data){
             return <img src="https://brfenergi.se/iprog/loading.gif"></img>
         }
-
-
-        return <div>
-        <NavbarView/>
-        <MainView
-            test = {setTestACB}
-            search = {searchACB}
-        />
-        </div>
     }
-    return (
-    <div>
-        <NavbarView/>
-        <MainView
-            test = {setTestACB}
-            search = {searchACB}
-        />
-        {conditionalRenderingResult(props.model.searchResultsPromiseState)}
-    </div>
-    )
 }
 )
 
