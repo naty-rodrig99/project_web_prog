@@ -1,8 +1,8 @@
-import { BASE_URL, API_KEY } from './apiConfig.js';
+import { BASE_URL } from './apiConfig.js';
 
 export function searchAnimal(searchParams){
 
-    const URL = `${BASE_URL}/api/v3/species/${searchParams}?token=${API_KEY}`;
+    const URL = `${BASE_URL}/pokemon/${searchParams}`;
 
     return fetch(URL).then(gotResponseACB).then(someACB);
 
@@ -11,7 +11,7 @@ export function searchAnimal(searchParams){
         if (!response.ok) {
             throw new Error('not ok');
         }
-        //console.log("json", response.json())
+        console.log("json", response.json())
         return response.json();
     } 
 

@@ -17,6 +17,4 @@ export function resolvePromise(prms, promiseState){
     if (prms!=null){
         prms.then(dataACB).catch(errorACB)
     }
-    
-
 }
