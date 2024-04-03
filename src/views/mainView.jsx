@@ -1,18 +1,13 @@
 import "../style.css"
 export function MainView(props){
+    function logACB(evt){
+        console.log('Clicked')
+        console.log(props.search("ditto"))
+        console.log(evt)
+    }
     return (
-    <html>
-        <body>
-            <nav class='navbar'>
-                <ul>
-                    <li class="float_right"><a href="#/main">ProfilePicture</a></li>
-                    <li class="float_right"><a href="#/main">Donate</a></li>
-                    <li class="float_right"><a href="#/main">Map</a></li>
-                    <li class="float_right"><a href="#/main">Home</a></li>
-                    <li class="float_left"><a href="#/main">Endangered Atlas</a></li>
-                </ul>
-            </nav>
-        </body>
-    </html>
+    <div class="mainContainer">
+        <button onClick={logACB}>Click me!</button>
+    </div>
     )
 }
