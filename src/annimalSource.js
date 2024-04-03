@@ -1,17 +1,29 @@
 import { BASE_URL } from './apiConfig.js';
 
 export function searchAnimal(searchParams){
-
+    console.log("searchParams", searchParams)
     const URL = `${BASE_URL}/pokemon/${searchParams}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:8080/',
+            'Access-Control-Allow-Credentials': 'true'
+        }
+    };
 
+    const URL1="https://pokeapi.co/api/v2/pokemon/ditto"
     return fetch(URL).then(gotResponseACB).then(someACB);
+
+    //return fetch(URL, options).then(gotResponseACB).then(someACB);
 
     //aynchronous callback to handle response
     function gotResponseACB(response) {
         if (!response.ok) {
             throw new Error('not ok');
         }
-        console.log("json", response.json())
+        console.log("json", response)
         return response.json();
     } 
 

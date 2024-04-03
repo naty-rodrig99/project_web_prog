@@ -2,19 +2,26 @@ import { observer } from "mobx-react-lite";
 
 import { MainView } from "./views/mainView";
 import { SearchResultsView } from "./views/searchResultsView";
+import { SearchFormView } from "./views/searchFormView";
 
 const Main = observer(function MainRender(props){
     return (
         <div>
-            <MainView
+            {/* <MainView
                 test = {setTestACB}
                 search = {searchACB}
+            /> */}
+            <SearchFormView
+                text={props.model.searchParams}
+                searchTextACB = {setSearchTextACB}
+                searchNowACB = {searchACB}
             />
             {conditionalRender(props.model.searchResultsPromiseState)}
         </div>
     )
-    function setTestACB(evt){
-        props.model.animals(evt)
+    function setSearchTextACB(evt){
+        //console.log("props,model", props.model);
+        props.model.setSearchText(evt);
     }
     function searchACB(evt){
         props.model.doSearch(evt);

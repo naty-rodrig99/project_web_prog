@@ -2,29 +2,24 @@
 
 export function SearchFormView(props){
     //console.log("form",props);
-    function sendSearchNameACB(evt){
-        props.searchNameACB(evt.target.value);
+    function sendSearchTextACB(evt){
+        props.searchTextACB(evt.target.value);
     }
 
     function sendsearchNowACB(evt){
-        props.searchNowACB()
+        props.searchNowACB();
     }
 
     //used for array rendering
     function dishTypeOptionsCB(dishType){
         return <option key={dishType} value={dishType}>{dishType}</option>;
     }
-    function backToSummaryACB(){
-        window.location.hash="#/summary"
-      }
-
 
     return (
         <div className="searchFormView">
-            <button onClick={backToSummaryACB}>Back to summary</button>
-            <td>Search for a recipe:</td>
+            <td>Search for a pokenmon:</td>
 
-            <input type="text" value={props.text || ""} onChange={sendSearchNameACB}/>
+            <input type="text" value={props.text || ""} onChange={sendSearchTextACB}/>
             <button onClick={sendsearchNowACB}>Search!</button>
           
         </div>

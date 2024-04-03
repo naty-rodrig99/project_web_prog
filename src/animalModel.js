@@ -2,7 +2,7 @@
    The Model keeps the state of the application (Application State). 
    It is an abstract object, i.e. it knows nothing about graphics and interaction.
 */
-import { searchAnimal } from './animalSource.js';
+import { searchAnimal } from './annimalSource.js';
 import { getPokemonDetials } from './getPokemon.js';
 import { resolvePromise } from './resolvePromise.js';
 
@@ -24,13 +24,13 @@ const model = {
         //this.currentAnimalId= animalId;
     },
 
-    setSearchName(name){
+    setSearchText(name){
         this.searchParams = name;
     },
 
     doSearch(params){
         //console.log("searchparams",this.searchParams);
-        console.log("this.searchResultsPromiseState", this.searchResultsPromiseState)
+        //console.log("this.searchResultsPromiseState", this.searchResultsPromiseState)
         resolvePromise(searchAnimal(params), this.searchResultsPromiseState);
     },
     
