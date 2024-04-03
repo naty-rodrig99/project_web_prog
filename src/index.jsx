@@ -8,14 +8,14 @@ const reactiveModel= observable(model);
 
 //reactiveModel.setSearchName("cheetah")
 reactiveModel.setSearchText("ditto");
-reactiveModel.doSearch(reactiveModel.searchParams);
+reactiveModel.doSearch(reactiveModel.searchParams.name);
 
 import { createElement } from "react";
 window.React= {createElement:createElement}; // needed in the lab because it works with both React and Vue
 
 import { createRoot } from "react-dom/client";
 import { ReactRoot } from "./ReactRoot.jsx";
-
+<script src="https://kit.fontawesome.com/6af1e368ac.js" crossorigin="anonymous"></script>
 
 createRoot(document.getElementById('root'))
     .render(<ReactRoot model={reactiveModel}/>);

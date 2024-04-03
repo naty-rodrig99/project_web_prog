@@ -7,19 +7,24 @@ const Main = observer(function MainRender(props){
     return (
         <div>
             <SearchFormView
-                text={props.model.searchParams}
+                queryParams = {props.model.queryParams}
+                searchOptions = {["Default", "Shiny"]}
+                setDefaultOrShiny = {setDefaultOrShinyACB}
+                text={props.model.searchParams.name}
                 searchTextACB = {setSearchTextACB}
                 searchNowACB = {searchACB}
             />
             {conditionalRender(props.model.searchResultsPromiseState)}
         </div>
     )
+    function setDefaultOrShinyACB(evt){
+        props.model.setQueryTypeDefaultOrShiny(evt)
+    }
     function setSearchTextACB(evt){
-        //console.log("props,model", props.model);
         props.model.setSearchText(evt);
     }
-    function searchACB(evt){
-      props.model.doSearch(props.model.searchParams);
+    function searchACB(){
+        props.model.doSearch(props.model.searchParams.name);
     }
     function conditionalRender(promiseState) {
         function promiseNoData(promiseState) {
@@ -36,7 +41,7 @@ const Main = observer(function MainRender(props){
             return (
               <SearchResultsView
                 searchResults={promiseState.data}
-                //userSearchDish={userSearchDish}
+                queryParams = {props.model.queryParams}
               />
             );
           }

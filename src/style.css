@@ -27,6 +27,55 @@ body{
     .navbar a:hover{
         background-color: blue;
     }
+
+    .searchFormView {
+        width: 100vw;
+        height:150px;
+    }
+    .searchBar{
+        background-color: #EBEBEB;
+        border: 2px solid rgb(189, 189, 189);
+        border-radius: 20px;
+        height: 40px;
+        width: 80vw;
+        align-content: center;
+        margin: 10px 10vw;
+    }
+    /* .searchFormView button{
+        background-color: ;
+        border: 0px;
+        height: 40px;
+    } */
+    .searchFormView button i{
+        height: 40px;
+        width: 40px;
+        border: 0px;
+    }
+
+
+    .searchFilter{
+        height: 40px;
+        width: 80vw;
+        align-content: center;
+        margin: 10px 10vw;
+    }
+    .searchFilter select{
+        border: 2px solid rgb(189, 189, 189);
+        border-radius: 5px;
+        height: 40px;
+        width:250px;
+    }
+    .resultCard{
+        background-color:#EBEBEB;
+        border: 2px solid rgb(189, 189, 189);
+        border-radius: 15px;
+        margin: 10px 5px;
+        width: 280px;
+        height: 350px;
+    }
+    .resultCard img{
+        height: 200px;
+    }
     .float_left{
         float: left;
         padding-left: 20px;
