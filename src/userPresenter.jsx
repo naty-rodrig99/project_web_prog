@@ -6,6 +6,8 @@ const UserPage = observer(function UserPageRender(props){
     return (
         <div>
             <UserPageView
+                favoriteList={props.model.favoriteList}
+                promise={props.model.currentPokemonPromiseState}
             />
         </div>
     )

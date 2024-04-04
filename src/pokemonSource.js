@@ -1,7 +1,7 @@
 import { BASE_URL } from './apiConfig.js';
 
 export function searchPokemon(searchParams){
-    console.log("searchParams", searchParams)
+    //console.log("searchParams", searchParams)
     const URL = `${BASE_URL}/pokemon/${searchParams}`;
     const options = {
         method: 'GET',
@@ -33,7 +33,7 @@ export function searchPokemon(searchParams){
 
 
 export function getPokemonAbilities(abilityName){
-    console.log("searchParams", abilityName)
+    //console.log("searchParams", abilityName)
     const URL = `${BASE_URL}/ability/${abilityName}`;
     const options = {
         method: 'GET',
@@ -62,7 +62,7 @@ export function getPokemonAbilities(abilityName){
 }
 
 export function getPokemonSpecies(pokemonName){
-    console.log("searchParams", pokemonName)
+    //console.log("searchParams", pokemonName)
     const URL = `${BASE_URL}/pokemon-species/${pokemonName}`;
     const options = {
         method: 'GET',

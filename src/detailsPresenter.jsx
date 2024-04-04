@@ -27,6 +27,10 @@ const Details = observer(
             props.model.getSpecies(props.model.currentPokemonId);
         }
 
+        function addToFavoriteListACB(){
+            props.model.addToFavoriteList(props.model.currentPokemonPromiseState.data);
+        }
+
         function showSpecies() {
             setCurrentView('species');
         }
@@ -57,6 +61,9 @@ const Details = observer(
                     pokemon = {props.model.currentPokemonPromiseState.data}
                     ability = {props.model.abilitiesPromiseState.data}
                     abilitiesFunction = {searchAbilityACB}
+                    species={props.model.speciesPromiseState.data}
+                    searchSpecies={searchSpicies}
+                    
                 />
             );
         } else if(currentView === 'species'){
@@ -78,10 +85,11 @@ const Details = observer(
         return <>
         <DetailsView
             setCurrentView={setCurrentView}
-            pokemonFunction = {searchPokemonACB}
+            //pokemonFunction = {searchPokemonACB}
             pokemon = {props.model.currentPokemonPromiseState.data}
             ability = {props.model.abilitiesPromiseState.data}
             abilitiesFunction = {searchAbilityACB}
+            addToFavoriteListACB={addToFavoriteListACB}
 
         />
             {viewToShow}

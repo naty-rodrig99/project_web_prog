@@ -4,7 +4,6 @@ export function SearchResultsView(props){
     //console.log("props!!!!!!!!!!!", props.searchResults.id);
     function changeToDetails(evt){
         props.detailsChosenACB(props.searchResults.id);
-        console.log("AQUI!!!!!!!!!!!", props.searchResults.id);
         window.location.hash="#/details";
     }
 
