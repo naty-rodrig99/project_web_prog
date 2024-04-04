@@ -11,6 +11,7 @@ const Details = observer(
         
         useEffect(() => {
             props.model.setcurrentPokemonId(10); 
+            props.model.getSpecies(10);
         }, []);
 
         function searchPokemonACB(){
@@ -55,15 +56,14 @@ const Details = observer(
                     pokemon = {props.model.currentPokemonPromiseState.data}
                     ability = {props.model.abilitiesPromiseState.data}
                     abilitiesFunction = {searchAbilityACB}
-                    species={props.model.speciesPromiseState.data}
-                    searchSpecies={searchSpicies}
                 />
             );
         } else if(currentView === 'species'){
             viewToShow = ( 
                 <DetailsViewSpecies
                     setCurrentView={setCurrentView}
-
+                    species={props.model.speciesPromiseState.data}
+                    searchSpecies={searchSpicies}
                 />
             );
         } else if(currentView === 'forum'){

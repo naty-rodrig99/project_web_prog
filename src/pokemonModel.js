@@ -2,7 +2,7 @@
    The Model keeps the state of the application (Application State). 
    It is an abstract object, i.e. it knows nothing about graphics and interaction.
 */
-import { searchPokemon, getPokemonAbilities } from './pokemonSource.js';
+import { searchPokemon, getPokemonAbilities, getPokemonSpecies } from './pokemonSource.js';
 import { resolvePromise } from './resolvePromise.js';
 
 const model = {  
