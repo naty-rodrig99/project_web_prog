@@ -258,9 +258,9 @@ body{
         width: 135;
         height: 35; 
         text-align: right; 
-        color: black;
+        color: #253237;
         font-size: 22;
-        font-weight: 700; 
+        font-weight: 200; 
         word-wrap: break-word;
     }
 
@@ -291,6 +291,46 @@ body{
         background-color: #C2DFE3; 
         border-radius: 10px; 
         text-align: center; 
+    }
+
+    .details_part2_div1 {
+        margin-top: 15;
+        margin-left: 90px;
+    }
+
+    .details_part2_headline2 {
+        margin-top: 30;
+        margin-left: 30px;
+        width: 200;
+        height: 35; 
+        text-align: right; 
+        color: black;
+        font-size: 18;
+        font-weight: 700; 
+    }
+
+    .details_part2_item1 {
+        margin-top: 30;
+        margin-left: 15px;
+        width: 200;
+        height: 35; 
+        text-align: right; 
+        font-size: 18;
+    }
+
+    .details_part2_rectangle2 {
+        margin-left: 50px;
+        margin-top: 20px;
+        width: 1080px;
+        height: 10px;
+        padding: 20px;
+        background: #F3D967; 
+        display: flex; 
+        flex-wrap: wrap; 
+        border-radius: 10px;
+        font-size: 22;
+        justify-content: center; 
+        flex-direction: column-reverse; 
     }
 
 }

@@ -31,14 +31,32 @@ export function DetailsView(props){
                 <button class="details_part2_abilities">Forum</button>
                 <div class="details_part2_line"></div>
                 <div class="details_part2_smallLine"></div>
-                <div class="details_part2_headline1">Abilities </div>
+            </div>
+            <div class="details_part2_rectangle2">
+                General
+            </div>
+            <div >
+                <div class="details_part2_div1">
+                    <span class="details_part2_headline2">Base Experience:</span>
+                    <span class="details_part2_item1">{props.pokemon.base_experience}</span>
+                  </div>
+                <div class="details_part2_div1">
+                    <span class="details_part2_headline2">Height:</span>
+                    <span class="details_part2_item1">{props.pokemon.height}</span>
+                </div>
+                <div class="details_part2_div1">
+                    <span class="details_part2_headline2">Weight:</span>
+                    <span class="details_part2_item1">{props.pokemon.weight}</span>
+                </div>
             </div>
 
+            <div class="details_part2_headline1">Abilities </div>
+            
             <div class="details_part2_abilities1">
                 {props.pokemon.abilities.map(abilitiesACB)}
             </div>
 
-            <div > </div>
+            
 
             
             
