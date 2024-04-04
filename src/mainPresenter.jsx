@@ -26,6 +26,10 @@ const Main = observer(function MainRender(props){
     function searchACB(){
         props.model.doSearch(props.model.searchParams.name);
     }
+    function setDetailsChosenACB(evt){
+      props.model.setcurrentPokemonId(evt.id)
+      }
+
     function conditionalRender(promiseState) {
         function promiseNoData(promiseState) {
           if (promiseState == null || promiseState.promise == null) {
@@ -42,6 +46,7 @@ const Main = observer(function MainRender(props){
               <SearchResultsView
                 searchResults={promiseState.data}
                 queryParams = {props.model.queryParams}
+                detailsChosenACB = {setDetailsChosenACB}
               />
             );
           }

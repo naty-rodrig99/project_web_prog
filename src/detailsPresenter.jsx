@@ -70,7 +70,6 @@ const Details = observer(
             viewToShow = ( 
                 <DetailsViewForum
                     setCurrentView={setCurrentView}
-
                 />
             );
         }
@@ -82,8 +81,8 @@ const Details = observer(
             pokemon = {props.model.currentPokemonPromiseState.data}
             ability = {props.model.abilitiesPromiseState.data}
             abilitiesFunction = {searchAbilityACB}
-        />
 
+        />
             {viewToShow}
         </>
 
