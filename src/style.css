@@ -238,7 +238,7 @@ body{
         margin-left: 30px;
         width: 130;
         height: 0;
-        border: 2px #FF0000 solid;
+        border: 2px #253237 solid;
         z-index: 2;
     }
 
@@ -260,10 +260,11 @@ body{
         width: 1080px;
         height: 55px;
         padding: 20px;
-        background: #F0DCD6; 
+        background: #C2DFE3; 
         display: flex; 
         flex-wrap: wrap; 
-        justify-content: space-between; 
+        justify-content: space-between;
+        border-radius: 10px;
     }
     
     .details_part2_abilityName {
@@ -279,7 +280,7 @@ body{
         width: 300px; 
         padding: 10px; 
         margin-bottom: 10px; 
-        background-color: #F0DCD6; 
+        background-color: #C2DFE3; 
         border-radius: 10px; 
         text-align: center; 
     }
