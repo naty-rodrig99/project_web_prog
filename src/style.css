@@ -3,8 +3,12 @@
 body{
     margin: 0;
     font-family: 'Roboto Slab';
-}
 
+}
+input[type=button] {
+    font-family: 'Roboto Slab';
+
+}
 @media (min-width: 250px){
     .flexParent{
         display:flex;
@@ -116,7 +120,7 @@ body{
     }
 
     .resultCard{
-        background-color:#EBEBEB;
+        background-color:#F3D967;
         border: 2px solid rgb(189, 189, 189);
         border-radius: 15px;
         margin: 20px 5px;
@@ -145,7 +149,6 @@ body{
         padding: 0px;
         height: min-content;
         overflow: hidden;
-        
     }
 
     .resultCardName{
@@ -351,4 +354,29 @@ body{
         flex-direction: column-reverse; 
     }
 
+    .details_forum ul{
+        list-style-type: none;
+        margin: 10px;
+        padding: 0px;
+        height: min-content;
+        width: 80vw;
+        overflow: hidden;
+    }
+    .details_forum li{
+        float: left;
+    }
+
+    .forum_card{
+        background-color: #C2DFE3; 
+        height: min-content;
+        width: 70vw;
+        margin: 20px 5vw;
+        font-size: 18px;
+        border-radius: 25px;
+        border: 0;
+    }
+
+    .hide{
+        display: none;
+    }
 }

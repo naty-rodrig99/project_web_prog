@@ -22,6 +22,11 @@ export function DetailsView(props){
                     <img class="details_part1_img2" src={heartImgSrc}></img>
                 </button>
             </div>
+            {/* <div class="details_selector">
+                <div class="detail_selector_item" style="z-index: 1; margin-top:0; background-color: #B4D3EE;" onClick={onChange(0)}>Details</div>
+                <div class="detail_selector_item" style="z-index: 2;" onClick={onChange(1)}>Species</div>
+                <div class="detail_selector_item" style="z-index: 2;" onClick={onChange(2)}>Forum</div>
+            </div> */}
         </div>
     )
 
