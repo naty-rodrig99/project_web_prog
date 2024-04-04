@@ -2,7 +2,16 @@
 export function DetailsViewDetails(props){
 
     function showDetailsACB(){
-        props.pokemonFunction()
+        props.setCurrentView("details")
+        //props.pokemonFunction()
+    }
+
+    function showSpeciesACB(){
+        props.setCurrentView("species")
+    }
+
+    function showForumACB(){
+        props.setCurrentView("forum")
     }
 
     function showAbilitiesACB(){
@@ -12,9 +21,9 @@ export function DetailsViewDetails(props){
     return (
         <div>
             <div class="details_part2">
-                <button onClick={showAbilitiesACB} class="details_part2_abilities">Details</button>
-                <button class="details_part2_abilities">Species</button>
-                <button class="details_part2_abilities">Forum</button>
+                <button onClick={showDetailsACB} class="details_part2_abilities">Details</button>
+                <button onClick={showSpeciesACB} class="details_part2_abilities">Species</button>
+                <button onClick={showForumACB} class="details_part2_abilities">Forum</button>
                 <div class="details_part2_line"></div>
                 <div class="details_part2_smallLine"></div>
             </div>

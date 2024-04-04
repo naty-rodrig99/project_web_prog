@@ -252,6 +252,24 @@ body{
         z-index: 2;
     }
 
+    .details_part2_smallLine2 {
+        position: absolute;
+        margin-left: 165px;
+        width: 130;
+        height: 0;
+        border: 2px #2E7BC3 solid;
+        z-index: 2;
+    }
+
+    .details_part2_smallLine3 {
+        position: absolute;
+        margin-left: 305px;
+        width: 130;
+        height: 0;
+        border: 2px #2E7BC3 solid;
+        z-index: 2;
+    }
+
     .details_part2_headline1 {
         margin-top: 30;
         margin-left: 10px;

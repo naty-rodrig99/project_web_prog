@@ -1,6 +1,7 @@
 import { DetailsView } from "./views/detailsView";
 import { DetailsViewDetails } from "./views/detailsView_Details"
 import { DetailsViewSpecies } from "./views/detialsView_Species";
+import { DetailsViewForum } from "./views/detailsView_Forum";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react"; //change this later
 
@@ -32,6 +33,10 @@ const Details = observer(
             setCurrentView('details');
         }
 
+        function showForum() {
+            setCurrentView('forum');
+        }
+
         if(!props.model.currentPokemonPromiseState.promise){
             return "no data"
         }
@@ -45,6 +50,7 @@ const Details = observer(
         if (currentView === 'details') {
             viewToShow = ( 
                 <DetailsViewDetails
+                    setCurrentView={setCurrentView}
                     pokemonFunction = {searchPokemonACB}
                     pokemon = {props.model.currentPokemonPromiseState.data}
                     ability = {props.model.abilitiesPromiseState.data}
@@ -56,6 +62,14 @@ const Details = observer(
         } else if(currentView === 'species'){
             viewToShow = ( 
                 <DetailsViewSpecies
+                    setCurrentView={setCurrentView}
+
+                />
+            );
+        } else if(currentView === 'forum'){
+            viewToShow = ( 
+                <DetailsViewForum
+                    setCurrentView={setCurrentView}
 
                 />
             );
@@ -63,6 +77,7 @@ const Details = observer(
 
         return <>
         <DetailsView
+            setCurrentView={setCurrentView}
             pokemonFunction = {searchPokemonACB}
             pokemon = {props.model.currentPokemonPromiseState.data}
             ability = {props.model.abilitiesPromiseState.data}

@@ -1,5 +1,5 @@
 
-export function DetailsViewSpecies(props){
+export function DetailsViewForum(props){
     
     function showDetailsACB(){
         props.setCurrentView("details")
@@ -20,7 +20,7 @@ export function DetailsViewSpecies(props){
                 <button onClick={showSpeciesACB} class="details_part2_abilities">Species</button>
                 <button onClick={showForumACB} class="details_part2_abilities">Forum</button>
                 <div class="details_part2_line"></div>
-                <div class="details_part2_smallLine2"></div>
+                <div class="details_part2_smallLine3"></div>
             </div>
         </div>
     );
