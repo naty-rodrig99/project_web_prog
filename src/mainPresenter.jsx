@@ -13,10 +13,16 @@ const Main = observer(function MainRender(props){
                 text={props.model.searchParams.name}
                 searchTextACB = {setSearchTextACB}
                 searchNowACB = {searchACB}
+                detailsChosenACB = {setResultChosenACB}
             />
             {conditionalRender(props.model.searchResultsPromiseState)}
         </div>
     )
+    function setResultChosenACB(evt){
+        console.log("AQ");
+        props.model.setcurrentPokemonId(evt);
+        console.log("EVT",evt);
+      }
     function setDefaultOrShinyACB(evt){
         props.model.setQueryTypeDefaultOrShiny(evt)
     }

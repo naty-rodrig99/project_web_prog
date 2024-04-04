@@ -3,27 +3,28 @@ import { DetailsViewDetails } from "./views/detailsView_Details"
 import { DetailsViewSpecies } from "./views/detialsView_Species";
 import { DetailsViewForum } from "./views/detailsView_Forum";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react"; //change this later
+import React, { useEffect, useState } from "react"; 
 
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
         
-        useEffect(() => {
-            props.model.setcurrentPokemonId(10); 
-            props.model.getSpecies(10);
-        }, []);
+        function initializeData(){
+            props.model.setcurrentPokemonId(10)
+        }
+
+        useEffect(initializeData);
 
         function searchPokemonACB(){
-            props.model.setcurrentPokemonId(10);
+            props.model.setcurrentPokemonId(props.model.currentPokemonId);
         }
 
         function searchAbilityACB(){
-            props.model.getAbilities("friend-guard");
+            props.model.getAbilities(props.model.currentPokemonId);
         }
 
         function searchSpicies(){
-            props.model.getSpecies(10);
+            props.model.getSpecies(props.model.currentPokemonId);
         }
 
         function showSpecies() {
@@ -52,7 +53,7 @@ const Details = observer(
             viewToShow = ( 
                 <DetailsViewDetails
                     setCurrentView={setCurrentView}
-                    pokemonFunction = {searchPokemonACB}
+                    //pokemonFunction = {searchPokemonACB}
                     pokemon = {props.model.currentPokemonPromiseState.data}
                     ability = {props.model.abilitiesPromiseState.data}
                     abilitiesFunction = {searchAbilityACB}

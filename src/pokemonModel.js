@@ -17,17 +17,17 @@ const model = {
 
     setcurrentPokemonId(pokemonId){
         if(pokemonId != this.currentPokemonId){
-            resolvePromise(searchPokemon(17 /*pokemonId*/),this.currentPokemonPromiseState);
+            resolvePromise(searchPokemon(pokemonId),this.currentPokemonPromiseState);
         }
         this.currentPokemonId= pokemonId;
     },
 
     getAbilities(){
-        resolvePromise(getPokemonAbilities("friend-guard" /*pokemonId*/),this.abilitiesPromiseState);
+        resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
     },
 
     getSpecies(pokemonId){
-        resolvePromise(getPokemonSpecies(17 /*pokemonId*/),this.speciesPromiseState);
+        resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
     },
 
     setSearchText(name){
