@@ -1,13 +1,15 @@
 import { DetailsView } from "./views/detailsView";
+import { DetailsViewDetails } from "./views/detailsView_Details"
+import { DetailsViewSpecies } from "./views/detialsView_Species";
 import { observer } from "mobx-react-lite";
-import React, { useEffect } from "react"; //change this later
+import React, { useEffect, useState } from "react"; //change this later
 
 const Details = observer(
     function DetialsRender(props){
+        const [currentView, setCurrentView] = useState('details');
         
         useEffect(() => {
             props.model.setcurrentPokemonId(10); 
-            // Call setCurrentpokemonId only once during component initialization
         }, []);
 
         function searchPokemonACB(){
@@ -18,6 +20,18 @@ const Details = observer(
             props.model.getAbilities("friend-guard");
         }
 
+        function searchSpicies(){
+            props.model.getSpecies(10);
+        }
+
+        function showSpecies() {
+            setCurrentView('species');
+        }
+
+        function showDetails() {
+            setCurrentView('details');
+        }
+
         if(!props.model.currentPokemonPromiseState.promise){
             return "no data"
         }
@@ -25,12 +39,38 @@ const Details = observer(
             return props.model.currentPokemonPromiseState.error
         }
         if(!props.model.currentPokemonPromiseState.data){return <img src="https://brfenergi.se/iprog/loading.gif"></img>}
-        return <DetailsView
-        pokemonFunction = {searchPokemonACB}
-        pokemon = {props.model.currentPokemonPromiseState.data}
-        ability = {props.model.abilitiesPromiseState.data}
-        abilitiesFunction = {searchAbilityACB}
+
+        let viewToShow;
+
+        if (currentView === 'details') {
+            viewToShow = ( 
+                <DetailsViewDetails
+                    pokemonFunction = {searchPokemonACB}
+                    pokemon = {props.model.currentPokemonPromiseState.data}
+                    ability = {props.model.abilitiesPromiseState.data}
+                    abilitiesFunction = {searchAbilityACB}
+                    species={props.model.speciesPromiseState.data}
+                    searchSpecies={searchSpicies}
+                />
+            );
+        } else if(currentView === 'species'){
+            viewToShow = ( 
+                <DetailsViewSpecies
+
+                />
+            );
+        }
+
+        return <>
+        <DetailsView
+            pokemonFunction = {searchPokemonACB}
+            pokemon = {props.model.currentPokemonPromiseState.data}
+            ability = {props.model.abilitiesPromiseState.data}
+            abilitiesFunction = {searchAbilityACB}
         />
+
+            {viewToShow}
+        </>
 
     }
     )

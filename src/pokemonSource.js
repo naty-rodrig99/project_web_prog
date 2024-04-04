@@ -15,8 +15,6 @@ export function searchPokemon(searchParams){
 
     return fetch(URL).then(gotResponseACB).then(someACB);
 
-    //return fetch(URL, options).then(gotResponseACB).then(someACB);
-
     //aynchronous callback to handle response
     function gotResponseACB(response) {
         if (!response.ok) {
@@ -55,6 +53,34 @@ export function getPokemonAbilities(abilityName){
         }
         const result = response.json();
         //console.log("ability", result)
+        return result;
+    } 
+
+    function someACB(objectResponse){
+        return objectResponse; 
+    }
+}
+
+export function getPokemonSpecies(pokemonName){
+    console.log("searchParams", pokemonName)
+    const URL = `${BASE_URL}/pokemon-species/${pokemonName}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:8080/',
+            'Access-Control-Allow-Credentials': 'true'
+        }
+    };
+
+    return fetch(URL).then(gotResponseACB).then(someACB);
+
+    function gotResponseACB(response) {
+        if (!response.ok) {
+            throw new Error('not ok');
+        }
+        const result = response.json();
         return result;
     } 
 

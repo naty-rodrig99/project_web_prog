@@ -7,6 +7,17 @@ import { observer } from "mobx-react-lite"
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
 
 function makeRouter(model){
+
+    function DetailsWrapper() {
+        return (
+          <>
+            <Details model={model} />
+            <DetailsDetails model={model} />
+          </>
+        );
+
+    }
+    
     return createHashRouter([
         { 
             path: "/", 
@@ -46,5 +57,7 @@ const ReactRoot = observer((props)=>{
             </div>
            );
 })
+
+
 
 export { makeRouter, ReactRoot }

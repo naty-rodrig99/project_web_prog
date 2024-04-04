@@ -13,6 +13,7 @@ const model = {
     searchResultsPromiseState: {},
     currentPokemonPromiseState: {},
     abilitiesPromiseState: {},
+    speciesPromiseState: {},
 
     setcurrentPokemonId(pokemonId){
         if(pokemonId != this.currentPokemonId){
@@ -23,6 +24,10 @@ const model = {
 
     getAbilities(){
         resolvePromise(getPokemonAbilities("friend-guard" /*pokemonId*/),this.abilitiesPromiseState);
+    },
+
+    getSpecies(pokemonId){
+        resolvePromise(getPokemonSpecies(17 /*pokemonId*/),this.speciesPromiseState);
     },
 
     setSearchText(name){
