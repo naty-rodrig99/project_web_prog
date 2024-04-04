@@ -10,20 +10,24 @@ const Details = observer(
         const [currentView, setCurrentView] = useState('details');
         
         useEffect(() => {
-            props.model.setcurrentPokemonId(10); 
-            props.model.getSpecies(10);
+            props.model.setcurrentPokemonId(props.model.currentPokemonId); 
+            props.model.getSpecies(props.model.currentPokemonId);
         }, []);
 
-        function searchPokemonACB(){
-            props.model.setcurrentPokemonId(10);
-        }
+        // function searchPokemonACB(){
+        //     props.model.setcurrentPokemonId(10);
+        // }
 
         function searchAbilityACB(){
             props.model.getAbilities("friend-guard");
         }
 
         function searchSpicies(){
-            props.model.getSpecies(10);
+            props.model.getSpecies(currentPokemonId);
+        }
+
+        function addToFavoriteListACB(){
+            props.model.addToFavoriteList(props.model.currentPokemonPromiseState.data);
         }
 
         function showSpecies() {
@@ -52,10 +56,13 @@ const Details = observer(
             viewToShow = ( 
                 <DetailsViewDetails
                     setCurrentView={setCurrentView}
-                    pokemonFunction = {searchPokemonACB}
+                    //pokemonFunction = {searchPokemonACB}
                     pokemon = {props.model.currentPokemonPromiseState.data}
                     ability = {props.model.abilitiesPromiseState.data}
                     abilitiesFunction = {searchAbilityACB}
+                    species={props.model.speciesPromiseState.data}
+                    searchSpecies={searchSpicies}
+                    
                 />
             );
         } else if(currentView === 'species'){
@@ -77,10 +84,11 @@ const Details = observer(
         return <>
         <DetailsView
             setCurrentView={setCurrentView}
-            pokemonFunction = {searchPokemonACB}
+            //pokemonFunction = {searchPokemonACB}
             pokemon = {props.model.currentPokemonPromiseState.data}
             ability = {props.model.abilitiesPromiseState.data}
             abilitiesFunction = {searchAbilityACB}
+            addToFavoriteListACB={addToFavoriteListACB}
 
         />
             {viewToShow}

@@ -3,13 +3,15 @@ import React, { useState } from 'react';
 export function DetailsView(props){
     const [heartImgSrc, setHeartImgSrc] = useState('src/icons/empty_heart.png');
 
-    function showDetailsACB(){
-        props.pokemonFunction()
-    }
+    // function showDetailsACB(){
+    //     props.pokemonFunction()
+    // }
 
     function handleHeartClick(){
         const newHeartImg = 'src/icons/red_heart.png';
         setHeartImgSrc(newHeartImg);
+        props.addToFavoriteListACB(props.pokemon);
+
     }
 
     return (

@@ -10,6 +10,7 @@ const model = {
     currentPokemonId: null,  // null means "intentionally empty"
     searchParams: {},
     queryParams: {},
+    favoriteList:[],
     searchResultsPromiseState: {},
     currentPokemonPromiseState: {},
     abilitiesPromiseState: {},
@@ -17,7 +18,7 @@ const model = {
 
     setcurrentPokemonId(pokemonId){
         if(pokemonId != this.currentPokemonId){
-            resolvePromise(searchPokemon(17 /*pokemonId*/),this.currentPokemonPromiseState);
+            resolvePromise(searchPokemon(pokemonId),this.currentPokemonPromiseState);
         }
         this.currentPokemonId= pokemonId;
     },
@@ -27,7 +28,7 @@ const model = {
     },
 
     getSpecies(pokemonId){
-        resolvePromise(getPokemonSpecies(17 /*pokemonId*/),this.speciesPromiseState);
+        resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
     },
 
     setSearchText(name){
@@ -41,7 +42,28 @@ const model = {
     // more methods will be added here, don't forget to separate them with comma!
     setQueryTypeDefaultOrShiny(queryType){
         this.queryParams.defaultOrShiny = queryType
-    }
+    },
+
+    addToFavoriteList(pokemonToAdd){
+        // array spread syntax example. Make sure you understand the code below.
+        // It sets this.dishes to a new array [   ] where we spread (...) the elements of the existing this.dishes
+        this.favoriteList= [...this.favoriteList, pokemonToAdd];
+        //console.log("Current the favorite list is: ", this.favoriteList);
+    },
+
+    // filter callback exercise
+    removeFromFavoriteList(pokemonToAdd){
+        function shouldWeKeepDishCB(pokemon){
+            if(pokemon.id===pokemonToAdd.id){
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        this.favoriteList= this.favoriteList.filter(shouldWeKeepDishCB);
+    },
+
 };
 
 export {model};

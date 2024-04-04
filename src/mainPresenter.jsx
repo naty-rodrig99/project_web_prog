@@ -27,7 +27,7 @@ const Main = observer(function MainRender(props){
         props.model.doSearch(props.model.searchParams.name);
     }
     function setDetailsChosenACB(evt){
-      props.model.setcurrentPokemonId(evt.id)
+      props.model.setcurrentPokemonId(evt)
       }
 
     function conditionalRender(promiseState) {

@@ -1,7 +1,6 @@
 import "../style.css"
 export function SearchResultsView(props){
 
-    console.log("props!!!!!!!!!!!", props);
     function changeToDetails(){
         props.detailsChosenACB(props.searchResults.id);
         window.location.hash="#/details";
