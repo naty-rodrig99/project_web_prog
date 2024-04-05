@@ -28,10 +28,12 @@ The framework used in this project are: Mobx & React
 - [x] User Study
 - [x] API Trial
 - [x] Web framework building
+- [x] Home page - name searh
 - [ ] Home Page - filter search and result (pending)
 - [ ] User login via google accounts (pending)
+- [x] User Page - favorite list
 - [ ] Details Page - forum (pending)
-- [ ] Details Page - about (pending)
+- [x] Details Page - about (pending)
 - [ ] Team Page -> maybe later
 
 
