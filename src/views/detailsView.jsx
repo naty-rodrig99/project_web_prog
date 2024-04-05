@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 
 export function DetailsView(props){
-    const [heartImgSrc, setHeartImgSrc] = useState('src/icons/empty_heart.png');
+    const [heartImgSrc, setHeartImgSrc] = useState('fa-regular fa-heart');
 
     // function showDetailsACB(){
     //     props.pokemonFunction()
     // }
 
-    function handleHeartClick(){
-        const newHeartImg = 'src/icons/red_heart.png';
-        setHeartImgSrc(newHeartImg);
+    function handleHeartClick(x){
+        // const newHeartImg = 'fa-solid fa-heart';
+        // setHeartImgSrc(newHeartImg);
+        // x.classList.toggle("fa-solid fa-heart");
         props.addToFavoriteListACB(props.pokemon);
 
     }
