@@ -1,5 +1,6 @@
 
 export function DetailsViewSpecies(props){
+    console.log("props in species", props);
     
     function showDetailsACB(){
         props.setCurrentView("details")

@@ -13,7 +13,7 @@ const Details = observer(
             props.model.setcurrentPokemonId(10)
         }
 
-        useEffect(initializeData);
+        //useEffect(initializeData);
 
         function searchPokemonACB(){
             props.model.setcurrentPokemonId(props.model.currentPokemonId);
@@ -67,6 +67,7 @@ const Details = observer(
                 />
             );
         } else if(currentView === 'species'){
+            console.log("species", props.model.speciesPromiseState);
             viewToShow = ( 
                 <DetailsViewSpecies
                     setCurrentView={setCurrentView}

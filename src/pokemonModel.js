@@ -19,6 +19,8 @@ const model = {
     setcurrentPokemonId(pokemonId){
         if(pokemonId != this.currentPokemonId){
             resolvePromise(searchPokemon(pokemonId),this.currentPokemonPromiseState);
+            resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
+            resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
         }
         this.currentPokemonId= pokemonId;
     },
