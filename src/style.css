@@ -203,6 +203,11 @@ input[type=button] {
         margin-right: 50px;
     }
 
+    .details_part1 i{
+        width: 20px;
+        height: 20px;
+        margin-left: 28px;
+    }
     .details_part1_img2 {
         width: 20px;
         height: auto;

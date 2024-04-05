@@ -21,7 +21,8 @@ export function DetailsView(props){
                 <img class="details_part1_img1" src={props.pokemon.sprites.front_shiny}></img>
                 <div class="details_part1_name">{props.pokemon.name}</div>
                 <button onClick={handleHeartClick} className="details_part1_button-img2">
-                    <img class="details_part1_img2" src={heartImgSrc}></img>
+                    <i class="fa-regular fa-heart"></i>
+                    {/* <img class="details_part1_img2" src={heartImgSrc}></img> */}
                 </button>
             </div>
             {/* <div class="details_selector">
