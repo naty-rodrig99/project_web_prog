@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 
-import { UserPageView } from "./views/userPageView";
+import { UserPageView } from "../views/userPageView";
 
 const UserPage = observer(function UserPageRender(props){
     return (

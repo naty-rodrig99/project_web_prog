@@ -1,4 +1,5 @@
-import { BASE_URL } from './apiConfig.js';
+//import { BASE_URL } from './apiConfig.js';
+const BASE_URL = 'https://pokeapi.co/api/v2';
 
 export function searchPokemon(searchParams){
     //console.log("searchParams", searchParams)

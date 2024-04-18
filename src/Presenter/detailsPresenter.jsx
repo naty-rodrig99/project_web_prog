@@ -1,7 +1,7 @@
-import { DetailsView } from "./views/detailsView";
-import { DetailsViewDetails } from "./views/detailsView_Details"
-import { DetailsViewSpecies } from "./views/detialsView_Species";
-import { DetailsViewForum } from "./views/detailsView_Forum";
+import { DetailsView } from "../views/detailsView";
+import { DetailsViewDetails } from "../views/detailsView_Details"
+import { DetailsViewSpecies } from "../views/detialsView_Species";
+import { DetailsViewForum } from "../views/detailsView_Forum";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react"; 
 

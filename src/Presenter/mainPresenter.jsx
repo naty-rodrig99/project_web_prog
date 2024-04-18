@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 
-import { SearchResultsView } from "./views/searchResultsView";
-import { SearchFormView } from "./views/searchFormView";
+import { SearchResultsView } from "../views/searchResultsView";
+import { SearchFormView } from "../views/searchFormView";
 
 const Main = observer(function MainRender(props){
     return (
