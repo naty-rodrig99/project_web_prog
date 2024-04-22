@@ -11,6 +11,7 @@ const model = {
     searchParams: {},
     queryParams: {},
     favoriteList:[],
+    //team: [],
     searchResultsPromiseState: {},
     currentPokemonPromiseState: {},
     abilitiesPromiseState: {},
@@ -68,4 +69,36 @@ const model = {
 
 };
 
-export {model};
+const PokenmonModel = {
+    currentPokemonId: null,
+    likeNumber: 0,
+    commentList: [],
+
+    setcurrentPokemonId(pokemonId){
+        if(pokemonId != this.currentPokemonId){
+            resolvePromise(searchPokemon(pokemonId),this.currentPokemonPromiseState);
+            resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
+            resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
+        }
+        this.currentPokemonId= pokemonId;
+    },
+
+    setlikeNumber(pokemonId, number){
+        if(pokemonId != this.currentPokemonId){
+            resolvePromise(searchPokemon(pokemonId),this.currentPokemonPromiseState);
+            resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
+            resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
+        }
+        this.likeNumber= number;
+    },
+
+    addToCommentList(comment){
+        // array spread syntax example. Make sure you understand the code below.
+        // It sets this.dishes to a new array [   ] where we spread (...) the elements of the existing this.dishes
+        this.commentList= [...this.commentList, comment];
+        //console.log("Current the favorite list is: ", this.favoriteList);
+    },
+
+};
+
+export {model, PokenmonModel};

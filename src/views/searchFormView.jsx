@@ -34,8 +34,6 @@ export function SearchFormView(props){
                     <option value="">Choose gender:</option>
                 </select>
             </div>
-            
-          
         </div>
     );
 }

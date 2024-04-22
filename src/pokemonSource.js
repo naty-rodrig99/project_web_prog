@@ -32,7 +32,6 @@ export function searchPokemon(searchParams){
     }
 }
 
-
 export function getPokemonAbilities(abilityName){
     //console.log("searchParams", abilityName)
     const URL = `${BASE_URL}/ability/${abilityName}`;

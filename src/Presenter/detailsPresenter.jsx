@@ -8,16 +8,6 @@ import React, { useEffect, useState } from "react";
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
-        
-        function initializeData(){
-            props.model.setcurrentPokemonId(10)
-        }
-
-        //useEffect(initializeData);
-
-        function searchPokemonACB(){
-            props.model.setcurrentPokemonId(props.model.currentPokemonId);
-        }
 
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
@@ -31,17 +21,9 @@ const Details = observer(
             props.model.addToFavoriteList(props.model.currentPokemonPromiseState.data);
         }
 
-        // function showSpecies() {
-        //     setCurrentView('species');
-        // }
-
-        // function showDetails() {
-        //     setCurrentView('details');
-        // }
-
-        // function showForum() {
-        //     setCurrentView('forum');
-        // }
+        function removeFromFavoriteListACB(){
+            props.model.removeFromFavoriteList(props.model.currentPokemonPromiseState.data);
+        }
 
         if(!props.model.currentPokemonPromiseState.promise){
             return "no data"
@@ -49,7 +31,9 @@ const Details = observer(
         if(props.model.currentPokemonPromiseState.error){
             return props.model.currentPokemonPromiseState.error
         }
-        if(!props.model.currentPokemonPromiseState.data){return <img src="https://brfenergi.se/iprog/loading.gif"></img>}
+        if(!props.model.currentPokemonPromiseState.data){
+            return <img src="https://brfenergi.se/iprog/loading.gif"></img>
+        }
 
         let viewToShow;
 
@@ -87,16 +71,23 @@ const Details = observer(
             return pokemon.id===props.model.currentPokemonId;
         }
 
+        function getLikeNumber(){
+            //  props.model.currentPokemonId
+            return 0;
+        }
+
+        //console.log("props.model.favoriteList.", props.model.favoriteList);
         return <>
         <DetailsView
             setCurrentView={setCurrentView}
             //pokemonFunction = {searchPokemonACB}
-            isInFavotite={props.model.favoriteList.find(isInFavoriteCB)}
+            isInFavorite={props.model.favoriteList.find(isInFavoriteCB)}
             pokemon = {props.model.currentPokemonPromiseState.data}
             ability = {props.model.abilitiesPromiseState.data}
             abilitiesFunction = {searchAbilityACB}
             addToFavoriteListACB={addToFavoriteListACB}
-
+            removeFromFavoriteListACB={removeFromFavoriteListACB}
+            likeNumber={getLikeNumber}
         />
             {viewToShow}
         </>
