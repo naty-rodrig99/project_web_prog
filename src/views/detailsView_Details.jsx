@@ -45,7 +45,7 @@ export function DetailsViewDetails(props){
                 </div>
             </div>
 
-            <div class="details_part2_headline1">Abilities </div>
+            <div class="details_part2_rectangle2">Abilities </div>
             
             <div class="details_part2_abilities1">
                 {props.pokemon.abilities.map(abilitiesACB)}
