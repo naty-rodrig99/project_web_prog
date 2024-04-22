@@ -15,11 +15,16 @@ export function DetailsView(props){
 
     }
 
+    function backtoHomePage(evt){
+        window.location.hash="#/main";
+    }
+
     return (
         <div>
+            <button className="details_part1_backbutton" onClick={backtoHomePage}>Back</button>
             <div class="details_part1">
                 <img class="details_part1_img1" src={props.pokemon.sprites.front_default}></img>
-                <img class="details_part1_img1" src={props.pokemon.sprites.front_shiny}></img>
+                {/*<img class="details_part1_img1" src={props.pokemon.sprites.front_shiny}></img> */}
                 <div class="details_part1_name">{props.pokemon.name}</div>
                 <button onClick={handleHeartClick} className="details_part1_button-img2">
                     <i class="fa-regular fa-heart"></i>

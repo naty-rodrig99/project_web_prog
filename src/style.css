@@ -208,6 +208,24 @@ input[type=button] {
         height: 20px;
         margin-left: 28px;
     }
+
+    .details_part1_backbutton {
+        background-color: white;
+        border: 3px solid #2e7bc3;
+        float: left;
+        height: 35px;
+        width: 100px;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Roboto Slab';
+        border-radius: 20px;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        margin-left: 15px;
+        margin-top: 15px;
+    }
+
     .details_part1_img2 {
         width: 20px;
         height: auto;
@@ -294,11 +312,11 @@ input[type=button] {
         margin-left: 50px;
         width: 1080px;
         height: 75px;
-        padding: 20px;
-        background: #C2DFE3; 
+        padding: 10px;
+        /*background: #C2DFE3;*/
         display: flex; 
         flex-wrap: wrap; 
-        justify-content: space-between;
+        /*justify-content: space-between; */
         border-radius: 10px;
     }
     
@@ -314,7 +332,7 @@ input[type=button] {
         width: 300px; 
         padding: 10px; 
         margin-bottom: 10px; 
-        background-color: #C2DFE3; 
+        /*background-color: #C2DFE3; */
         border-radius: 10px; 
         text-align: center; 
     }
