@@ -29,7 +29,22 @@ createRoot(document.getElementById('root'))
     } catch (error) {
         console.error(error);
     } */
+    // import {Helmet} from "react-helmet";
 
+    // class Application extends React.Component {
+    //   render () {
+    //     return (
+    //         <div className="application">
+    //             <Helmet>
+    //                 <meta charSet="utf-8" />
+    //                 <title>My Title</title>
+    //                 <link rel="canonical" href="http://example.com/example" />
+    //             </Helmet>
+    //             ...
+    //         </div>
+    //     );
+    //   }
+    // };
 
 window.myModel= reactiveModel;
 // import {createRoot} from "react-dom/client";

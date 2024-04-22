@@ -28,13 +28,13 @@ export function DetailsViewForum(props){
     
     return (
         <div>
-            <div class="details_part2">
+            {/* <div class="details_part2">
                 <button onClick={showDetailsACB} class="details_part2_abilities">Details</button>
                 <button onClick={showSpeciesACB} class="details_part2_abilities">Species</button>
                 <button onClick={showForumACB} class="details_part2_abilities">Forum</button>
                 <div class="details_part2_line"></div>
                 <div class="details_part2_smallLine3"></div>
-            </div>
+            </div> */}
             <div class="details_forum">
                 <ul>
                     <li>

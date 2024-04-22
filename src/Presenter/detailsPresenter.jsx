@@ -31,17 +31,17 @@ const Details = observer(
             props.model.addToFavoriteList(props.model.currentPokemonPromiseState.data);
         }
 
-        function showSpecies() {
-            setCurrentView('species');
-        }
+        // function showSpecies() {
+        //     setCurrentView('species');
+        // }
 
-        function showDetails() {
-            setCurrentView('details');
-        }
+        // function showDetails() {
+        //     setCurrentView('details');
+        // }
 
-        function showForum() {
-            setCurrentView('forum');
-        }
+        // function showForum() {
+        //     setCurrentView('forum');
+        // }
 
         if(!props.model.currentPokemonPromiseState.promise){
             return "no data"
@@ -83,10 +83,15 @@ const Details = observer(
             );
         }
 
+        function isInFavoriteCB(pokemon){
+            return pokemon.id===props.model.currentPokemonId;
+        }
+
         return <>
         <DetailsView
             setCurrentView={setCurrentView}
             //pokemonFunction = {searchPokemonACB}
+            isInFavotite={props.model.favoriteList.find(isInFavoriteCB)}
             pokemon = {props.model.currentPokemonPromiseState.data}
             ability = {props.model.abilitiesPromiseState.data}
             abilitiesFunction = {searchAbilityACB}

@@ -38,7 +38,7 @@ function makeRouter(model){
     return createHashRouter([
         { 
             path: "/", 
-            element:<Details model={model} />,
+            element:<Main model={model} />,
         },
 
         {
@@ -67,6 +67,7 @@ function makeRouter(model){
     }
 const ReactRoot = observer((props)=>{
     return (<div className="MainPage">
+                <title>Pokemon</title>
                 <div className="NavPage">
                     <Navigator></Navigator>
                 </div>
