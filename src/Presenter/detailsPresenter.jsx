@@ -5,9 +5,18 @@ import { DetailsViewForum } from "../views/detailsView_Forum";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react"; 
 
+
+import { reaction, observable, configure } from "mobx";
+import { PokenmonModel } from '../pokemonModel.js';
+import { connectToFirebasePokemon } from '../firebaseConfig.js';
+
+const reactivePokemonModel= observable(PokenmonModel);
+//console.log("reactivePokemonModel", reactivePokemonModel);
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
+
+        connectToFirebasePokemon(reactivePokemonModel, props.model.currentPokemonId, reaction);
 
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
@@ -19,10 +28,13 @@ const Details = observer(
 
         function addToFavoriteListACB(){
             props.model.addToFavoriteList(props.model.currentPokemonPromiseState.data);
+            //console.log("add!!");
+            reactivePokemonModel.addLikeNumber();
         }
 
         function removeFromFavoriteListACB(){
             props.model.removeFromFavoriteList(props.model.currentPokemonPromiseState.data);
+            reactivePokemonModel.minusLikeNumber();
         }
 
         if(!props.model.currentPokemonPromiseState.promise){
@@ -87,7 +99,7 @@ const Details = observer(
             abilitiesFunction = {searchAbilityACB}
             addToFavoriteListACB={addToFavoriteListACB}
             removeFromFavoriteListACB={removeFromFavoriteListACB}
-            likeNumber={getLikeNumber}
+            likeNumber={reactivePokemonModel.likeNumber}
         />
             {viewToShow}
         </>

@@ -70,26 +70,26 @@ const model = {
 };
 
 const PokenmonModel = {
-    currentPokemonId: null,
+    pokemonId: null,
     likeNumber: 0,
     commentList: [],
 
-    setcurrentPokemonId(pokemonId){
-        if(pokemonId != this.currentPokemonId){
-            resolvePromise(searchPokemon(pokemonId),this.currentPokemonPromiseState);
-            resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
-            resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
-        }
-        this.currentPokemonId= pokemonId;
+    setPokemonId(pokemonId){
+        this.pokemonId= pokemonId;
     },
 
-    setlikeNumber(pokemonId, number){
-        if(pokemonId != this.currentPokemonId){
-            resolvePromise(searchPokemon(pokemonId),this.currentPokemonPromiseState);
-            resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
-            resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
-        }
+    setlikeNumber(number){
         this.likeNumber= number;
+    },
+
+    addLikeNumber(){
+        //console.log("before add: ", this.likeNumber);
+        this.likeNumber++;
+        //console.log("after add: ", this.likeNumber);
+    },
+
+    minusLikeNumber(){
+        this.likeNumber--;
     },
 
     addToCommentList(comment){
