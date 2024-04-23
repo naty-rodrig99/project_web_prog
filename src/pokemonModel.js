@@ -40,9 +40,8 @@ const model = {
 
     doSearch(params){
         //console.log("this.searchResultsPromiseState", this.searchResultsPromiseState)
-        resolvePromise(searchPokemon(params), this.searchResultsPromiseState);
+        resolvePromise(searchPokemon(params.toLowerCase()), this.searchResultsPromiseState);
     },
-    // more methods will be added here, don't forget to separate them with comma!
     setQueryTypeDefaultOrShiny(queryType){
         this.queryParams.defaultOrShiny = queryType
     },
