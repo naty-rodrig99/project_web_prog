@@ -6,6 +6,12 @@ export function SearchFormView(props){
         props.searchTextACB(evt.target.value);
     }
 
+    function handleEnterACB(evt){
+        if (evt.key === 'Enter'){
+            props.searchNowACB()
+        }
+    }
+
     function sendSearchNowACB(){
         props.searchNowACB();
     }
@@ -23,7 +29,7 @@ export function SearchFormView(props){
         <div className="searchFormView">
             {/* <div className="mainPagePic"> <img alt="picture of pokemon" src="https://wallpapers-clan.com/wp-content/uploads/2023/10/cute-pikachu-flowers-pokemon-desktop-wallpaper-cover.jpg"></img></div> */}
             <div className="searchBar">
-                <input type="text" value={props.text || ""} onChange={setSearchTextACB}/>
+                <input type="text" value={props.text || ""} onKeyDown={handleEnterACB} onChange={setSearchTextACB}/>
                 <button onClick={sendSearchNowACB}><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             <div className="searchFilter">
