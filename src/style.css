@@ -23,6 +23,12 @@ input[type=button] {
         padding: 0px;
         height: 60px;
         overflow: hidden;
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+    .float_left{
+        margin-right: auto;
     }
     .navbar a{
         color: white;
@@ -32,17 +38,14 @@ input[type=button] {
         font-size: large;
         text-align: center;
     }
+
     .navbar i{
         font-size: 30px;
     }
     .navbar img{
         height:50px;
-        margin: 5px 10px;
+        margin: 0px 10px 5px 10px;
     }
-    /* .navbar a:hover{
-        background-color: blue;
-    } */
-
     .searchFormView {
         width: 90vw;
         margin: 20px 5vw;
