@@ -1,20 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SignIn from "./googleSignIn/signIn";
 
-// function ReactRoot(props){
-//     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-//     useEffect(() => {
-//         const email = localStorage.getItem('email');
-//         setIsAuthenticated(!!email);
-//     }, []);
-
-//     return (
-//         <div>
-//             {isAuthenticated ? <Main/> : <SignIn/>}
-//         </div>
-//     );
-// }
 import {Details} from "./Presenter/detailsPresenter.jsx";
 import { Main } from "./Presenter/mainPresenter.jsx";
 import {Navigator} from "./Presenter/navPresenter.jsx";
@@ -58,6 +45,10 @@ function makeRouter(model){
              path: "/details", 
              element:<Details model={model} />,
          },
+         { 
+            path: "/signin", 
+            element:<SignIn model={model} />,
+        },
          { 
             path: "/user", 
             element:<UserPage model={model} />,

@@ -1,4 +1,5 @@
 import { observer } from "mobx-react-lite";
+import SignIn from "../googleSignIn/signIn";
 
 import { UserPageView } from "../views/userPageView";
 
@@ -9,6 +10,7 @@ const UserPage = observer(function UserPageRender(props){
       }
     return (
         <div>
+            <SignIn onSignIn={props.SignIn} />
             <UserPageView
                 favoriteList={props.model.favoriteList}
                 promise={props.model.currentPokemonPromiseState}

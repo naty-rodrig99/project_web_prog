@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {getAuth,GoogleAuthProvider} from "firebase/auth";
+import {getAuth,GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getDatabase, ref, get, set, child, onValue} from "firebase/database";
 import { searchPokemon } from "./pokemonSource";
 import { useReducer } from "react";
@@ -20,9 +20,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
+//const auth = getAuth(app)
 const provider = new GoogleAuthProvider();
-export {auth, provider};
+// whenever a user interacts with the provider, we force them to select an account
+provider.setCustomParameters({   
+    prompt : "select_account "
+});
+export const auth = getAuth();
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 const db= getDatabase(app)
 
