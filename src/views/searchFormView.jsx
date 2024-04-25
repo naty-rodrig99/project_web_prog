@@ -19,6 +19,7 @@ export function SearchFormView(props){
     // array rendering
     function dropDownACB(evt){
         props.setDefaultOrShiny(evt.target.value)
+        props.searchNowACB()
     }
 
     function renderOptionsCB(optionTypes){

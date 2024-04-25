@@ -31,7 +31,7 @@ export function searchPokemon(searchParams){
     } 
 
     function someACB(objectResponse){
-        //console.log("results", objectResponse)
+        console.log("results", objectResponse)
         return objectResponse; 
     }
 }
