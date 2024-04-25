@@ -46,6 +46,10 @@ const model = {
         this.queryParams.defaultOrShiny = queryType
     },
 
+    setQueryPokemonGameVersion(queryGameVersion){
+        this.queryParams.gameVersion = queryGameVersion
+    },
+
     addToFavoriteList(pokemonToAdd){
         // array spread syntax example. Make sure you understand the code below.
         // It sets this.dishes to a new array [   ] where we spread (...) the elements of the existing this.dishes

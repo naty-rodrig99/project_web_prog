@@ -8,8 +8,9 @@ const Main = observer(function MainRender(props){
         <div>
             <SearchFormView
                 queryParams = {props.model.queryParams}
-                searchOptions = {["Default", "Shiny"]}
+                searchOptions = {{spriteOptions: ["Default", "Shiny"], generationOptions: ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii"]}}
                 setDefaultOrShiny = {setDefaultOrShinyACB}
+                setGameVersion = {setGameVersionACB}
                 text={props.model.searchParams.name}
                 searchTextACB = {setSearchTextACB}
                 searchNowACB = {searchACB}
@@ -24,6 +25,9 @@ const Main = observer(function MainRender(props){
       }
     function setDefaultOrShinyACB(evt){
         props.model.setQueryTypeDefaultOrShiny(evt)
+    }
+    function setGameVersionACB(evt){
+      props.model.setQueryPokemonGameVersion(evt)
     }
     function setSearchTextACB(evt){
         props.model.setSearchText(evt);

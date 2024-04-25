@@ -15,6 +15,8 @@ export function searchPokemon(searchParams){
     };
     if (Object.entries(searchParams).length === 0){
         console.log("Empty search paramater --> (Object.entries(searchParams).length === 0)")
+        
+        return fetch(URL).then(gotResponseACB).then(someACB);
     }
     else{
         return fetch(URL).then(gotResponseACB).then(someACB);

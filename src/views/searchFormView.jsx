@@ -16,9 +16,12 @@ export function SearchFormView(props){
         props.searchNowACB();
     }
 
-    // array rendering
-    function dropDownACB(evt){
+    function dropDownDefaultOrShinyACB(evt){
         props.setDefaultOrShiny(evt.target.value)
+        props.searchNowACB()
+    }
+    function dropDownGameVersionACB(evt){
+        props.setGameVersion(evt.target.value)
         props.searchNowACB()
     }
 
@@ -28,17 +31,16 @@ export function SearchFormView(props){
 
     return (
         <div className="searchFormView">
-            {/* <div className="mainPagePic"> <img alt="picture of pokemon" src="https://wallpapers-clan.com/wp-content/uploads/2023/10/cute-pikachu-flowers-pokemon-desktop-wallpaper-cover.jpg"></img></div> */}
             <div className="searchBar">
                 <input type="text" value={props.text || ""} onKeyDown={handleEnterACB} onChange={setSearchTextACB}/>
                 <button onClick={sendSearchNowACB}><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             <div className="searchFilter">
-                <select className="versionTypeSelect" value={props.queryParams.defaultOrShiny || ""} onChange={dropDownACB}>
-                    {props.searchOptions.map(renderOptionsCB)}
+                <select className="versionTypeSelect" value={props.queryParams.defaultOrShiny || ""} onChange={dropDownDefaultOrShinyACB}>
+                    {props.searchOptions.spriteOptions.map(renderOptionsCB)}
                 </select>
-                <select className="genderTypeSelect" value={props.type || ""}>
-                    <option value="">Choose gender:</option>
+                <select value={props.queryParams.gameVersion || ""} onChange={dropDownGameVersionACB}>
+                    {props.searchOptions.generationOptions.map(renderOptionsCB)}
                 </select>
             </div>
         </div>
