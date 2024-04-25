@@ -2,7 +2,7 @@
 const BASE_URL = 'https://pokeapi.co/api/v2';
 
 export function searchPokemon(searchParams){
-    //console.log("searchParams", searchParams)
+    console.log("searchParams", searchParams)
     const URL = `${BASE_URL}/pokemon/${searchParams}`;
     const options = {
         method: 'GET',
@@ -13,8 +13,12 @@ export function searchPokemon(searchParams){
             'Access-Control-Allow-Credentials': 'true'
         }
     };
-
-    return fetch(URL).then(gotResponseACB).then(someACB);
+    if (Object.entries(searchParams).length === 0){
+        console.log("Empty search paramater --> (Object.entries(searchParams).length === 0)")
+    }
+    else{
+        return fetch(URL).then(gotResponseACB).then(someACB);
+    }
 
     //aynchronous callback to handle response
     function gotResponseACB(response) {
