@@ -19,8 +19,9 @@ Whether you're a seasoned trainer or just starting your journey, The Pokémon En
 The framework used in this project are: Mobx & React  
 
 
-## :bookmark: API
+## :bookmark: API & useful tool link
 - [Pokemon](https://pokeapi.co/docs/v2)
+- [awesome-react-components](https://github.com/brillout/awesome-react-components)
 
 
 ## :bookmark_tabs: Project Structure
