@@ -5,7 +5,8 @@ import SignIn from "./googleSignIn/signIn";
 import {Details} from "./Presenter/detailsPresenter.jsx";
 import { Main } from "./Presenter/mainPresenter.jsx";
 import {Navigator} from "./Presenter/navPresenter.jsx";
-import {UserPage} from "./Presenter/userPresenter.jsx"
+import {UserPage} from "./Presenter/userPresenter.jsx";
+import {TeamPage} from "./Presenter/teamPresenter.jsx"
 //import "../style.css"
 import { observer } from "mobx-react-lite"
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
@@ -52,6 +53,10 @@ function makeRouter(model){
          { 
             path: "/user", 
             element:<UserPage model={model} />,
+        },
+        { 
+            path: "/team", 
+            element:<TeamPage model={model} />,
         }
     
     ])
