@@ -29,6 +29,13 @@ export function SearchFormView(props){
         return <option value={optionTypes}>{optionTypes}</option>
     }
 
+    function renderTestCB(object){
+        return <optgroup label={object.optionGroup}>
+        {renderOptionsCB(object.options)}
+        <option>test</option>
+        </optgroup>
+    }
+
     return (
         <div className="searchFormView">
             <div className="searchBar">
@@ -41,6 +48,9 @@ export function SearchFormView(props){
                 </select>
                 <select value={props.queryParams.gameVersion || ""} onChange={dropDownGameVersionACB}>
                     {props.searchOptions.generationOptions.map(renderOptionsCB)}
+                </select>
+                <select>
+                    {props.searchOptions.test.map(renderTestCB)}
                 </select>
             </div>
         </div>

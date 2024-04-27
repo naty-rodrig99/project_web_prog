@@ -8,7 +8,39 @@ const Main = observer(function MainRender(props){
         <div>
             <SearchFormView
                 queryParams = {props.model.queryParams}
-                searchOptions = {{spriteOptions: ["Default", "Shiny"], generationOptions: ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii"]}}
+                searchOptions = {{spriteOptions: ["Default", "Shiny"], 
+                generationOptions: ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii"],
+                test: [
+                  {
+                    optionGroup: "generation-i",
+                    options: ["red-blue", "yellow"]
+                  },
+                  {
+                    optionGroup: "generation-ii",
+                    options: ["crystal", "gold", "silver"]
+                  },
+                  {
+                    optionGroup: "generation-iii",
+                    options: ["emerald", "firered-leafgrean", "ruby-sapphire"]
+                  },
+                  {
+                    optionGroup: "generation-iv",
+                    options: ["diamond-pearl", "heartgold-soulsilver", "platinum"]
+                  },
+                  {
+                    optionGroup: "generation-v",
+                    options: ["black_white"]
+                  },
+                  {
+                    optionGroup: "generation-vi",
+                    options: ["omegaruby-alphasapphire", "x-y"]
+                  },
+                  {
+                    optionGroup: "generation-vii",
+                    options: ["ultra-sun-ultra-moon"]
+                  }
+                ]
+              }}
                 setDefaultOrShiny = {setDefaultOrShinyACB}
                 setGameVersion = {setGameVersionACB}
                 text={props.model.searchParams.name}
