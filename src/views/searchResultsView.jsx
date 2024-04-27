@@ -10,7 +10,7 @@ export function SearchResultsView(props){
     return (
         <div className="searchResultsView">
             <div className="resultCard">
-                {spriteDefaultOrShinyACB()}
+                {showSprite()}
                 <ul>
                     <li className="resultCardName">{props.searchResults.name}</li>
                     <li><button onClick={changeToDetails}>Learn More</button></li>
@@ -18,12 +18,65 @@ export function SearchResultsView(props){
             </div>
         </div>
     );
-    function spriteDefaultOrShinyACB(){
-        if (props.queryParams.defaultOrShiny == "Shiny"){
-            return <img src={props.searchResults.sprites.front_shiny}/>
+    function showSprite(){
+        var gameName = props.queryParams.gameVersion
+        if (props.queryParams.gameVersion === undefined){
+            return shinyOrDefault(props.searchResults.sprites)
         }
         else{
-            return <img src={props.searchResults.sprites.front_default}/>
+            if (gameName == "red-blue"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-i"]["red-blue"])
+            }
+            else if (gameName == "yellow"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-i"]["yellow"])
+            }
+            else if (gameName == "crystal"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-ii"]["crystal"])
+            }
+            else if (gameName == "gold"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-ii"]["gold"])
+            }
+            else if (gameName == "silver"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-ii"]["silver"])
+            }
+            else if (gameName == "emerald"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-iii"]["emerald"])
+            }
+            else if (gameName == "firered-leafgreen"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-iii"]["firered-leafgreen"])
+            }
+            else if (gameName == "ruby-sapphire"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-iii"]["ruby-sapphire"])
+            }
+            else if (gameName == "diamond-pearl"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-iv"]["diamond-pearl"])
+            }
+            else if (gameName == "heartgold-soulsilver"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-iv"]["heartgold-soulsilver"])
+            }
+            else if (gameName == "platinum"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-iv"]["platinum"])
+            }
+            else if (gameName == "black-white"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-v"]["black-white"])
+            }
+            else if (gameName == "omegaruby-alphasapphire"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-vi"]["omegaruby-alphasapphire"])
+            }
+            else if (gameName == "x-y"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-vi"]["x-y"])
+            }
+            else if (gameName == "ultra-sun-ultra-moon"){
+                return shinyOrDefault(props.searchResults.sprites.versions["generation-vii"]["ultra-sun-ultra-moon"])
+            }
+        }
+    }
+    function shinyOrDefault(object){
+        if (props.queryParams.defaultOrShiny == "Shiny"){
+            return <img src={object.front_shiny}/>
+        }
+        else{
+            return <img src={object.front_default}/>
         }
     }
 }

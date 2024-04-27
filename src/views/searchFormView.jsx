@@ -21,6 +21,8 @@ export function SearchFormView(props){
         props.searchNowACB()
     }
     function dropDownGameVersionACB(evt){
+        console.log("queryParams.gameVersion:", props.queryParams)
+        console.log("dropDownGameVersionACB", evt)
         props.setGameVersion(evt.target.value)
         props.searchNowACB()
     }
@@ -31,8 +33,7 @@ export function SearchFormView(props){
 
     function renderTestCB(object){
         return <optgroup label={object.optionGroup}>
-        {renderOptionsCB(object.options)}
-        <option>test</option>
+        {object.options.map(renderOptionsCB)}
         </optgroup>
     }
 
@@ -46,11 +47,8 @@ export function SearchFormView(props){
                 <select className="versionTypeSelect" value={props.queryParams.defaultOrShiny || ""} onChange={dropDownDefaultOrShinyACB}>
                     {props.searchOptions.spriteOptions.map(renderOptionsCB)}
                 </select>
-                <select value={props.queryParams.gameVersion || ""} onChange={dropDownGameVersionACB}>
-                    {props.searchOptions.generationOptions.map(renderOptionsCB)}
-                </select>
-                <select>
-                    {props.searchOptions.test.map(renderTestCB)}
+                <select value={props.queryParams.gameVersion  || ""} onChange={dropDownGameVersionACB}>
+                    {props.searchOptions.generationGames.map(renderTestCB)}
                 </select>
             </div>
         </div>
