@@ -1,0 +1,5 @@
+Mainpage:
+    1. Some pokemons only has a sprite directly under "props.searchResults.sprites.front_(default/shiny)"
+       Should add a check for if sprite url is null and then instead return the above path/sprite.
+    2. Some pokemons do not exist in all generations, should instead show some info to the user letting them know aobut this instead of a blank screen.
+    
