@@ -5,7 +5,9 @@
 import { searchPokemon, getPokemonAbilities, getPokemonSpecies } from './pokemonSource.js';
 import { resolvePromise } from './resolvePromise.js';
 
+
 const model = {  
+    user: null,
     pokemons: [],
     currentPokemonId: null,  // null means "intentionally empty"
     searchParams: {},
@@ -16,6 +18,10 @@ const model = {
     currentPokemonPromiseState: {},
     abilitiesPromiseState: {},
     speciesPromiseState: {},
+
+    setUser(user){
+        this.user=user;
+    },
 
     setcurrentPokemonId(pokemonId){
         if(pokemonId != this.currentPokemonId){
@@ -53,7 +59,9 @@ const model = {
     addToFavoriteList(pokemonToAdd){
         // array spread syntax example. Make sure you understand the code below.
         // It sets this.dishes to a new array [   ] where we spread (...) the elements of the existing this.dishes
-        this.favoriteList= [...this.favoriteList, pokemonToAdd];
+        if(!this.favoriteList.includes(pokemonToAdd)){
+            this.favoriteList= [...this.favoriteList, pokemonToAdd];
+        }
         //console.log("Current the favorite list is: ", this.favoriteList);
     },
 

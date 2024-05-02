@@ -47,9 +47,12 @@ createRoot(document.getElementById('root'))
     // };
 
 window.myModel= reactiveModel;
+export {reactiveModel}
 
 import {connectToFirebaseUser} from '/src/firebaseConfig.js'
 connectToFirebaseUser(reactiveModel, reaction)
+
+
 // import {createRoot} from "react-dom/client";
 // createRoot(document.getElementById('root'))
 //     .render(<div>hello world!</div>);  

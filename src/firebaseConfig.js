@@ -1,9 +1,10 @@
 import { initializeApp } from "firebase/app";
-import {getAuth,GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {getAuth,GoogleAuthProvider, signInWithPopup,signOut,onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, get, set, child, onValue} from "firebase/database";
 import { searchPokemon } from "./pokemonSource";
 import { useReducer } from "react";
 import { useMatch } from "react-router-dom";
+import {model} from "./pokemonModel"
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -28,11 +29,13 @@ provider.setCustomParameters({
 });
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signOutWithGoogle = () => signOut(auth);
 
 const db= getDatabase(app)
 
 const PATH_Pokenmon="pokemons"; //save pokemon comment and like number
-const PATH_user="users/yujingzh"; //save users'favorite list and team
+//const PATH_user="users/naty"; //save users'favorite list and team
+const PATH_user="users"; //save users'favorite list and team
 
 // set(ref(db, PATH1), "pokemon1");
 // set(ref(db, PATH2), "user1");
@@ -117,10 +120,10 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     }
 }
 
-function saveToFirebaseUser(model){
+function saveToFirebaseUser(model, uid){
     if(model.ready){
         //console.log("saveToFirebaseUser", model);
-        set(ref(db, PATH_user), userModelToPersistence(model));
+        set(ref(db, PATH_user+"/"+uid), userModelToPersistence(model));
     }
 }
 
@@ -147,9 +150,8 @@ function readFromFirebasePokemon(model, id){
     
     return get(ref(db, PATH_Pokenmon+"/"+id)).then(convertDataCB).then(changeModelReadyCB);
 }
-function readFromFirebaseUser(model){
+function readFromFirebaseUser(model, uid){
     model.ready = false;
-
     function convertDataCB(snapshot){
         //console.log("snapshot", snapshot.val());
         return persistenceToUserModel(snapshot.val(),model);
@@ -159,22 +161,45 @@ function readFromFirebaseUser(model){
         model.ready = true;
     }
     
-    return get(ref(db, PATH_user)).then(convertDataCB).then(changeModelReadyCB);
+    return get(ref(db, PATH_user+"/"+uid)).then(convertDataCB).then(changeModelReadyCB);
 }
 function connectToFirebaseUser(model, watchFunction){
-    readFromFirebaseUser(model)
+    console.log("!!!!!!!!!!!!connect firebase")
+    let currentUser = model.user;
+    
     function checkACB(){
+        if(model.user!==currentUser){
+            currentUser = model.user;
+            readFromFirebaseUser(model, model.user)
+            console.log("!!!!!!!!!!!!read from firebase")
+        }
         //console.log("checking");
         //console.log("current model11", model);
         return [model.currentPokemonId, model.favoriteList, model.team];
     }
     function effectACB(){
-        saveToFirebaseUser(model)
-        //console.log("current model", model);
+        if(model.user!==null){
+            saveToFirebaseUser(model, model.user)
+            console.log("save to current model", model);
+        }
         //console.log("side effect triggred: save to firebase!")
     }
     watchFunction(checkACB, effectACB);
 }
+
+    // readFromFirebaseUser(model)
+    // function checkACB(){
+    //     //console.log("checking");
+    //     //console.log("current model11", model);
+    //     return [model.currentPokemonId, model.favoriteList, model.team];
+    // }
+    // function effectACB(){
+    //     saveToFirebaseUser(model)
+    //     //console.log("current model", model);
+    //     //console.log("side effect triggred: save to firebase!")
+    // }
+    // watchFunction(checkACB, effectACB);
+
 
 function connectToFirebasePokemon(pokemonModel, id, watchFunction){
     readFromFirebasePokemon(pokemonModel, id)

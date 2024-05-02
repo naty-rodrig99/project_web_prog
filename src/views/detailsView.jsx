@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 
 export function DetailsView(props){
-    //console.log("details view: ", props)
+    console.log("details view: ", props)
     function handleHeartClick(x){
-        if(!props.isInFavorite){
-            props.addToFavoriteListACB(props.pokemon);
+        if(props.user===null){
+            window.location.hash="#/user";
         }
         else{
-            props.removeFromFavoriteListACB(props.pokemon);
+            if(!props.isInFavorite){
+                props.addToFavoriteListACB(props.pokemon);
+            }
+            else{
+                props.removeFromFavoriteListACB(props.pokemon);
+            }
         }
+        
     }
     function backtoHomePage(evt){
         window.location.hash="#/main";

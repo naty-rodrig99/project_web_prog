@@ -1,23 +1,63 @@
 import { observer } from "mobx-react-lite";
 import SignIn from "../googleSignIn/signIn";
+import React, { useEffect, useState } from "react"; 
+import { reaction, observable, configure } from "mobx";
+import {connectToFirebaseUser} from '../firebaseConfig.js'
 
 import { UserPageView } from "../views/userPageView";
+import { SignInView } from "../views/signInView";
+import { SignOutView } from "../views/signOutView";
 
 const UserPage = observer(function UserPageRender(props){
+
     function setResultChosenACB(evt){
         props.model.setcurrentPokemonId(evt);
         console.log("EVT",evt);
       }
-    return (
-        <div>
-            <SignIn onSignIn={props.SignIn} />
+    console.log("###########current.user: ", props.model.user);
+
+    function setUser(user){
+        props.model.setUser(user);
+        // hasUser=props.model.user;
+    }
+
+    // const [hasUser, setHasUser] = useState(props.model.user);
+    let viewToShow;
+    if(props.model.user===null){
+        console.log("no user")
+        viewToShow = ( 
+            <div className="signInorOutView">
+                <SignInView
+                loginUser={setUser}
+                />
+            </div>
+        );
+    }
+
+    else{
+        //props.model.connect();
+        console.log("have user")
+        viewToShow = ( 
+            <div className="signInorOutView">
+            <SignOutView
+                currentUser={props.model.user}
+                logoutUser={setUser}
+            />
             <UserPageView
                 favoriteList={props.model.favoriteList}
                 promise={props.model.currentPokemonPromiseState}
                 detailsChosenACB = {setResultChosenACB}
             />
+            </div>
+        );
+
+    }
+
+    return <>
+        <div>
+            {viewToShow}
         </div>
-    )
+        </>
 }
 )
 

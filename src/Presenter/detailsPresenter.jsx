@@ -10,8 +10,6 @@ import { reaction, observable, configure } from "mobx";
 import { PokenmonModel } from '../pokemonModel.js';
 import { connectToFirebasePokemon } from '../firebaseConfig.js';
 
-const reactivePokemonModel= observable(PokenmonModel);
-//console.log("reactivePokemonModel", reactivePokemonModel);
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
@@ -28,7 +26,6 @@ const Details = observer(
 
         function addToFavoriteListACB(){
             props.model.addToFavoriteList(props.model.currentPokemonPromiseState.data);
-            //console.log("add!!");
             reactivePokemonModel.addLikeNumber();
         }
 
@@ -52,8 +49,6 @@ const Details = observer(
         if (currentView === 'details') {
             viewToShow = ( 
                 <DetailsViewDetails
-                    setCurrentView={setCurrentView}
-                    //pokemonFunction = {searchPokemonACB}
                     pokemon = {props.model.currentPokemonPromiseState.data}
                     ability = {props.model.abilitiesPromiseState.data}
                     abilitiesFunction = {searchAbilityACB}
@@ -66,7 +61,6 @@ const Details = observer(
             console.log("species", props.model.speciesPromiseState);
             viewToShow = ( 
                 <DetailsViewSpecies
-                    setCurrentView={setCurrentView}
                     species={props.model.speciesPromiseState.data}
                     searchSpecies={searchSpicies}
                 />
@@ -74,7 +68,6 @@ const Details = observer(
         } else if(currentView === 'forum'){
             viewToShow = ( 
                 <DetailsViewForum
-                    setCurrentView={setCurrentView}
                 />
             );
         }
@@ -83,14 +76,11 @@ const Details = observer(
             return pokemon.id===props.model.currentPokemonId;
         }
 
-        function getLikeNumber(){
-            //  props.model.currentPokemonId
-            return 0;
-        }
 
         //console.log("props.model.favoriteList.", props.model.favoriteList);
         return <>
         <DetailsView
+            user={props.model.user}
             setCurrentView={setCurrentView}
             //pokemonFunction = {searchPokemonACB}
             isInFavorite={props.model.favoriteList.find(isInFavoriteCB)}

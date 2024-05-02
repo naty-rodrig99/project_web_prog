@@ -1,22 +1,22 @@
 
 export function DetailsViewDetails(props){
 
-    function showDetailsACB(){
-        props.setCurrentView("details")
-        //props.pokemonFunction()
-    }
+    // function showDetailsACB(){
+    //     props.setCurrentView("details")
+    //     //props.pokemonFunction()
+    // }
 
-    function showSpeciesACB(){
-        props.setCurrentView("species")
-    }
+    // function showSpeciesACB(){
+    //     props.setCurrentView("species")
+    // }
 
-    function showForumACB(){
-        props.setCurrentView("forum")
-    }
+    // function showForumACB(){
+    //     props.setCurrentView("forum")
+    // }
 
-    function showAbilitiesACB(){
-        props.abilitiesFunction()
-    }
+    // function showAbilitiesACB(){
+    //     props.abilitiesFunction()
+    // }
 
     return (
         <div>
