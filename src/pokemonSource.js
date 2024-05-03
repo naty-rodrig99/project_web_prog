@@ -13,10 +13,8 @@ export function searchPokemon(searchParams){
             'Access-Control-Allow-Credentials': 'true'
         }
     };
-    if (Object.entries(searchParams).length === 0){
-        //console.log("Empty search paramater --> (Object.entries(searchParams).length === 0)")
-        
-        return fetch(URL).then(gotResponseACB).then(someACB);
+    if (searchParams.length === 0){
+        console.log("Empty search paramater --> (Object.entries(searchParams).length === 0)")
     }
     else{
         return fetch(URL).then(gotResponseACB).then(someACB);
