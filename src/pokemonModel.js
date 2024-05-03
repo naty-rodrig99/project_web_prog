@@ -38,7 +38,7 @@ const model = {
             resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
             resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
         }
-        this.currentPokemonId= pokemonId;
+        this.currentPokemonId = pokemonId;
     },
 
     getAbilities(){
