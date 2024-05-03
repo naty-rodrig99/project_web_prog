@@ -151,6 +151,7 @@ function connectToFirebaseUser(model, watchFunction){
          }
         else{
             model.setUser(null)
+            model.clearModel()
         }
      }
 

@@ -4,7 +4,7 @@ export function TeamView(props){
     function backtoHomePage(evt){
         window.location.hash="#/main";
     }
-
+    
     return (
         <div>
             <div>

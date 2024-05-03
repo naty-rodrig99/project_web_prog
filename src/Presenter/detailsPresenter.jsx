@@ -68,6 +68,9 @@ const Details = observer(
                 />
             );
         } else if(currentView === 'forum'){
+            if ( props.model.user===null){
+                window.location.hash="#/user";
+            }
             viewToShow = ( 
                 <DetailsViewForum
                 />
