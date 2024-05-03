@@ -34,11 +34,7 @@ export const signOutWithGoogle = () => signOut(auth);
 const db= getDatabase(app)
 
 const PATH_Pokenmon="pokemons"; //save pokemon comment and like number
-//const PATH_user="users/naty"; //save users'favorite list and team
 const PATH_user="users"; //save users'favorite list and team
-
-// set(ref(db, PATH1), "pokemon1");
-// set(ref(db, PATH2), "user1");
 
 function pokemonModelToPersistence(objectPokemon){
     const pokemonData = {
@@ -46,7 +42,6 @@ function pokemonModelToPersistence(objectPokemon){
         comments: objectPokemon.commentList,
         likeNumber: objectPokemon.likeNumber
     }
-    //console.log("pokemonData", pokemonData);
     return pokemonData;
 }
 
@@ -55,34 +50,26 @@ function userModelToPersistence(objectUser){
         return pokemon.id;
     }
     
-    //const pokemonTeamIds = objectUser.team.map(transformerCB).sort();
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
-    //console.log("pokemonFavoriteIds", pokemonFavoriteIds);
     const userData = {
-        //userId: objectUser.currentId,
         currentPokemonId: objectUser.currentPokemonId,
         favoriteList: pokemonFavoriteIds,
-        //team: pokemonTeamIds
     }
     return userData;
 }
 
 
 function persistenceToPokemonModel(pokemondata_from_firebase, pokenmonModel, id){
-    //console.log("pokemondata_from_firebase", pokemondata_from_firebase);
-    if(!pokemondata_from_firebase || pokenmonModel.likeNumber==NaN){
-        //console.log("no!!! pokenmonModel id: ");
+    if(!pokemondata_from_firebase || pokenmonModel.isNaN){
         pokenmonModel.setPokemonId(id);
         pokenmonModel.commentList = [];
         pokenmonModel.likeNumber = 0;
     }
     else{
-        //console.log("pokenmonModel !!! id: ", pokemondata_from_firebase);
         pokenmonModel.setPokemonId(pokemondata_from_firebase.pokemonId);
         pokenmonModel.commentList = [];
         pokenmonModel.likeNumber = pokemondata_from_firebase.likeNumber;
     }
-    //console.log("pokenmonModel after: ", pokemondata_from_firebase);
     return pokenmonModel;
 }
 
@@ -99,7 +86,6 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
         userModel.favoriteList=[];
         id_arrays.map(searchPokemon);
         return id_arrays.map(searchPokemonList);
-        // return searchPokemon().then(responseFavoriteACB);
     }
     //user do not exist
     if (!userdata_from_firebase) {
@@ -109,12 +95,10 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     }
     else{
         userModel.setcurrentPokemonId(userdata_from_firebase.currentPokemonId);
-
         if(!userdata_from_firebase.favoriteList || userdata_from_firebase.favoriteList === 'undefined'){
             return searchPokemonFavorite([]);
         }
         else{
-            //console.log("userdata_from_firebase.favoriteList", userdata_from_firebase.favoriteList);
             return searchPokemonFavorite(userdata_from_firebase.favoriteList);
         }
     }
@@ -122,21 +106,17 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
 
 function saveToFirebaseUser(model, uid){
     if(model.ready){
-        //console.log("saveToFirebaseUser", model);
         set(ref(db, PATH_user+"/"+uid), userModelToPersistence(model));
     }
 }
 
 function saveToFirebasePokemon(model, id){
     if(model.ready){
-        //console.log("model.pokemonId", model.pokemonId);
         set(ref(db, PATH_Pokenmon+"/"+id), pokemonModelToPersistence(model));
     }
 }
 
 function readFromFirebasePokemon(model, id){
-    //console.log("readFromFirebasePokemon", model);
-    //console.log("id", id);
     model.ready = false;
 
     function convertDataCB(snapshot){
@@ -144,7 +124,6 @@ function readFromFirebasePokemon(model, id){
     }
 
     function changeModelReadyCB(){
-        //console.log("readFromFirebasePokemon", model);
         model.ready = true;
     }
     
@@ -153,7 +132,6 @@ function readFromFirebasePokemon(model, id){
 function readFromFirebaseUser(model, uid){
     model.ready = false;
     function convertDataCB(snapshot){
-        //console.log("snapshot", snapshot.val());
         return persistenceToUserModel(snapshot.val(),model);
     }
 
@@ -164,47 +142,37 @@ function readFromFirebaseUser(model, uid){
     return get(ref(db, PATH_user+"/"+uid)).then(convertDataCB).then(changeModelReadyCB);
 }
 function connectToFirebaseUser(model, watchFunction){
-    console.log("!!!!!!!!!!!!connect firebase")
-    let currentUser = model.user;
-    
-    function checkACB(){
-        if(model.user!==currentUser){
-            currentUser = model.user;
+    onAuthStateChanged(auth, loginOutACB);
+    function loginOutACB(user){
+        if(user!==null){
+            model.setUser(user.uid)
             readFromFirebaseUser(model, model.user)
-            console.log("!!!!!!!!!!!!read from firebase")
+            watchFunction(checkACB, effectACB);
+         }
+        else{
+            model.setUser(null)
         }
-        //console.log("checking");
-        //console.log("current model11", model);
-        return [model.currentPokemonId, model.favoriteList, model.team];
+     }
+
+    function checkACB(){
+        console.log("check");
+        if(model.user!==null){
+            return [model.currentPokemonId, model.favoriteList, model.team];
+        }
+
     }
     function effectACB(){
         if(model.user!==null){
             saveToFirebaseUser(model, model.user)
-            console.log("save to current model", model);
         }
-        //console.log("side effect triggred: save to firebase!")
     }
-    watchFunction(checkACB, effectACB);
 }
 
-    // readFromFirebaseUser(model)
-    // function checkACB(){
-    //     //console.log("checking");
-    //     //console.log("current model11", model);
-    //     return [model.currentPokemonId, model.favoriteList, model.team];
-    // }
-    // function effectACB(){
-    //     saveToFirebaseUser(model)
-    //     //console.log("current model", model);
-    //     //console.log("side effect triggred: save to firebase!")
-    // }
-    // watchFunction(checkACB, effectACB);
 
 
 function connectToFirebasePokemon(pokemonModel, id, watchFunction){
     readFromFirebasePokemon(pokemonModel, id)
     function checkACB(){
-        //console.log("checking pokemonModel");
         return [pokemonModel.commentList, pokemonModel.likeNumber, pokemonModel.pokemonId];
     }
     function effectACB(){

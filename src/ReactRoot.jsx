@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SignIn from "./googleSignIn/signIn";
 
 
 import {Details} from "./Presenter/detailsPresenter.jsx";
@@ -46,10 +45,6 @@ function makeRouter(model){
              path: "/details", 
              element:<Details model={model} />,
          },
-         { 
-            path: "/signin", 
-            element:<SignIn model={model} />,
-        },
          { 
             path: "/user", 
             element:<UserPage model={model} />,

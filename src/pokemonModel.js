@@ -23,6 +23,15 @@ const model = {
         this.user=user;
     },
 
+    clearModel(){
+        this.user=null;
+        this.pokemons=[];
+        this.currentPokemonId=null;
+        this.favoriteList=[];
+        this.searchParams={};
+        this.queryParams={};
+    },
+
     setcurrentPokemonId(pokemonId){
         if(pokemonId != this.currentPokemonId){
             resolvePromise(searchPokemon(pokemonId),this.currentPokemonPromiseState);

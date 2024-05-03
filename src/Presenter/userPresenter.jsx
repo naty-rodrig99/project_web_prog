@@ -1,8 +1,5 @@
 import { observer } from "mobx-react-lite";
-import SignIn from "../googleSignIn/signIn";
-import React, { useEffect, useState } from "react"; 
-import { reaction, observable, configure } from "mobx";
-import {connectToFirebaseUser} from '../firebaseConfig.js'
+import React from "react"; 
 
 import { UserPageView } from "../views/userPageView";
 import { SignInView } from "../views/signInView";

@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 
 import { reaction, observable, configure } from "mobx";
 import { PokenmonModel } from '../pokemonModel.js';
-import { connectToFirebasePokemon } from '../firebaseConfig.js';
+import { connectToFirebasePokemon } from '../firebaseModel.js';
 
 const reactivePokemonModel= observable(PokenmonModel);
 //console.log("reactivePokemonModel", reactivePokemonModel);

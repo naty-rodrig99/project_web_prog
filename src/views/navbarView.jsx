@@ -10,7 +10,7 @@ export function NavbarView(props){
                     <li class="float_left"><a href="#/main"><img alt="picture of pokemon" src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"/></a></li>
                     <li class="float_right"><a href="#/main">Home</a></li>
                     <li class="float_right"><a href="#/team">Team</a></li>
-                    <li class="float_right"><a href="#/signin">Sign in</a></li>
+                    {/* <li class="float_right"><a href="#/signin">Sign in</a></li> */}
                     <li class="float_right"><a href="#/user"><i class="fa-solid fa-user"></i></a></li>
                 </ul>
             </nav>

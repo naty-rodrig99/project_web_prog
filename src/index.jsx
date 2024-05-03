@@ -49,7 +49,7 @@ createRoot(document.getElementById('root'))
 window.myModel= reactiveModel;
 export {reactiveModel}
 
-import {connectToFirebaseUser} from '/src/firebaseConfig.js'
+import {connectToFirebaseUser} from '/src/firebaseModel.js'
 connectToFirebaseUser(reactiveModel, reaction)
 
 
