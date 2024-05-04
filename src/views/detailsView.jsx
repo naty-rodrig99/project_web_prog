@@ -71,6 +71,7 @@ export function DetailsView(props){
                 <button  className="details_part1_button-img2"onClick={handleHeartClick}>
                     {/* <button onClick={handleHeartClick} className="details_part1_button-img2"> */}
                     <i class={props.isInFavorite ? 'fa-solid fa-heart': 'fa-regular fa-heart'}></i>
+                    {/* <img src={props.isInFavorite ? 'red_heart.png': 'empty_heart.png'}></img> */}
                     {/* <img class="details_part1_img2" src={heartImgSrc}></img> */}
                 </button>
                 <div>{props.user? props.likeNumber: "You need to login first to check the like number"}</div>

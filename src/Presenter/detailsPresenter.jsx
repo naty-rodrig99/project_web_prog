@@ -5,18 +5,9 @@ import { DetailsViewForum } from "../views/detailsView_Forum";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react"; 
 
-
-import { reaction, observable, configure } from "mobx";
-
-
-//const reactivePokemonModel= observable(PokenmonModel);
-//console.log("reactivePokemonModel", reactivePokemonModel);
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
-
-        //connectToFirebasePokemon(reactivePokemonModel, props.model.currentPokemonId, reaction);
-
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
         }
@@ -81,8 +72,6 @@ const Details = observer(
             return pokemon.id===props.model.currentPokemonId;
         }
 
-
-        //console.log("props.model.favoriteList.", props.model.favoriteList);
         return <>
         <DetailsView
             user={props.model.user}
