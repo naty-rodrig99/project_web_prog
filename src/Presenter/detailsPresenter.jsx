@@ -7,16 +7,15 @@ import React, { useEffect, useState } from "react";
 
 
 import { reaction, observable, configure } from "mobx";
-import { PokenmonModel } from '../pokemonModel.js';
-import { connectToFirebasePokemon } from '../firebaseModel.js';
 
-const reactivePokemonModel= observable(PokenmonModel);
+
+//const reactivePokemonModel= observable(PokenmonModel);
 //console.log("reactivePokemonModel", reactivePokemonModel);
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
 
-        connectToFirebasePokemon(reactivePokemonModel, props.model.currentPokemonId, reaction);
+        //connectToFirebasePokemon(reactivePokemonModel, props.model.currentPokemonId, reaction);
 
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
@@ -24,16 +23,17 @@ const Details = observer(
 
         function searchSpicies(){
             props.model.getSpecies(props.model.currentPokemonId);
+            props.model.setPokemon()
         }
 
         function addToFavoriteListACB(){
             props.model.addToFavoriteList(props.model.currentPokemonPromiseState.data);
-            reactivePokemonModel.addLikeNumber();
+            props.model.addcurrentPokemonLikeNumber();
         }
 
         function removeFromFavoriteListACB(){
             props.model.removeFromFavoriteList(props.model.currentPokemonPromiseState.data);
-            reactivePokemonModel.minusLikeNumber();
+            props.model.minuscurrentPokemonLikeNumber();
         }
 
         if(!props.model.currentPokemonPromiseState.promise){
@@ -68,7 +68,7 @@ const Details = observer(
                 />
             );
         } else if(currentView === 'forum'){
-            if ( props.model.user===null){
+            if (props.model.user===null){
                 window.location.hash="#/user";
             }
             viewToShow = ( 
@@ -94,7 +94,7 @@ const Details = observer(
             abilitiesFunction = {searchAbilityACB}
             addToFavoriteListACB={addToFavoriteListACB}
             removeFromFavoriteListACB={removeFromFavoriteListACB}
-            likeNumber={reactivePokemonModel.likeNumber}
+            likeNumber={props.model.currentPokemonLikeNumber}
         />
             {viewToShow}
         </>

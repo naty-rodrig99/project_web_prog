@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export function DetailsView(props){
-    console.log("details view: ", props)
+    //console.log("details view: ", props)
     function handleHeartClick(x){
         if(props.user===null){
             window.location.hash="#/user";
@@ -73,7 +73,7 @@ export function DetailsView(props){
                     <i class={props.isInFavorite ? 'fa-solid fa-heart': 'fa-regular fa-heart'}></i>
                     {/* <img class="details_part1_img2" src={heartImgSrc}></img> */}
                 </button>
-                <div>{props.likeNumber}</div>
+                <div>{props.user? props.likeNumber: "You need to login first to check the like number"}</div>
             </div>
             <div className="details_selector">
                 <button className="detail_selector_item" style ={defaultStyle} onClick={onChange0}>Details</button>

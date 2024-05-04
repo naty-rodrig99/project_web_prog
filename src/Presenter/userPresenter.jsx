@@ -9,19 +9,17 @@ const UserPage = observer(function UserPageRender(props){
 
     function setResultChosenACB(evt){
         props.model.setcurrentPokemonId(evt);
-        console.log("EVT",evt);
+        //console.log("EVT",evt);
       }
-    console.log("###########current.user: ", props.model.user);
 
     function setUser(user){
         props.model.setUser(user);
-        // hasUser=props.model.user;
     }
 
-    // const [hasUser, setHasUser] = useState(props.model.user);
+
     let viewToShow;
     if(props.model.user===null){
-        console.log("no user")
+        //console.log("no user")
         viewToShow = ( 
             <div className="signInorOutView">
                 <SignInView
@@ -32,8 +30,7 @@ const UserPage = observer(function UserPageRender(props){
     }
 
     else{
-        //props.model.connect();
-        console.log("have user")
+        //console.log("have user")
         viewToShow = ( 
             <div className="signInorOutView">
             <SignOutView

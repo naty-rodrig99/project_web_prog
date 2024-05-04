@@ -8,11 +8,15 @@ import { resolvePromise } from './resolvePromise.js';
 
 const model = {  
     user: null,
-    pokemons: [],
     currentPokemonId: null,  // null means "intentionally empty"
+    //currentReadPokemon: [null, 0, []], //pokemon Id, Like number, Comment List
+    currentReadPokemonId: null,
+    currentPokemonLikeNumber: 0,
+    currentPokemonCommentList: [],
     searchParams: {},
     queryParams: {},
     favoriteList:[],
+    // favoriteList:[],
     //team: [],
     searchResultsPromiseState: {},
     currentPokemonPromiseState: {},
@@ -23,13 +27,42 @@ const model = {
         this.user=user;
     },
 
+    setcurrentReadPokemon(id){
+        this.currentReadPokemon[0]= id;
+        this.currentReadPokemon.pokemonId=id;
+
+    },
+    setcurrentReadPokemonId(id){
+        this.currentReadPokemonId= id;
+    },
+
+    setcurrentPokemonlikeNumber(number){
+        this.currentPokemonLikeNumber= number;
+    },
+
+    addcurrentPokemonLikeNumber(){
+        //console.log("before add: ", this.likeNumber);
+        this.currentPokemonLikeNumber++;
+        //this.currentReadPokemon[1]++;
+        console.log("after add: ", this.currentPokemonLikeNumber);
+    },
+
+    minuscurrentPokemonLikeNumber(){
+        if(this.currentPokemonLikeNumber>0){
+            this.currentPokemonLikeNumber--;
+        }
+        // this.currentPokemonLikeNumber--;
+    },
+
     clearModel(){
         this.user=null;
-        this.pokemons=[];
         this.currentPokemonId=null;
+        this.currentReadPokemonId=null;
         this.favoriteList=[];
         this.searchParams={};
         this.queryParams={};
+        this.currentPokemonLikeNumber=0;
+        this.currentPokemonCommentList=[];
     },
 
     setcurrentPokemonId(pokemonId){
@@ -75,50 +108,50 @@ const model = {
     },
 
     // filter callback exercise
-    removeFromFavoriteList(pokemonToAdd){
+    removeFromFavoriteList(pokemonToRemove){
         function shouldWeKeepDishCB(pokemon){
-            if(pokemon.id===pokemonToAdd.id){
+            if(pokemon.id===pokemonToRemove.id){
                 return false
             }
             else{
                 return true
             }
         }
-        this.favoriteList= this.favoriteList.filter(shouldWeKeepDishCB);
+        this.favoriteList = this.favoriteList.filter(shouldWeKeepDishCB);
     },
 
 };
 
-const PokenmonModel = {
-    pokemonId: null,
-    likeNumber: 0,
-    commentList: [],
+// const PokenmonModel = {
+//     pokemonId: null,
+//     likeNumber: 0,
+//     commentList: [],
 
-    setPokemonId(pokemonId){
-        this.pokemonId= pokemonId;
-    },
+//     setPokemonId(pokemonId){
+//         this.pokemonId= pokemonId;
+//     },
 
-    setlikeNumber(number){
-        this.likeNumber= number;
-    },
+//     setlikeNumber(number){
+//         this.likeNumber= number;
+//     },
 
-    addLikeNumber(){
-        //console.log("before add: ", this.likeNumber);
-        this.likeNumber++;
-        //console.log("after add: ", this.likeNumber);
-    },
+//     addLikeNumber(){
+//         //console.log("before add: ", this.likeNumber);
+//         this.likeNumber++;
+//         //console.log("after add: ", this.likeNumber);
+//     },
 
-    minusLikeNumber(){
-        this.likeNumber--;
-    },
+//     minusLikeNumber(){
+//         this.likeNumber--;
+//     },
 
-    addToCommentList(comment){
-        // array spread syntax example. Make sure you understand the code below.
-        // It sets this.dishes to a new array [   ] where we spread (...) the elements of the existing this.dishes
-        this.commentList= [...this.commentList, comment];
-        //console.log("Current the favorite list is: ", this.favoriteList);
-    },
+//     addToCommentList(comment){
+//         // array spread syntax example. Make sure you understand the code below.
+//         // It sets this.dishes to a new array [   ] where we spread (...) the elements of the existing this.dishes
+//         this.commentList= [...this.commentList, comment];
+//         //console.log("Current the favorite list is: ", this.favoriteList);
+//     },
 
-};
+// };
 
-export {model, PokenmonModel};
+export {model};
