@@ -442,6 +442,21 @@ input[type=button] {
         display: none;
     }
 
+    .team_backbutton {
+        background-color: white;
+        border: 3px solid #2e7bc3;
+        height: 35px;
+        width: 100px;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Roboto Slab';
+        border-radius: 20px;
+        color: black;
+        text-align: center;
+        margin-left: 15px;
+        margin-top: 15px;
+    }
+
     .team_view1_title{
         color: #000;
         font-size: 30px;
@@ -449,7 +464,6 @@ input[type=button] {
         font-weight: 400;
         line-height: normal;
         text-align: center;
-        margin-top: 30px;
         display: flex;
         justify-content: center;
     }
@@ -467,7 +481,7 @@ input[type=button] {
         color: black;
         text-align: center;
         text-decoration: none;
-        margin-left: 15px;
+        margin-left: 150px;
         margin-top: 15px;
     }
 
@@ -510,4 +524,54 @@ input[type=button] {
         color: black;
         text-align: center;
     }
+    .team_teamName{
+        color: #000;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-align: center;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .team_input_teamName {
+        width: 200px;
+        height: 30px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    .team_box{
+        width: 50%;
+        height: 50%;
+        background: 'white';
+        border-radius: 20px;
+        border: 3px #4489C9 solid;
+        margin-top: 40px;
+        margin: auto;
+    }
+
+    .team_submit_button{
+        background-color: white;
+        border: 3px solid #2e7bc3;
+        height: 35px;
+        width: 140px;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Roboto Slab';
+        border-radius: 20px;
+        color: black;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 }
