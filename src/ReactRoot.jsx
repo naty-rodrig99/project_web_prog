@@ -6,6 +6,7 @@ import { Main } from "./Presenter/mainPresenter.jsx";
 import {Navigator} from "./Presenter/navPresenter.jsx";
 import {UserPage} from "./Presenter/userPresenter.jsx";
 import {TeamPage} from "./Presenter/teamPresenter.jsx"
+import {CreateTeamView} from "./Presenter/teamCreatePresenter.jsx";
 //import "../style.css"
 import { observer } from "mobx-react-lite"
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
@@ -52,6 +53,10 @@ function makeRouter(model){
         { 
             path: "/team", 
             element:<TeamPage model={model} />,
+        },
+        { 
+            path: "/createTeam", 
+            element:<CreateTeamView model={model} />,
         }
     
     ])

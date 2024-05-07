@@ -442,6 +442,21 @@ input[type=button] {
         display: none;
     }
 
+    .team_backbutton {
+        background-color: white;
+        border: 3px solid #2e7bc3;
+        height: 35px;
+        width: 100px;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Roboto Slab';
+        border-radius: 20px;
+        color: black;
+        text-align: center;
+        margin-left: 15px;
+        margin-top: 15px;
+    }
+
     .team_view1_title{
         color: #000;
         font-size: 30px;
@@ -449,6 +464,114 @@ input[type=button] {
         font-weight: 400;
         line-height: normal;
         text-align: center;
-        margin-top: 30px;
+        display: flex;
+        justify-content: center;
     }
+
+    .team_createteam_button{
+        background-color: white;
+        border: 3px solid #2e7bc3;
+        float: left;
+        height: 35px;
+        width: 140px;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Roboto Slab';
+        border-radius: 20px;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        margin-left: 150px;
+        margin-top: 15px;
+    }
+
+    .team_table-container {
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #F9F2CB;
+        width: 75%;
+        margin-left: auto; 
+        margin-right: auto; 
+    }
+
+    .team_table-container table {
+        width: 100%;
+    }
+
+    .team_table-container th,
+    .team_table-container tr {
+        padding: 20px;
+        text-align: center;
+        border-bottom: 2px solid white;
+        font-size: 18px;
+    }
+    
+    .team_table-container th {
+        background-color: #F4DD64;
+    }
+
+    .team_seedetails_button{
+        background-color: white;
+        border: 3px solid #F3D967;
+        height: 35px;
+        width: 100px;
+        font-size: 15px;
+        font-weight: 500;
+        font-family: 'Roboto Slab';
+        border-radius: 20px;
+        color: black;
+        text-align: center;
+    }
+    .team_teamName{
+        color: #000;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-align: center;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .team_input_teamName {
+        width: 200px;
+        height: 30px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    .team_box{
+        width: 50%;
+        height: 50%;
+        background: 'white';
+        border-radius: 20px;
+        border: 3px #4489C9 solid;
+        margin-top: 40px;
+        margin: auto;
+    }
+
+    .team_submit_button{
+        background-color: white;
+        border: 3px solid #2e7bc3;
+        height: 35px;
+        width: 140px;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Roboto Slab';
+        border-radius: 20px;
+        color: black;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 }
