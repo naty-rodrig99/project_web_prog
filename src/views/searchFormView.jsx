@@ -44,9 +44,9 @@ export function SearchFormView(props){
                 <button onClick={sendSearchNowACB}><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             <div className="searchFilter">
-                <select className="versionTypeSelect" value={props.queryParams.defaultOrShiny || ""} onChange={dropDownDefaultOrShinyACB}>
+                {/* <select className="versionTypeSelect" value={props.queryParams.defaultOrShiny || ""} onChange={dropDownDefaultOrShinyACB}>
                     {props.searchOptions.spriteOptions.map(renderOptionsCB)}
-                </select>
+                </select> */}
                 <select value={props.queryParams.gameVersion  || ""} onChange={dropDownGameVersionACB}>
                     {props.searchOptions.generationGames.map(renderTestCB)}
                 </select>

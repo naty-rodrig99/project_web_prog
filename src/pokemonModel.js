@@ -45,7 +45,7 @@ const model = {
         //console.log("before add: ", this.likeNumber);
         this.currentPokemonLikeNumber++;
         //this.currentReadPokemon[1]++;
-        console.log("after add: ", this.currentPokemonLikeNumber);
+        //console.log("after add: ", this.currentPokemonLikeNumber);
     },
 
     minuscurrentPokemonLikeNumber(){
@@ -64,6 +64,12 @@ const model = {
         this.queryParams={};
         this.currentPokemonLikeNumber=0;
         this.currentPokemonCommentList=[];
+    },
+
+    clearPokemonModel(){
+        this.currentReadPokemonId = null;
+        this.currentPokemonLikeNumber = 0;
+        this.currentPokemonCommentList = [];
     },
 
     setcurrentPokemonId(pokemonId){
@@ -88,7 +94,9 @@ const model = {
     },
 
     doSearch(params){
-        //console.log("this.searchResultsPromiseState", this.searchResultsPromiseState)
+        if(Number.isInteger(params)){
+            params=params.toString()
+        }
         resolvePromise(searchPokemon(params.toLowerCase()), this.searchResultsPromiseState);
     },
     setQueryTypeDefaultOrShiny(queryType){
@@ -110,22 +118,14 @@ const model = {
 
     removeFromFavoriteList(pokemonToRemove){
         function shouldWeKeepFavoritePokemonCB(pokemon){
-            if(pokemon.id===pokemonToRemove.id){
-                return false
-            }
-            else{
-                return true
-            }
+            return (pokemon.id!==pokemonToRemove.id);
         }
         this.favoriteList = this.favoriteList.filter(shouldWeKeepFavoritePokemonCB);
     },
 
     isPokemonInTeam(teamName, pokemonName) {
         const team = this.teams.find(team => team.teamName === teamName);
-        if (!team || !team.pokemonNames.includes(pokemonName)) {
-            return false;
-        }
-        return true;
+        return !(!team || !team.pokemonNames.includes(pokemonName));
     },
 
     addTeam(teamName, pokemon) {

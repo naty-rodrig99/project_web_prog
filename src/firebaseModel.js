@@ -39,7 +39,7 @@ function pokemonModelToPersistence(model){
         comments: model.currentPokemonCommentList,
         likeNumber: model.currentPokemonLikeNumber,
     }
-    console.log("pokemonData", pokemonData);
+    //console.log("pokemonData", pokemonData);
     return pokemonData;
 }
 
@@ -49,9 +49,9 @@ function userModelToPersistence(objectUser){
     }
     
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
-
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
+        currentSearchName: objectUser.searchParams.name,
         favoriteList: pokemonFavoriteIds,
     }
     return userData;
@@ -70,7 +70,7 @@ function persistenceToPokemonModel(pokemondata_from_firebase, model){
         model.currentPokemonCommentList = [];
         model.currentPokemonLikeNumber=pokemondata_from_firebase.likeNumber;
     }
-    console.log("persistenceToPokemonModel", model)
+    //console.log("persistenceToPokemonModel", model)
     return model;
 }
 
@@ -88,14 +88,18 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
         //id_arrays.map(searchPokemon);
         return id_arrays.map(searchPokemonList);
     }
+    
     //user do not exist
-    if (!userdata_from_firebase) {
+    if (!userdata_from_firebase || userdata_from_firebase.currentPokemonId == "undefined" ) {
+        userModel.likeNumber = 0;
         userModel.teamsList = [];
         userModel.favoriteList = [];
-        userModel.currentPokemonId=null;
+        //userModel.currentPokemonId=null;
     }
     else{
+        console.log("userdata_from_firebase.currentPokemonId", userdata_from_firebase.currentPokemonId);
         userModel.setcurrentPokemonId(userdata_from_firebase.currentPokemonId);
+        userModel.searchParams.name=(userdata_from_firebase.currentSearchName);
         if(!userdata_from_firebase.favoriteList || userdata_from_firebase.favoriteList === 'undefined'){
             return searchPokemonFavorite([]);
         }
@@ -112,16 +116,18 @@ function saveToFirebaseUser(model, uid){
 }
 
 function saveToFirebasePokemon(PokenmonModel){
-    set(ref(db, PATH_Pokenmon+"/"+PokenmonModel.currentReadPokemonId), pokemonModelToPersistence(PokenmonModel));
+    set(ref(db, PATH_Pokenmon+"/"+PokenmonModel.currentPokemonId), pokemonModelToPersistence(PokenmonModel));
 }
 
 function readFromFirebasePokemon(model){
     function convertDataCB(snapshot){
+        //model.likeNumber=0;
         //console.log("-----------convertDataCB",snapshot.val())
         return persistenceToPokemonModel(snapshot.val(), model);
     }
     if(model.currentPokemonId!==null){
-        //console.log("model.currentPokemonId!==null",model.currentPokemonId)
+        //console.log("model.currentPokemonId!==null",model)
+        //model.likeNumber=0;
         return get(ref(db, PATH_Pokenmon+"/"+model.currentPokemonId)).then(convertDataCB);
     }
    
@@ -133,6 +139,7 @@ function readFromFirebaseUser(model, uid){
     }
 
     function changeModelReadyCB(){
+        model.doSearch(model.searchParams.name);
         model.ready = true;
     }
     
@@ -145,6 +152,8 @@ function connectToFirebaseUser(model, watchFunction){
             model.setUser(user.uid)
             readFromFirebaseUser(model, model.user)
             watchFunction(checkUserACB, effectUserACB);
+            //console.log("model.setSearchText",model.currentPokemonId)
+            //model.setSearchText(model.currentPokemonId?model.currentPokemonId:"ditto");
         }
         else{
             model.setUser(null)
@@ -153,12 +162,11 @@ function connectToFirebaseUser(model, watchFunction){
     }
 
     readFromFirebasePokemon(model)
+    watchFunction(checkPokemonChangeACB, effectPokemonChangeACB);
     watchFunction(checkPokemonACB, effectPokemonACB);
 
     function checkUserACB(){
-        //console.log("check");
-        //readFromFirebaseUser(model, model.user)
-        return [model.currentPokemonId, model.favoriteList, model.team];
+        return [model.currentPokemonId, model.favoriteList, model.team, model.searchParams.name];
     }
     function effectUserACB(){
         if(model.user!==null){
@@ -166,16 +174,22 @@ function connectToFirebaseUser(model, watchFunction){
         }
     }
 
+    function checkPokemonChangeACB(){
+        return [model.currentPokemonId];
+    }
+    function effectPokemonChangeACB(){
+        model.clearPokemonModel();
+    }
+
     function checkPokemonACB(){
         if(model.currentPokemonId!==model.currentReadPokemonId){
             readFromFirebasePokemon(model)
-            //console.log("after read pokenmon!!",model.currentPokemonId, model.currentReadPokemonId)
         }
-        return [model.currentPokemonId, model.currentPokemonLikeNumber, model.currentPokemonCommentList];
+        return [model.currentPokemonLikeNumber, model.currentPokemonCommentList];
     }
     function effectPokemonACB(){
-        if(model.currentReadPokemonId!==null){
-            console.log("save to pokemon model", model.currentReadPokemonId)
+        if(model.currentReadPokemonId!==null && model.currentPokemonId===model.currentReadPokemonId){
+            //console.log("save to pokemon model", model.currentReadPokemonId)
             saveToFirebasePokemon(model);
         }
     }
