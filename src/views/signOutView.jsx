@@ -10,8 +10,8 @@ export function SignOutView(props){
     //console.log("!!!!!!!!current.user: ", props.currentUser);
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
-            <div><button onClick={signOutWithGoogle}>logout </button></div>
+        <div className="signInOutArea">
+                <button className="signInOutButton" onClick={signOutWithGoogle}>Sign Out </button>
         </div>
     )
 }

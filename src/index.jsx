@@ -7,7 +7,7 @@ configure({ enforceActions: "never", });  // we don't use Mobx actions
 const reactiveModel= observable(model);
 
 //reactiveModel.setSearchName("cheetah")
-reactiveModel.setSearchText("ditto");
+reactiveModel.setSearchText(reactiveModel.searchParams.name?reactiveModel.searchParams.name:"14");
 reactiveModel.doSearch(reactiveModel.searchParams.name);
 
 import { createElement } from "react";
@@ -51,7 +51,8 @@ export {reactiveModel}
 
 import {connectToFirebaseUser} from '/src/firebaseModel.js'
 connectToFirebaseUser(reactiveModel, reaction)
-
+//console.log("!!!!!!!!!!!!!!!!!!reactiveModel.searchParams.name",reactiveModel.searchParams.name)
+//reactiveModel.setSearchText(reactiveModel.searchParams.name);
 
 // import {createRoot} from "react-dom/client";
 // createRoot(document.getElementById('root'))
