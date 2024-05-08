@@ -49,10 +49,12 @@ function userModelToPersistence(objectUser){
     }
     
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
+    const userTeams = objectUser.teamsList.map(transformerCB).sort();
 
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
         favoriteList: pokemonFavoriteIds,
+        teams: userTeams,
     }
     return userData;
 }
