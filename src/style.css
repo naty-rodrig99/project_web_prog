@@ -574,4 +574,105 @@ input[type=button] {
         margin-right: auto;
     }
 
+    .team_carousel {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .team_carousel::-webkit-scrollbar {
+        width: 1px;
+    }
+
+    .team_carousel::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .team_carousel::-webkit-scrollbar-thumb {
+        background-color: #BAD2E8;
+        border-radius: 2px; 
+    }
+    
+    .team_carouselItem {
+        flex: 0 0 auto;
+        margin-right: 10px;
+    }
+
+    .team_resultCard{
+        background-color:#F3D967;
+        border: 2px solid rgb(189, 189, 189);
+        border-radius: 15px;
+        margin: 20px 5px;
+        width: 210px;
+        height: 220px;
+        text-align: center; 
+    }
+
+    .team_resultCard img{
+        height: 110px;
+        width: 190px;
+        margin: 5px;
+        object-fit: cover;
+        border-radius: 15px;
+        background-color: #ffffff;
+    }
+
+    .team_resultCard ul{
+        list-style-type: none;
+        margin: 10px;
+        padding: 0px;
+        height: 40px;
+        overflow: hidden;
+    }
+
+    .team_favoriteList ul{
+        list-style-type: none;
+        margin: 10px;
+        padding: 0px;
+        height: min-content;
+        overflow: hidden;
+    }
+
+    .team_resultCardName{
+        float: left;
+        margin: 2px 10px;
+        font-weight: bolder;
+        font-size: 15px;
+    }
+
+    .team_cardButtonLearnMore{
+        background-color: #2e7bc3;
+        border: 3px solid #2e7bc3;
+        height: 25px;
+        width: 90px;
+        font-size: 12px;
+        font-weight: 500;
+        font-family: 'Roboto Slab';
+        border-radius: 20px;
+        color: white;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 5px;
+    }
+
+    .team_cardButtonAdd{
+        background-color: white;
+        border: 3px solid #2e7bc3;
+        height: 30px;
+        width: 100px;
+        font-size: 13px;
+        font-weight: 500;
+        font-family: 'Roboto Slab';
+        border-radius: 20px;
+        color: black;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+
 }
