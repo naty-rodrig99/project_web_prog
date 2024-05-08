@@ -123,20 +123,29 @@ const model = {
         this.favoriteList = this.favoriteList.filter(shouldWeKeepFavoritePokemonCB);
     },
 
-    isPokemonInTeam(teamName, pokemonName) {
-        const team = this.teams.find(team => team.teamName === teamName);
-        return !(!team || !team.pokemonNames.includes(pokemonName));
+    isPokemonInTeam(teamName, pokemonIds) {
+        function isTeamNameMatch(team) {
+            return team.teamName === teamName;
+        }
+        const team = this.teamsList.find(isTeamNameMatch);
+        if (!team || !team.pokemonIds || !team.pokemonIds.includes(pokemonIds)) {
+            return false;
+        }
+        return true;
     },
 
     addTeam(teamName, pokemon) {
+        function isTeamNameMatch(team) {
+            return team.teamName === teamName;
+        }
         if(this.isPokemonInTeam(teamName, pokemon) == false){
-            const team = this.teamsList.find(team => team.teamName === teamName);
+            const team = this.teamsList.find(isTeamNameMatch);
             // If the team doesn't exist, create a new team
             if (!team) {
-                this.teamsList.push({ teamName, pokemons: [pokemos] });
+                this.teamsList.push({ teamName, pokemons: [pokemon] });
             } else {
                 // If the team already exists, add the Pokemon
-                team.pokemons.push(pokemons);
+                team.pokemons.push(pokemon);
             }
         }
     },

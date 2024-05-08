@@ -9,10 +9,16 @@ const CreateTeam = observer(             // needed for the presenter to update (
             //console.log("EVT",evt);
           }
 
+        function addToTeamsListACB(){
+            props.model.addTeam(props.model.currentPokemonPromiseState.data);
+            //console.log("DATA",props.model.currentPokemonPromiseState.data);
+        }
+
         return <CreateTeamView
             favoriteList={props.model.favoriteList}
             promise={props.model.currentPokemonPromiseState}
             detailsChosenACB = {setResultChosenACB}
+            addToTeamsACB={addToTeamsListACB}
         />
         
     }

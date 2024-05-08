@@ -4,12 +4,19 @@ export function CreateTeamView(props){
         window.location.hash="#/team";
     }
 
+    function createTeamACB(){
+        const inputElement = document.querySelector('.team_input_teamName');
+        const teamName = inputElement.value;
+        props.addToTeamsACB(teamName,pokemon.id); //how to get pokemon id when click on ADD to team?
+        window.location.hash="#/team";
+    }
+
     function favoriteListCB(pokemon){
         console.log("userPage pokemon: ", pokemon);
         function changeToDetails(evt){
             props.detailsChosenACB(pokemon.id);
             window.location.hash="#/details";
-        }
+    }
 
         return <div key={pokemon.id} className="team_carouselItem">
                     <div className="team_resultCard">
@@ -19,7 +26,7 @@ export function CreateTeamView(props){
                             <li><button className="team_cardButtonLearnMore" onClick={changeToDetails}>Learn More</button></li>
                         </ul>
                         <ul>
-                            <li><button className="team_cardButtonAdd">Add to team</button></li>
+                            <li><button className="team_cardButtonAdd" onClick={createTeamACB}>Add to team</button></li>
                         </ul>
                     </div>
 
@@ -53,7 +60,7 @@ export function CreateTeamView(props){
                 </div>
             </div>
             
-            <button class="team_submit_button">Create</button>
+            <button class="team_submit_button" onClick={createTeamACB}>Create</button>
         </div>
         
     );
