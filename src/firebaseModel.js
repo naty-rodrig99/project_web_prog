@@ -49,6 +49,7 @@ function userModelToPersistence(objectUser){
     }
     
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
+
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
         favoriteList: pokemonFavoriteIds,
@@ -89,7 +90,7 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     }
     //user do not exist
     if (!userdata_from_firebase) {
-        userModel.team = [];
+        userModel.teamsList = [];
         userModel.favoriteList = [];
         userModel.currentPokemonId=null;
     }

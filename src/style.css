@@ -534,6 +534,7 @@ input[type=button] {
         margin-top: 30px;
         display: flex;
         justify-content: center;
+        margin-bottom: 10px;
     }
 
     .team_input_teamName {
@@ -572,6 +573,7 @@ input[type=button] {
         margin-top: 20px;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 40px;
     }
 
     .team_carousel {
@@ -672,6 +674,16 @@ input[type=button] {
         justify-content: center;
         margin-right: auto;
         margin-left: auto;
+    }
+
+    .team_box_members{
+        width: 75%;
+        height: 45%;
+        background: 'white';
+        border-radius: 20px;
+        border: 3px #4489C9 transparent;
+        margin-top: 40px;
+        margin: auto;
     }
 
 

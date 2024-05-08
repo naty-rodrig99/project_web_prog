@@ -39,17 +39,21 @@ export function CreateTeamView(props){
                     Team Name:
                     <input class="team_input_teamName" type="text" />
                 </div>
-                <div class="team_teamName">Select from your favorite list 5 pokemon to add to your team:</div>
-                    <div class="team_box">
-                        <div className="team_carousel">
-                            {props.favoriteList.map(favoriteListCB)}
-                        </div>
+                <div class="team_teamName">Select from your favorite list 4 pokemon to add to your team:</div>
+                <div class="team_box">
+                    <div className="team_carousel">
+                        {props.favoriteList.map(favoriteListCB)}
                     </div>
                 </div>
-            <div class="team_teamName">
-                    Team Members:
             </div>
-            <button class="team_submit_button">Submit</button>
+            <div class="team_teamName">Team Members:</div>
+            <div class="team_box_members">
+                <div className="team_carousel">
+                    {/*props.teamsList.pokemon.map(favoriteListCB)*/}
+                </div>
+            </div>
+            
+            <button class="team_submit_button">Create</button>
         </div>
         
     );

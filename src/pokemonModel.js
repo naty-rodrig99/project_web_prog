@@ -8,7 +8,7 @@ import { resolvePromise } from './resolvePromise.js';
 
 const model = {  
     user: null,
-    currentPokemonId: null,  // null means "intentionally empty"
+    currentPokemonId: null, 
     //currentReadPokemon: [null, 0, []], //pokemon Id, Like number, Comment List
     currentReadPokemonId: null,
     currentPokemonLikeNumber: 0,
@@ -16,6 +16,7 @@ const model = {
     searchParams: {},
     queryParams: {},
     favoriteList:[],
+    teamsList: [],
     // favoriteList:[],
     //team: [],
     searchResultsPromiseState: {},
@@ -107,9 +108,8 @@ const model = {
         //console.log("Current the favorite list is: ", this.favoriteList);
     },
 
-    // filter callback exercise
     removeFromFavoriteList(pokemonToRemove){
-        function shouldWeKeepDishCB(pokemon){
+        function shouldWeKeepFavoritePokemonCB(pokemon){
             if(pokemon.id===pokemonToRemove.id){
                 return false
             }
@@ -117,7 +117,28 @@ const model = {
                 return true
             }
         }
-        this.favoriteList = this.favoriteList.filter(shouldWeKeepDishCB);
+        this.favoriteList = this.favoriteList.filter(shouldWeKeepFavoritePokemonCB);
+    },
+
+    isPokemonInTeam(teamName, pokemonName) {
+        const team = this.teams.find(team => team.teamName === teamName);
+        if (!team || !team.pokemonNames.includes(pokemonName)) {
+            return false;
+        }
+        return true;
+    },
+
+    addTeam(teamName, pokemon) {
+        if(this.isPokemonInTeam(teamName, pokemon) == false){
+            const team = this.teamsList.find(team => team.teamName === teamName);
+            // If the team doesn't exist, create a new team
+            if (!team) {
+                this.teamsList.push({ teamName, pokemons: [pokemos] });
+            } else {
+                // If the team already exists, add the Pokemon
+                team.pokemons.push(pokemons);
+            }
+        }
     },
 
 };
