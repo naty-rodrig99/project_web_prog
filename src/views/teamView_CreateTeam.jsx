@@ -3,11 +3,17 @@ export function CreateTeamView(props){
     function backtoTeamPage(evt){
         window.location.hash="#/team";
     }
-
     function newTeam(){
         props.newTeamACB();
-        window.location.hash="#/team";
     }
+    // function createTeamACB(){
+    //     const inputElement = document.querySelector('.team_input_teamName');
+    //     const teamName = inputElement.value;
+    //     console.log("!!!!!!!!!!!!!!!pokemon,", pokemon.id);
+    //     props.addToTeamsACB(teamName,pokemon.id); //how to get pokemon id when click on ADD to team?
+
+    //     window.location.hash="#/team";
+    // }
 
     function favoriteListCB(pokemon){
         console.log("userPage pokemon: ", pokemon);
