@@ -17,6 +17,7 @@ const model = {
     queryParams: {},
     favoriteList:[],
     teamsList: [],
+    temporalTeamsList: [],
     // favoriteList:[],
     //team: [],
     searchResultsPromiseState: {},
@@ -45,7 +46,7 @@ const model = {
         //console.log("before add: ", this.likeNumber);
         this.currentPokemonLikeNumber++;
         //this.currentReadPokemon[1]++;
-        console.log("after add: ", this.currentPokemonLikeNumber);
+        //console.log("after add: ", this.currentPokemonLikeNumber);
     },
 
     minuscurrentPokemonLikeNumber(){
@@ -64,6 +65,12 @@ const model = {
         this.queryParams={};
         this.currentPokemonLikeNumber=0;
         this.currentPokemonCommentList=[];
+    },
+
+    clearPokemonModel(){
+        this.currentReadPokemonId = null;
+        this.currentPokemonLikeNumber = 0;
+        this.currentPokemonCommentList = [];
     },
 
     setcurrentPokemonId(pokemonId){
@@ -88,7 +95,9 @@ const model = {
     },
 
     doSearch(params){
-        //console.log("this.searchResultsPromiseState", this.searchResultsPromiseState)
+        if(Number.isInteger(params)){
+            params=params.toString()
+        }
         resolvePromise(searchPokemon(params.toLowerCase()), this.searchResultsPromiseState);
     },
     setQueryTypeDefaultOrShiny(queryType){
@@ -110,35 +119,45 @@ const model = {
 
     removeFromFavoriteList(pokemonToRemove){
         function shouldWeKeepFavoritePokemonCB(pokemon){
-            if(pokemon.id===pokemonToRemove.id){
-                return false
-            }
-            else{
-                return true
-            }
+            return (pokemon.id!==pokemonToRemove.id);
         }
         this.favoriteList = this.favoriteList.filter(shouldWeKeepFavoritePokemonCB);
     },
 
-    isPokemonInTeam(teamName, pokemonName) {
-        const team = this.teams.find(team => team.teamName === teamName);
-        if (!team || !team.pokemonNames.includes(pokemonName)) {
+    isPokemonInTeam(teamName, pokemonIds) {
+        function isTeamNameMatch(team) {
+            return team.teamName === teamName;
+        }
+        const team = this.temporalTeamsList.find(isTeamNameMatch);
+        if (!team || !team.pokemonIds || !team.pokemonIds.includes(pokemonIds)) {
             return false;
         }
         return true;
     },
 
-    addTeam(teamName, pokemon) {
+    addTemporalTeam(teamName, pokemon) {
+        function isTeamNameMatch(team) {
+            return team.teamName === teamName;
+        }
         if(this.isPokemonInTeam(teamName, pokemon) == false){
-            const team = this.teamsList.find(team => team.teamName === teamName);
+            const team = this.temporalTeamsList.find(isTeamNameMatch);
             // If the team doesn't exist, create a new team
             if (!team) {
-                this.teamsList.push({ teamName, pokemons: [pokemos] });
+                this.temporalTeamsList= [...this.temporalTeamsList,{teamName, pokemons: [pokemon]}];
+                //console.log("CREATING NEW",teamName,pokemon);
+                //this.teamsList.push({ teamName, pokemons: [pokemon] });
+                console.log("LIST",this.temporalTeamsList[0]);
             } else {
-                // If the team already exists, add the Pokemon
-                team.pokemons.push(pokemons);
+                // If the team already exists, add the Pokemon;
+                team.pokemons.push(pokemon);
             }
         }
+    },
+
+    createTeam(){
+        this.teamsList = [...this.temporalTeamsList];
+        this.temporalTeamsList = [];
+        console.log("NEW",this.teamsList);
     },
 
 };

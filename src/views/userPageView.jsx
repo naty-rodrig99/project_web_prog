@@ -1,17 +1,12 @@
 
 import "../style.css"
 import "https://kit.fontawesome.com/6af1e368ac.js"
-import { searchPokemon} from '../pokemonSource.js';
-import {resolvePromise} from '../resolvePromise.js';
+import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 
 export function UserPageView(props){
 
     //used for array rendering
     function favoriteListCB(pokemon){
-        //pokemon={};
-        //resolvePromise(searchPokemon(pokemonID), {});
-        //pokemon= pokemon.data;
-        //console.log("userPage pokemon: ", pokemon);
         function changeToDetails(evt){
             props.detailsChosenACB(pokemon.id);
             window.location.hash="#/details";
@@ -31,10 +26,16 @@ export function UserPageView(props){
 
     return (
         <div>
-            <div class="favoriteList">
-            <ul>
+            <div className="favoriteList">
+            <MasonryInfiniteGrid
+            className="favoriteListContainer"
+            gap={3}
+            >
+                {props.favoriteList.map(favoriteListCB)}
+            </MasonryInfiniteGrid>;
+            {/* <ul>
             {props.favoriteList.map(favoriteListCB)}
-            </ul>
+            </ul> */}
             </div>
             
             

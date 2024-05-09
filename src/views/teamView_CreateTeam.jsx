@@ -4,8 +4,39 @@ export function CreateTeamView(props){
         window.location.hash="#/team";
     }
 
+    function newTeam(){
+        props.newTeamACB();
+        window.location.hash="#/team";
+    }
+
     function favoriteListCB(pokemon){
         console.log("userPage pokemon: ", pokemon);
+        function changeToDetails(evt){
+            props.detailsChosenACB(pokemon.id);
+            window.location.hash="#/details";
+        }
+        function createTeam(evt){
+            const inputElement = document.querySelector('.team_input_teamName');
+            const teamName = inputElement.value;
+            props.addToTeamsACB(teamName,pokemon.id);
+        }
+
+        return <div key={pokemon.id} className="team_carouselItem">
+                    <div className="team_resultCard">
+                        <img src={pokemon.sprites.front_default}/>
+                        <ul>
+                            <li className="team_resultCardName">{pokemon.name}</li>
+                            <li><button className="team_cardButtonLearnMore" onClick={changeToDetails}>Learn More</button></li>
+                        </ul>
+                        <ul>
+                            <li><button className="team_cardButtonAdd" onClick={createTeam}>Add to team</button></li>
+                        </ul>
+                    </div>
+
+                </div>;
+    }
+
+    function selectedPokemonsCB(pokemon){
         function changeToDetails(evt){
             props.detailsChosenACB(pokemon.id);
             window.location.hash="#/details";
@@ -17,9 +48,6 @@ export function CreateTeamView(props){
                         <ul>
                             <li className="team_resultCardName">{pokemon.name}</li>
                             <li><button className="team_cardButtonLearnMore" onClick={changeToDetails}>Learn More</button></li>
-                        </ul>
-                        <ul>
-                            <li><button className="team_cardButtonAdd">Add to team</button></li>
                         </ul>
                     </div>
 
@@ -49,11 +77,11 @@ export function CreateTeamView(props){
             <div class="team_teamName">Team Members:</div>
             <div class="team_box_members">
                 <div className="team_carousel">
-                    {/*props.teamsList.pokemon.map(favoriteListCB)*/}
+                    {/*props.temporalTeamsList.pokemons.map(selectedPokemonsCB)*/}
                 </div>
             </div>
             
-            <button class="team_submit_button">Create</button>
+            <button class="team_submit_button" onClick={newTeam}>Create</button>
         </div>
         
     );

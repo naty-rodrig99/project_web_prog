@@ -18,12 +18,12 @@ export function SignInView(props){
     // // }
     return (
         <div>
-            <div>
+            <div className="signInNotification">
                 You have to signin first to use the further functions!
             </div>
         
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
-                <button onClick={signInWithGooglePopup}>login</button>
+            <div className="signInOutArea">
+                <button className="signInOutButton" onClick={signInWithGooglePopup}>Sign in with Google</button>
             </div>
         </div>
     )

@@ -22,6 +22,8 @@ The framework used in this project are: Mobx & React
 ## :bookmark: API & useful tool link
 - [Pokemon](https://pokeapi.co/docs/v2)
 - [awesome-react-components](https://github.com/brillout/awesome-react-components)
+- [Font Awesome](https://fontawesome.com/)
+- [InfiniteGrid](https://naver.github.io/egjs-infinitegrid/docs/api/InfiniteGrid#renderItems)
 - [Blogger API](https://developers.google.com/blogger/docs/3.0/using)
 - [telegraph API](https://telegra.ph/api)
 
