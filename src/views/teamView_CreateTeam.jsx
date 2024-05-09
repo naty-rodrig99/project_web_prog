@@ -6,14 +6,6 @@ export function CreateTeamView(props){
     function newTeam(){
         props.newTeamACB();
     }
-    // function createTeamACB(){
-    //     const inputElement = document.querySelector('.team_input_teamName');
-    //     const teamName = inputElement.value;
-    //     console.log("!!!!!!!!!!!!!!!pokemon,", pokemon.id);
-    //     props.addToTeamsACB(teamName,pokemon.id); //how to get pokemon id when click on ADD to team?
-
-    //     window.location.hash="#/team";
-    // }
 
     function favoriteListCB(pokemon){
         console.log("userPage pokemon: ", pokemon);
@@ -24,7 +16,7 @@ export function CreateTeamView(props){
         function createTeam(evt){
             const inputElement = document.querySelector('.team_input_teamName');
             const teamName = inputElement.value;
-            props.addToTeamsACB(teamName,pokemon.id);
+            props.addToTeamsACB(teamName,pokemon);
         }
 
         return <div key={pokemon.id} className="team_carouselItem">

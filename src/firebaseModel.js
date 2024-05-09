@@ -47,9 +47,20 @@ function userModelToPersistence(objectUser){
     function transformerCB(pokemon){
         return pokemon.id;
     }
-    
+
+    function transformTeamCB(team) {
+        function getPokemonId(pokemon) {
+            return pokemon.id;
+        }
+        return {
+            teamName: team.teamName,
+            pokemons: team.pokemons.map(getPokemonId)
+        };
+    }
+
+    console.log("storing data");
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
-    const userTeams = objectUser.teamsList.map(transformerCB).sort();
+    const userTeams = objectUser.teamsList.map(transformTeamCB).sort();
   
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
