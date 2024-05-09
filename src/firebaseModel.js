@@ -55,7 +55,7 @@ function userModelToPersistence(objectUser){
         currentPokemonId: objectUser.currentPokemonId,
         currentSearchName: objectUser.searchParams.name,
         favoriteList: pokemonFavoriteIds,
-        teams: userTeams,
+        teamsList: userTeams,
     }
     return userData;
 }
@@ -169,7 +169,7 @@ function connectToFirebaseUser(model, watchFunction){
     watchFunction(checkPokemonACB, effectPokemonACB);
 
     function checkUserACB(){
-        return [model.currentPokemonId, model.favoriteList, model.team, model.searchParams.name];
+        return [model.currentPokemonId, model.favoriteList, model.teamsList, model.searchParams.name];
     }
     function effectUserACB(){
         if(model.user!==null){

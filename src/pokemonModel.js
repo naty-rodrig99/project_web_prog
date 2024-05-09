@@ -17,6 +17,7 @@ const model = {
     queryParams: {},
     favoriteList:[],
     teamsList: [],
+    temporalTeamsList: [],
     // favoriteList:[],
     //team: [],
     searchResultsPromiseState: {},
@@ -127,31 +128,36 @@ const model = {
         function isTeamNameMatch(team) {
             return team.teamName === teamName;
         }
-        const team = this.teamsList.find(isTeamNameMatch);
+        const team = this.temporalTeamsList.find(isTeamNameMatch);
         if (!team || !team.pokemonIds || !team.pokemonIds.includes(pokemonIds)) {
             return false;
         }
         return true;
     },
 
-    addTeam(teamName, pokemon) {
+    addTemporalTeam(teamName, pokemon) {
         function isTeamNameMatch(team) {
             return team.teamName === teamName;
         }
         if(this.isPokemonInTeam(teamName, pokemon) == false){
-            const team = this.teamsList.find(isTeamNameMatch);
+            const team = this.temporalTeamsList.find(isTeamNameMatch);
             // If the team doesn't exist, create a new team
             if (!team) {
-                this.teamsList= [...this.teamsList,{teamName, pokemons: [pokemon]}];
+                this.temporalTeamsList= [...this.temporalTeamsList,{teamName, pokemons: [pokemon]}];
                 //console.log("CREATING NEW",teamName,pokemon);
                 //this.teamsList.push({ teamName, pokemons: [pokemon] });
-                console.log("LIST",this.teamsList[0]);
+                console.log("LIST",this.temporalTeamsList[0]);
             } else {
-                // If the team already exists, add the Pokemon
-                //console.log("ADDING",team);
+                // If the team already exists, add the Pokemon;
                 team.pokemons.push(pokemon);
             }
         }
+    },
+
+    createTeam(){
+        this.teamsList = [...this.temporalTeamsList];
+        this.temporalTeamsList = [];
+        console.log("NEW",this.teamsList);
     },
 
 };
