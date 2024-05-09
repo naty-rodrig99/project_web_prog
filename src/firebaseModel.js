@@ -48,10 +48,8 @@ function userModelToPersistence(objectUser){
         return pokemon.id;
     }
     
-    console.log("ALMOST THERE");
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
     const userTeams = objectUser.teamsList.map(transformerCB).sort();
-    console.log("userTeams",userTeams);
   
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
@@ -103,7 +101,7 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     }
     else{
         console.log("userdata_from_firebase.currentPokemonId", userdata_from_firebase.currentPokemonId);
-        userModel.setcurrentPokemonId(userdata_from_firebase.currentPokemonId);
+        //userModel.setcurrentPokemonId(userdata_from_firebase.currentPokemonId);
         userModel.searchParams.name=(userdata_from_firebase.currentSearchName);
         if(!userdata_from_firebase.favoriteList || userdata_from_firebase.favoriteList === 'undefined'){
             return searchPokemonFavorite([]);
@@ -171,8 +169,7 @@ function connectToFirebaseUser(model, watchFunction){
     watchFunction(checkPokemonACB, effectPokemonACB);
 
     function checkUserACB(){
-        console.log("It changes",model.teamsList[0]);
-        return [model.currentPokemonId, model.favoriteList, model.teamsList, model.searchParams.name];
+        return [model.currentPokemonId, model.favoriteList, model.team, model.searchParams.name];
     }
     function effectUserACB(){
         if(model.user!==null){
@@ -191,7 +188,8 @@ function connectToFirebaseUser(model, watchFunction){
         if(model.currentPokemonId!==model.currentReadPokemonId){
             readFromFirebasePokemon(model)
         }
-        return [model.currentPokemonLikeNumber, model.currentPokemonCommentList];
+        return [model.currentPokemonId, model.currentPokemonLikeNumber, model.currentPokemonCommentList];
+        //return [model.currentPokemonLikeNumber, model.currentPokemonCommentList];
     }
     function effectPokemonACB(){
         if(model.currentReadPokemonId!==null && model.currentPokemonId===model.currentReadPokemonId){
