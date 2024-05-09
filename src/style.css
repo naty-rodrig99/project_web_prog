@@ -176,6 +176,14 @@ input[type=button] {
         border-radius: 15px;
         background-color: #ffffff;
     }
+    .whiteImage{
+        width: 260px;
+        height: 260px;
+        margin: 10px;
+        object-fit: cover;
+        border-radius: 15px;
+        background-color: #ffffff
+    }
 
     .resultCard ul{
         list-style-type: none;
