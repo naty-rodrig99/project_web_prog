@@ -111,7 +111,8 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
         //userModel.currentPokemonId=null;
     }
     else{
-        console.log("userdata_from_firebase.currentPokemonId", userdata_from_firebase.currentPokemonId);
+        console.log("userdata_from_firebase.teamsList", userdata_from_firebase.teamsList);
+        //console.log("userdata_from_firebase.currentPokemonId", userdata_from_firebase.currentPokemonId);
         //userModel.setcurrentPokemonId(userdata_from_firebase.currentPokemonId);
         userModel.searchParams.name=(userdata_from_firebase.currentSearchName);
         if(!userdata_from_firebase.favoriteList || userdata_from_firebase.favoriteList === 'undefined'){

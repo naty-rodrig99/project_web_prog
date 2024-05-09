@@ -155,7 +155,8 @@ const model = {
     },
 
     createTeam(){
-        this.teamsList = [...this.temporalTeamsList];
+        //this.teamsList = [...this.teamsList,this.temporalTeamsList];
+        this.teamsList = [...this.teamsList,...this.temporalTeamsList];
         this.temporalTeamsList = [];
         console.log("NEW",this.teamsList);
     },
