@@ -2,9 +2,12 @@
 export function DetailsViewForum(props){
 
     //Comment
-    function showComment(){
+    function addCommentACB(){
         var commentArea = document.getElementById("comment-area");
         commentArea.classList.remove("hide");
+        timestamp = "123345";
+        var params = props.addCommentACB(commentArea, props.pokemon, timestamp)  
+        console.log(commentArea)  
     }
 
     //Reply
@@ -44,9 +47,9 @@ export function DetailsViewForum(props){
                                 <div class="comments-body">
                                     <div class="username">User Name</div>
                                     <div class="content">
-                                        Just a comment of the above random topic.
+                                    <input class="team_input_teamName" type="text" />
                                         <div class="comment">
-                                            <button onclick={showReply}>Reply</button>
+                                            <button onclick={addCommentACB}>Add comment</button>
                                         </div>
                                     </div>
                                 </div>
