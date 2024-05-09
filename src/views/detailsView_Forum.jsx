@@ -45,7 +45,7 @@ export function DetailsViewForum(props){
                             {/* <!--Another Comment With replies--> */}
                             <div class="comments-container">
                                 <div class="comments-body">
-                                    <div class="username">User Name</div>
+                                    <div class="username">John</div>
                                     <div class="content">
                                     <input class="team_input_teamName" type="text" />
                                         <div class="comment">
@@ -68,16 +68,52 @@ export function DetailsViewForum(props){
                             <div class="comments-container">
                                 <div class="comments-body">
                                     <div class="authors">
-                                        <div class="username">User Name2</div>
-                                        {/* <div>Role</div> */}
-                                        {/* <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt=""/> */}
-                                        {/* <div>Posts: <u>455</u></div>
-                                        <div>Points: <u>4586</u></div> */}
-                                    </div>
-                                    <div class="content">
-                                        Just a comment of the above random topic2.
+                                        <div class="username">Julie</div>
+                                        <div class="comment" type="text">I love this pokemon!</div>
                                         <div class="comment">
-                                            <button onclick={showReply}>Reply</button>
+                                            <button onClick={addCommentACB}>Reply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <!--Reply Area--> */}
+                            <div class="comment-area hide" id="reply-area">
+                                <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+                                <input type="submit" value="submit"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="forum_card">
+                            {/* <!--Another Comment With replies--> */}
+                            <div class="comments-container">
+                                <div class="comments-body">
+                                    <div class="authors">
+                                        <div class="username">Bob</div>
+                                        <div class="comment" type="text">Hi guys!!</div>
+                                        <div class="comment">
+                                            <button onClick={addCommentACB}>Reply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <!--Reply Area--> */}
+                            <div class="comment-area hide" id="reply-area">
+                                <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+                                <input type="submit" value="submit"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="forum_card">
+                            {/* <!--Another Comment With replies--> */}
+                            <div class="comments-container">
+                                <div class="comments-body">
+                                    <div class="authors">
+                                        <div class="username">Robert</div>
+                                        <div class="comment" type="text">It's so strong!</div>
+                                        <div class="comment">
+                                            <button onClick={addCommentACB}>Reply</button>
                                         </div>
                                     </div>
                                 </div>
