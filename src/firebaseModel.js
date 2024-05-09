@@ -48,8 +48,10 @@ function userModelToPersistence(objectUser){
         return pokemon.id;
     }
     
+    console.log("ALMOST THERE");
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
     const userTeams = objectUser.teamsList.map(transformerCB).sort();
+    console.log("userTeams",userTeams);
   
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
@@ -169,7 +171,8 @@ function connectToFirebaseUser(model, watchFunction){
     watchFunction(checkPokemonACB, effectPokemonACB);
 
     function checkUserACB(){
-        return [model.currentPokemonId, model.favoriteList, model.team, model.searchParams.name];
+        console.log("It changes",model.teamsList[0]);
+        return [model.currentPokemonId, model.favoriteList, model.teamsList, model.searchParams.name];
     }
     function effectUserACB(){
         if(model.user!==null){

@@ -9,9 +9,12 @@ const CreateTeam = observer(             // needed for the presenter to update (
             //console.log("EVT",evt);
           }
 
-        function addToTeamsListACB(){
-            props.model.addTeam(props.model.currentPokemonPromiseState.data);
-            //console.log("DATA",props.model.currentPokemonPromiseState.data);
+        function addToTeamsListACB(teamName, pokemonId){
+            //console.log("TEAM NAME",teamName);
+            props.model.addTeam(teamName, pokemonId);
+            //props.model.addTeam(props.model.currentPokemonPromiseState.data);
+            //props.model.addTeam(props.model.currentPokemonPromiseState.data);
+            //console.log("DATA",props.model.currentPokemonPromiseState.data.id);
         }
 
         return <CreateTeamView
