@@ -142,9 +142,13 @@ const model = {
             const team = this.teamsList.find(isTeamNameMatch);
             // If the team doesn't exist, create a new team
             if (!team) {
-                this.teamsList.push({ teamName, pokemons: [pokemon] });
+                this.teamsList= [...this.teamsList,{teamName, pokemons: [pokemon]}];
+                //console.log("CREATING NEW",teamName,pokemon);
+                //this.teamsList.push({ teamName, pokemons: [pokemon] });
+                console.log("LIST",this.teamsList[0]);
             } else {
                 // If the team already exists, add the Pokemon
+                //console.log("ADDING",team);
                 team.pokemons.push(pokemon);
             }
         }
