@@ -11,10 +11,14 @@ const CreateTeam = observer(             // needed for the presenter to update (
 
         function addToTeamsListACB(teamName, pokemonId){
             //console.log("TEAM NAME",teamName);
-            props.model.addTeam(teamName, pokemonId);
+            props.model.addTemporalTeam(teamName, pokemonId);
             //props.model.addTeam(props.model.currentPokemonPromiseState.data);
             //props.model.addTeam(props.model.currentPokemonPromiseState.data);
             //console.log("DATA",props.model.currentPokemonPromiseState.data.id);
+        }
+
+        function createTeamACB(){
+            props.model.createTeam();
         }
 
         return <CreateTeamView
@@ -22,6 +26,8 @@ const CreateTeam = observer(             // needed for the presenter to update (
             promise={props.model.currentPokemonPromiseState}
             detailsChosenACB = {setResultChosenACB}
             addToTeamsACB={addToTeamsListACB}
+            newTeamACB={createTeamACB}
+            teamporalTeamsList={props.model.teamporalTeamsList}
         />
         
     }
