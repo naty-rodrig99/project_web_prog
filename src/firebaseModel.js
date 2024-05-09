@@ -58,27 +58,28 @@ function userModelToPersistence(objectUser){
         };
     }
 
-    function transformCommentCB(comment) {
+    function transformCommentCB(commentData) {
         function getPokemonId(pokemon) {
             return pokemon.id;
         }
         return {
-            comments: comment.content,
-            pokemons: team.pokemons.map(getPokemonId)
+            comment: commentData.comment,
+            pokemon: commentData.pokemon,
+            timestamp: commentData.timestamp
         };
     }
 
     console.log("storing data");
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
     const userTeams = objectUser.teamsList.map(transformTeamCB).sort();
-    const userComments = objectUser.userComments.map(transformCommentCB).sort();
+    const userComments = objectUser.commentList.map(transformCommentCB).sort();
   
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
         currentSearchName: objectUser.searchParams.name,
         favoriteList: pokemonFavoriteIds,
         teamsList: userTeams,
-        userComments: userComments
+        commentList: userComments
     }
     return userData;
 }
@@ -120,7 +121,7 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
         userModel.likeNumber = 0;
         userModel.teamsList = [];
         userModel.favoriteList = [];
-        userModel.userComments = [];
+        userModel.commentList = [];
         //userModel.currentPokemonId=null;
     }
     else{
@@ -194,7 +195,7 @@ function connectToFirebaseUser(model, watchFunction){
     watchFunction(checkPokemonACB, effectPokemonACB);
 
     function checkUserACB(){
-        return [model.currentPokemonId, model.favoriteList, model.teamsList, model.searchParams.name, model.userComments];
+        return [model.currentPokemonId, model.favoriteList, model.teamsList, model.searchParams.name, model.commentList];
     }
     function effectUserACB(){
         if(model.user!==null){

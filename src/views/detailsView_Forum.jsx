@@ -3,11 +3,11 @@ export function DetailsViewForum(props){
 
     //Comment
     function addCommentACB(){
-        var commentArea = document.getElementById("comment-area");
-        commentArea.classList.remove("hide");
-        timestamp = "123345";
-        var params = props.addCommentACB(commentArea, props.pokemon, timestamp)  
-        console.log(commentArea)  
+        const inputElement = document.querySelector('.team_input_teamName');
+        const commentArea = inputElement.value;
+        //var commentArea = document.getElementById("comment-area");
+        //commentArea.classList.remove("hide");
+        props.addComment(commentArea, props.pokemon.id, "12:00");  
     }
 
     //Reply
@@ -49,7 +49,7 @@ export function DetailsViewForum(props){
                                     <div class="content">
                                     <input class="team_input_teamName" type="text" />
                                         <div class="comment">
-                                            <button onclick={addCommentACB}>Add comment</button>
+                                            <button onClick={addCommentACB}>Add comment</button>
                                         </div>
                                     </div>
                                 </div>

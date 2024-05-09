@@ -62,6 +62,8 @@ const model = {
         this.currentPokemonId=null;
         this.currentReadPokemonId=null;
         this.favoriteList=[];
+        this.teamsList=[];
+        this.commentList=[];
         this.searchParams={};
         this.queryParams={};
         this.currentPokemonLikeNumber=0;
@@ -156,7 +158,7 @@ const model = {
     },
 
     addComment(comment, pokemon, timestamp) {
-            this.commentList= [...this.commentList,{comment, pokemon, timestamp}];
+        this.commentList= [...this.commentList,{comment, pokemon, timestamp}];
     },
 
     createTeam(){

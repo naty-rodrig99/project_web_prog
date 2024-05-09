@@ -69,6 +69,7 @@ const Details = observer(
             viewToShow = ( 
                 <DetailsViewForum
                 addComment={addCommentACB}
+                pokemon = {props.model.currentPokemonPromiseState.data}
                 />
             );
         }
