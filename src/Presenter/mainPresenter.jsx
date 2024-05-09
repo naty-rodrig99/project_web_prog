@@ -12,6 +12,10 @@ const Main = observer(function MainRender(props){
                   generationOptions: ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii"],
                   generationGames: [
                     {
+                      optionGroup: "Filter By Generation",
+                      options: ["Default Generation"]
+                    },
+                    {
                       optionGroup: "generation-i",
                       options: ["red-blue", "yellow"]
                     },
