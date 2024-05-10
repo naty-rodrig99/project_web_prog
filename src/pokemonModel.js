@@ -18,6 +18,7 @@ const model = {
     favoriteList:[],
     teamsList: [],
     temporalTeamsList: [],
+    commentList: [],
     // favoriteList:[],
     //team: [],
     searchResultsPromiseState: {},
@@ -61,6 +62,8 @@ const model = {
         this.currentPokemonId=null;
         this.currentReadPokemonId=null;
         this.favoriteList=[];
+        this.teamsList=[];
+        this.commentList=[];
         this.searchParams={};
         this.queryParams={};
         this.currentPokemonLikeNumber=0;
@@ -152,6 +155,10 @@ const model = {
                 team.pokemons.push(pokemon);
             }
         }
+    },
+
+    addComment(comment, pokemon, timestamp) {
+        this.commentList= [...this.commentList,{comment, pokemon, timestamp}];
     },
 
     createTeam(){
