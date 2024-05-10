@@ -2,7 +2,7 @@
 const BASE_URL = 'https://pokeapi.co/api/v2';
 
 export function searchPokemon(searchParams){
-    //console.log("searchParams", searchParams)
+    console.log("searchParams", searchParams)
     const URL = `${BASE_URL}/pokemon/${searchParams}`;
     const options = {
         method: 'GET',

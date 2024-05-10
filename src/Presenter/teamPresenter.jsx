@@ -22,7 +22,7 @@ const TeamPage = observer(             // needed for the presenter to update (it
 
         return <>
         <TeamView
-
+            teamsList={props.model.teamsList}
         />
         </>
         
