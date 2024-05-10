@@ -58,7 +58,7 @@ function userModelToPersistence(objectUser){
         };
     }
 
-    console.log("storing data");
+    //console.log("storing data");
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
     const userTeams = objectUser.teamsList.map(transformTeamCB).sort();
   
