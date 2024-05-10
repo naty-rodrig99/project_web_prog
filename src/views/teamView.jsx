@@ -39,7 +39,7 @@ export function TeamView(props){
                         <th></th>
                     </tr>
                 </thead>
-                <div>{props.model.teamsList.map(teamsListCB)}</div>
+                <div>{/*props.model.teamsList.map(teamsListCB)*/}</div>
             </table>
             </div>
         </div>

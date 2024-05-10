@@ -106,22 +106,28 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     }
 
     function responseTeamsACB(response){
-        console.log("response:",response);
+        console.log("response:",response.response);
+        console.log("reponse2",response.teamName) 
         if(response){
-            userModel.addTeamsList(response.teamName,response);
+            console.log("yes");
+            userModel.addToTeamsList(response.teamName,response.response);
         }
     }
 
-    function searchPokemonListforTeams(id){
-        console.log("ID",id);
-        searchPokemon(id).then(responseTeamsACB);
+    function searchPokemonListforTeams(data){
+        const id = data.id;
+        const teamName = data.teamName;
+        console.log("ID",data.id);
+        console.log("team",data.teamName);
+        searchPokemon(id).then(response => responseTeamsACB({ response: response, teamName: teamName }));
     }
 
     function transformTeamCB(team) {
         console.log("TEAMID:",team.pokemons);
         return {
             teamName: team.teamName,
-            pokemons: team.pokemons.map(searchPokemonListforTeams)
+            //pokemons: team.pokemons.map(searchPokemonListforTeams)
+            pokemons: team.pokemons.map(id => searchPokemonListforTeams({ id: id, teamName: team.teamName }))
             //pokemons: Object.entries(team.pokemons).map(searchPokemonListforTeams)
         };
     }
