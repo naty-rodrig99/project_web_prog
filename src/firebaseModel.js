@@ -117,11 +117,12 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
         searchPokemon(id).then(responseTeamsACB);
     }
 
-    function transformTeamCB(teamID) {
-        console.log("TEAMID:",teamID);
+    function transformTeamCB(team) {
+        console.log("TEAMID:",team.pokemons);
         return {
             teamName: team.teamName,
             pokemons: team.pokemons.map(searchPokemonListforTeams)
+            //pokemons: Object.entries(team.pokemons).map(searchPokemonListforTeams)
         };
     }
 
