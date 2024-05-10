@@ -9,14 +9,13 @@ export function TeamView(props){
     }
 
     function teamsListCB(team){
-        const pokemonNames = team.pokemons.join(', ');
-        return <tbody key={team.teamName}>
-                    <tr>
+        const pokemonNames = team.pokemons.map(pokemon => pokemon.name).join(', ');
+        return  <tr key={team.teamName}>
                         <td>{team.teamName}</td>
                         <td>{pokemonNames}</td>
                         <td><button class="team_seedetails_button">See Details</button></td>
                     </tr>
-                </tbody>
+                
     }
     
     return (
@@ -39,7 +38,7 @@ export function TeamView(props){
                         <th></th>
                     </tr>
                 </thead>
-                <div>{/*props.model.teamsList.map(teamsListCB)*/}</div>
+                <tbody >{props.teamsList.map(teamsListCB)}</tbody>
             </table>
             </div>
         </div>

@@ -158,28 +158,22 @@ const model = {
         //this.teamsList = [...this.teamsList,this.temporalTeamsList];
         this.teamsList = [...this.teamsList,...this.temporalTeamsList];
         this.temporalTeamsList = [];
-        console.log("NEW",this.teamsList);
+        //console.log("NEW",this.teamsList);
     },
 
     addToTeamsList(teamName, pokemon){
         function isTeamNameMatch(team) {
             return team.teamName === teamName;
         }
-        console.log("initiated");
         if(this.isPokemonInTeam(teamName, pokemon) == false){
             const team = this.teamsList.find(isTeamNameMatch);
             // If the team doesn't exist, create a new team
             if (!team) {
                 this.teamsList= [...this.teamsList,{teamName, pokemons: [pokemon]}];
-                //console.log("CREATING NEW",teamName,pokemon);
-                //this.teamsList.push({ teamName, pokemons: [pokemon] });
-                console.log("LIST",this.teamList);
             } else {
-                // If the team already exists, add the Pokemon;
-                team.pokemons.push(pokemon);
+                team.pokemons.push(pokemon); // If the team already exists, add the Pokemon;
             }
         } 
-        console.log("LIST",this.teamList);
     },
 
 };

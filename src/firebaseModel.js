@@ -89,7 +89,7 @@ function persistenceToPokemonModel(pokemondata_from_firebase, model){
 }
 
 function persistenceToUserModel(userdata_from_firebase, userModel){
-    console.log("reading data");
+    //console.log("reading data");
     function responseFavoriteACB(response){
         if(response){
             userModel.addToFavoriteList(response);
@@ -101,15 +101,12 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     function searchPokemonFavorite(id_arrays){
         userModel.favoriteList=[];
         //id_arrays.map(searchPokemon);
-        console.log("id_arrays",id_arrays);
+        //console.log("id_arrays",id_arrays);
         return id_arrays.map(searchPokemonList);
     }
 
     function responseTeamsACB(response){
-        console.log("response:",response.response);
-        console.log("reponse2",response.teamName) 
         if(response){
-            console.log("yes");
             userModel.addToTeamsList(response.teamName,response.response);
         }
     }
@@ -117,13 +114,10 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     function searchPokemonListforTeams(data){
         const id = data.id;
         const teamName = data.teamName;
-        console.log("ID",data.id);
-        console.log("team",data.teamName);
         searchPokemon(id).then(response => responseTeamsACB({ response: response, teamName: teamName }));
     }
 
     function transformTeamCB(team) {
-        console.log("TEAMID:",team.pokemons);
         return {
             teamName: team.teamName,
             //pokemons: team.pokemons.map(searchPokemonListforTeams)
@@ -133,7 +127,6 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     }
 
     function searchTeams(id_arrays){
-        console.log("PASSING",id_arrays);
         userModel.teamsList=[];
         return id_arrays.map(transformTeamCB);
     }
@@ -152,21 +145,17 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
         userModel.searchParams.name=(userdata_from_firebase.currentSearchName);
         if(!userdata_from_firebase.favoriteList || userdata_from_firebase.favoriteList === 'undefined'){
             //return searchPokemonFavorite([]);
-            console.log("Favorites");
             searchPokemonFavorite([]);
         }
         else{
-            console.log("Favorites2");
             searchPokemonFavorite(userdata_from_firebase.favoriteList);
             //return searchPokemonFavorite(userdata_from_firebase.favoriteList);
         }
         if(!userdata_from_firebase.teamsList || userdata_from_firebase.teamsList === 'undefined'){
-            console.log("HERE1");
             searchTeams([]);
             //return searchPokemonFavorite([]);
         }
         else{
-            console.log("HERE2");
             searchTeams(userdata_from_firebase.teamsList);
             //return searchPokemonFavorite(userdata_from_firebase.favoriteList);
         }
