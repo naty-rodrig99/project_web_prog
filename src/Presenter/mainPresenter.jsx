@@ -2,6 +2,8 @@ import { observer } from "mobx-react-lite";
 
 import { SearchResultsView } from "../views/searchResultsView";
 import { SearchFormView } from "../views/searchFormView";
+import { InfinitePokemonView } from "../views/infinitePokemonView";
+import { InfiniteScrollView } from "../views/infiniteScrollView";
 
 const Main = observer(function MainRender(props){
     return (
@@ -11,6 +13,10 @@ const Main = observer(function MainRender(props){
                 searchOptions = {{spriteOptions: ["Default", "Shiny"], 
                   generationOptions: ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii"],
                   generationGames: [
+                    {
+                      optionGroup: "Filter By Generation",
+                      options: ["Default Generation"]
+                    },
                     {
                       optionGroup: "generation-i",
                       options: ["red-blue", "yellow"]
@@ -50,8 +56,15 @@ const Main = observer(function MainRender(props){
                 detailsChosenACB = {setResultChosenACB}
             />
             {conditionalRender(props.model.searchResultsPromiseState)}
+            <InfiniteScrollView
+              detailsChosenACB = {setDetailsChosenACB}
+            />
         </div>
     )
+    function paginationACB(){
+      props.model.getPaginationPokemons()
+    }
+
     function setResultChosenACB(evt){
         props.model.setcurrentPokemonId(evt);
         console.log("EVT",evt);
@@ -99,3 +112,11 @@ const Main = observer(function MainRender(props){
 )
 
 export {Main}
+
+/*
+            <InfinitePokemonView
+              searchPaginationACB = {paginationACB}
+              paginationPromiseState = {props.model.paginationPromiseState}
+              getImage = {props.model.getPokemonImage}
+            />
+*/

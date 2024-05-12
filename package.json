@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@egjs/react-infinitegrid": "^4.11.1",
+        "axios": "^1.6.8",
         "firebase": "^9.23.0",
         "mobx": "^6.8.0",
         "mobx-react-lite": "^3.4.2",

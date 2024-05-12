@@ -20,7 +20,6 @@ export function UserPageView(props){
                             <li><button onClick={changeToDetails}>Learn More</button></li>
                         </ul>
                     </div>
-
                 </span>;
     }
 
