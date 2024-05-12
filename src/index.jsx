@@ -7,7 +7,7 @@ configure({ enforceActions: "never", });  // we don't use Mobx actions
 const reactiveModel= observable(model);
 
 //reactiveModel.setSearchName("cheetah")
-reactiveModel.setSearchText(reactiveModel.searchParams.name?reactiveModel.searchParams.name:"14");
+reactiveModel.setSearchText(reactiveModel.searchParams.name?reactiveModel.searchParams.name:"ditto");
 reactiveModel.doSearch(reactiveModel.searchParams.name);
 
 import { createElement } from "react";

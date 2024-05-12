@@ -7,6 +7,16 @@ export function TeamView(props){
     function showCreateTeamView(){
         window.location.hash="#/createTeam";
     }
+
+    function teamsListCB(team){
+        const pokemonNames = team.pokemons.map(pokemon => pokemon.name).join(', ');
+        return  <tr key={team.teamName}>
+                        <td>{team.teamName}</td>
+                        <td>{pokemonNames}</td>
+                        <td><button class="team_seedetails_button">See Details</button></td>
+                    </tr>
+                
+    }
     
     return (
         <div>
@@ -28,13 +38,7 @@ export function TeamView(props){
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Team 1</td>
-                        <td>ditto - weedle - pikachu - bulbasaur - raichu</td>
-                        <td><button class="team_seedetails_button">See Details</button></td>
-                    </tr>
-                </tbody>
+                <tbody >{props.teamsList.map(teamsListCB)}</tbody>
             </table>
             </div>
         </div>

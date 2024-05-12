@@ -27,6 +27,10 @@ const Details = observer(
             props.model.minuscurrentPokemonLikeNumber();
         }
 
+        function addCommentACB(comment, pokemon, timestamp){
+            props.model.addComment(comment, pokemon, timestamp);
+        }
+
         if(!props.model.currentPokemonPromiseState.promise){
             return "no data"
         }
@@ -64,6 +68,8 @@ const Details = observer(
             }
             viewToShow = ( 
                 <DetailsViewForum
+                addComment={addCommentACB}
+                pokemon = {props.model.currentPokemonPromiseState.data}
                 />
             );
         }

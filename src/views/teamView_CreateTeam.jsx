@@ -3,14 +3,13 @@ export function CreateTeamView(props){
     function backtoTeamPage(evt){
         window.location.hash="#/team";
     }
-
     function newTeam(){
         props.newTeamACB();
         window.location.hash="#/team";
     }
 
     function favoriteListCB(pokemon){
-        console.log("userPage pokemon: ", pokemon);
+        //console.log("userPage pokemon: ", pokemon);
         function changeToDetails(evt){
             props.detailsChosenACB(pokemon.id);
             window.location.hash="#/details";
@@ -18,7 +17,7 @@ export function CreateTeamView(props){
         function createTeam(evt){
             const inputElement = document.querySelector('.team_input_teamName');
             const teamName = inputElement.value;
-            props.addToTeamsACB(teamName,pokemon.id);
+            props.addToTeamsACB(teamName,pokemon);
         }
 
         return <div key={pokemon.id} className="team_carouselItem">
@@ -77,7 +76,7 @@ export function CreateTeamView(props){
             <div class="team_teamName">Team Members:</div>
             <div class="team_box_members">
                 <div className="team_carousel">
-                    {/*props.temporalTeamsList.pokemons.map(selectedPokemonsCB)*/}
+                    {props.temporalTeamsList && props.temporalTeamsList.pokemons && props.temporalTeamsList.pokemons.map(selectedPokemonsCB)}
                 </div>
             </div>
             

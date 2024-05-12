@@ -41,8 +41,8 @@ The framework used in this project are: Mobx & React
 - [x] User Page - favorite list
 - [x] Home page - name searh
 - [x] Details Page - about, species and add to favorite list
-- [ ] [Firebase setting](https://console.firebase.google.com/u/0/project/ddrela-filfor-rodrig-yujingzh/overview)
-- [ ] Home Page - filter search and result (pending, still some bugs)
+- [x] [Firebase setting](https://console.firebase.google.com/u/0/project/ddrela-filfor-rodrig-yujingzh/overview)
+- [x] Home Page - filter search and result (pending, still some bugs)
 - [x] User login via google accounts (pending)
 - [x] Details Page - forum (pending, complete the basic UI design)
 - [ ] Team Page -> function design, new Ui design

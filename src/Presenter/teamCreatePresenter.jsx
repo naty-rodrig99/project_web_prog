@@ -1,17 +1,23 @@
 import { CreateTeamView } from "../views/teamView_CreateTeam.jsx";
 import { observer } from "mobx-react-lite";
+import React, { useEffect } from 'react';
 
 const CreateTeam = observer(             // needed for the presenter to update (its view) when relevant parts of the model change
     function CreateTeamRender(props){
+
+        useEffect(() => {
+            // This code will execute whenever props.temporalTeamsList changes
+            console.log("temporalTeamsList updated:", props.temporalTeamsList);
+        }, [props.temporalTeamsList]); // This dependency array specifies that useEffect should run whenever props.temporalTeamsList changes
 
         function setResultChosenACB(evt){
             props.model.setcurrentPokemonId(evt);
             //console.log("EVT",evt);
           }
 
-        function addToTeamsListACB(teamName, pokemonId){
+        function addToTeamsListACB(teamName, pokemon){
             //console.log("TEAM NAME",teamName);
-            props.model.addTemporalTeam(teamName, pokemonId);
+            props.model.addTemporalTeam(teamName, pokemon);
             //props.model.addTeam(props.model.currentPokemonPromiseState.data);
             //props.model.addTeam(props.model.currentPokemonPromiseState.data);
             //console.log("DATA",props.model.currentPokemonPromiseState.data.id);
@@ -27,7 +33,7 @@ const CreateTeam = observer(             // needed for the presenter to update (
             detailsChosenACB = {setResultChosenACB}
             addToTeamsACB={addToTeamsListACB}
             newTeamACB={createTeamACB}
-            teamporalTeamsList={props.model.teamporalTeamsList}
+            temporalTeamsList={props.model.temporalTeamsList}
         />
         
     }

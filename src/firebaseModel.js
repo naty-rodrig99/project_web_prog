@@ -36,7 +36,7 @@ const PATH_user="users"; //save users'favorite list and team
 function pokemonModelToPersistence(model){
     const pokemonData = {
         pokemonId:model.currentReadPokemonId,
-        comments: model.currentPokemonCommentList,
+        comments: model.currentPokemonCommentList,//how to save it 
         likeNumber: model.currentPokemonLikeNumber,
     }
     //console.log("pokemonData", pokemonData);
@@ -47,15 +47,38 @@ function userModelToPersistence(objectUser){
     function transformerCB(pokemon){
         return pokemon.id;
     }
-    
+
+    function transformTeamCB(team) {
+        function getPokemonId(pokemon) {
+            return pokemon.id;
+        }
+        return {
+            teamName: team.teamName,
+            pokemons: team.pokemons.map(getPokemonId)
+        };
+    }
+
+    function transformCommentCB(commentData) {
+        function getPokemonId(pokemon) {
+            return pokemon.id;
+        }
+        return {
+            comment: commentData.comment,
+            pokemon: commentData.pokemon,
+            timestamp: commentData.timestamp
+        };
+    }
+
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
-    const userTeams = objectUser.teamsList.map(transformerCB).sort();
+    const userTeams = objectUser.teamsList.map(transformTeamCB).sort();
+    const userComments = objectUser.commentList.map(transformCommentCB).sort();
   
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
         currentSearchName: objectUser.searchParams.name,
         favoriteList: pokemonFavoriteIds,
         teamsList: userTeams,
+        commentList: userComments
     }
     return userData;
 }
@@ -70,7 +93,7 @@ function persistenceToPokemonModel(pokemondata_from_firebase, model){
     else{
         //console.log("model currentPokemonId", model.currentPokemonId);
         model.currentReadPokemonId=model.currentPokemonId;
-        model.currentPokemonCommentList = [];
+        model.currentPokemonCommentList = model.currentPokemonCommentList;
         model.currentPokemonLikeNumber=pokemondata_from_firebase.likeNumber;
     }
     //console.log("persistenceToPokemonModel", model)
@@ -78,6 +101,7 @@ function persistenceToPokemonModel(pokemondata_from_firebase, model){
 }
 
 function persistenceToUserModel(userdata_from_firebase, userModel){
+    //console.log("reading data");
     function responseFavoriteACB(response){
         if(response){
             userModel.addToFavoriteList(response);
@@ -89,7 +113,34 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     function searchPokemonFavorite(id_arrays){
         userModel.favoriteList=[];
         //id_arrays.map(searchPokemon);
+        //console.log("id_arrays",id_arrays);
         return id_arrays.map(searchPokemonList);
+    }
+
+    function responseTeamsACB(response){
+        if(response){
+            userModel.addToTeamsList(response.teamName,response.response);
+        }
+    }
+
+    function searchPokemonListforTeams(data){
+        const id = data.id;
+        const teamName = data.teamName;
+        searchPokemon(id).then(response => responseTeamsACB({ response: response, teamName: teamName }));
+    }
+
+    function transformTeamCB(team) {
+        return {
+            teamName: team.teamName,
+            //pokemons: team.pokemons.map(searchPokemonListforTeams)
+            pokemons: team.pokemons.map(id => searchPokemonListforTeams({ id: id, teamName: team.teamName }))
+            //pokemons: Object.entries(team.pokemons).map(searchPokemonListforTeams)
+        };
+    }
+
+    function searchTeams(id_arrays){
+        userModel.teamsList=[];
+        return id_arrays.map(transformTeamCB);
     }
     
     //user do not exist
@@ -97,17 +148,29 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
         userModel.likeNumber = 0;
         userModel.teamsList = [];
         userModel.favoriteList = [];
+        userModel.commentList = [];
         //userModel.currentPokemonId=null;
     }
     else{
-        console.log("userdata_from_firebase.currentPokemonId", userdata_from_firebase.currentPokemonId);
-        //userModel.setcurrentPokemonId(userdata_from_firebase.currentPokemonId);
+        console.log("userdata_from_firebase.teamsList", userdata_from_firebase.teamsList);
+        //console.log("userdata_from_firebase.currentPokemonId", userdata_from_firebase.currentPokemonId);
+        userModel.setcurrentPokemonId(userdata_from_firebase.currentPokemonId);
         userModel.searchParams.name=(userdata_from_firebase.currentSearchName);
         if(!userdata_from_firebase.favoriteList || userdata_from_firebase.favoriteList === 'undefined'){
-            return searchPokemonFavorite([]);
+            //return searchPokemonFavorite([]);
+            searchPokemonFavorite([]);
         }
         else{
-            return searchPokemonFavorite(userdata_from_firebase.favoriteList);
+            searchPokemonFavorite(userdata_from_firebase.favoriteList);
+            //return searchPokemonFavorite(userdata_from_firebase.favoriteList);
+        }
+        if(!userdata_from_firebase.teamsList || userdata_from_firebase.teamsList === 'undefined'){
+            searchTeams([]);
+            //return searchPokemonFavorite([]);
+        }
+        else{
+            searchTeams(userdata_from_firebase.teamsList);
+            //return searchPokemonFavorite(userdata_from_firebase.favoriteList);
         }
     }
 }
@@ -119,7 +182,7 @@ function saveToFirebaseUser(model, uid){
 }
 
 function saveToFirebasePokemon(PokenmonModel){
-    set(ref(db, PATH_Pokenmon+"/"+PokenmonModel.currentPokemonId), pokemonModelToPersistence(PokenmonModel));
+    set(ref(db, PATH_Pokenmon+"/"+PokenmonModel.currentPokemonId), pokemonModelToPersistence(PokenmonModel));//check the model to persistence 
 }
 
 function readFromFirebasePokemon(model){
@@ -169,7 +232,7 @@ function connectToFirebaseUser(model, watchFunction){
     watchFunction(checkPokemonACB, effectPokemonACB);
 
     function checkUserACB(){
-        return [model.currentPokemonId, model.favoriteList, model.teamsList, model.searchParams.name];
+        return [model.currentPokemonId, model.favoriteList, model.teamsList, model.searchParams.name, model.commentList];
     }
     function effectUserACB(){
         if(model.user!==null){

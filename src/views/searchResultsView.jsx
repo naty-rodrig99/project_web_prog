@@ -74,10 +74,10 @@ export function SearchResultsView(props){
     }
     function shinyOrDefault(object){
         if (props.queryParams.defaultOrShiny == "Shiny"){
-            return <img src={object.front_shiny}/>
+            return object.front_shiny?<img src={object.front_shiny}/>:<img className="whiteImage" alt="No available image for this pokemon"/>
         }
         else{
-            return <img src={object.front_default}/>
+            return object.front_default?<img src={object.front_default}/>:<img className="whiteImage" alt="No available image for this pokemon"/>
         }
     }
 }
