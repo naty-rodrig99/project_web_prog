@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { SearchResultsView } from "../views/searchResultsView";
 import { SearchFormView } from "../views/searchFormView";
 import { InfinitePokemonView } from "../views/infinitePokemonView";
+import { InfiniteScrollView } from "../views/infiniteScrollView";
 
 const Main = observer(function MainRender(props){
     return (
@@ -55,13 +56,12 @@ const Main = observer(function MainRender(props){
                 detailsChosenACB = {setResultChosenACB}
             />
             {conditionalRender(props.model.searchResultsPromiseState)}
-            <InfinitePokemonView
-              searchPaginationACB = {paginationACB}
-              paginationResults = {props.model.paginationPromiseState}
+            <InfiniteScrollView
+              detailsChosenACB = {setDetailsChosenACB}
             />
         </div>
     )
-    function paginationACB(evt){
+    function paginationACB(){
       props.model.getPaginationPokemons()
     }
 
@@ -112,3 +112,11 @@ const Main = observer(function MainRender(props){
 )
 
 export {Main}
+
+/*
+            <InfinitePokemonView
+              searchPaginationACB = {paginationACB}
+              paginationPromiseState = {props.model.paginationPromiseState}
+              getImage = {props.model.getPokemonImage}
+            />
+*/

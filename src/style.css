@@ -5,7 +5,7 @@ body{
     font-family: 'Roboto Slab';
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll; 
+    /*overflow-y: scroll;*/ 
     /* overflow: hidden; Hide scrollbars */
 
 }
