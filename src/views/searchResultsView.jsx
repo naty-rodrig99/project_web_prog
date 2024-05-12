@@ -20,7 +20,7 @@ export function SearchResultsView(props){
     );
     function showSprite(){
         var gameName = props.queryParams.gameVersion
-        console.log("gameName", gameName)
+        //console.log("gameName", gameName)
         if (gameName === undefined || gameName === "Default Generation"){
             return shinyOrDefault(props.searchResults.sprites)
         }

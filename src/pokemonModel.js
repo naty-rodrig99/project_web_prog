@@ -2,7 +2,7 @@
    The Model keeps the state of the application (Application State). 
    It is an abstract object, i.e. it knows nothing about graphics and interaction.
 */
-import { searchPokemon, getPokemonAbilities, getPokemonSpecies } from './pokemonSource.js';
+import { searchPokemon, getPokemonAbilities, getPokemonSpecies, getPaginatedPokemons } from './pokemonSource.js';
 import { resolvePromise } from './resolvePromise.js';
 
 
@@ -24,6 +24,7 @@ const model = {
     currentPokemonPromiseState: {},
     abilitiesPromiseState: {},
     speciesPromiseState: {},
+    paginationPromiseState: {},
 
     setUser(user){
         this.user=user;
@@ -92,6 +93,11 @@ const model = {
 
     setSearchText(name){
         this.searchParams.name = name;
+    },
+
+    getPaginationPokemons(page){
+        resolvePromise(getPaginatedPokemons(page), this.paginationPromiseState)
+        console.log("from model", this.paginationPromiseState)
     },
 
     doSearch(params){

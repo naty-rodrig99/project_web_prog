@@ -31,8 +31,27 @@ export function searchPokemon(searchParams){
     } 
 
     function someACB(objectResponse){
-        console.log("results", objectResponse)
+        //console.log("results", objectResponse)
         return objectResponse; 
+    }
+}
+
+export function getPaginatedPokemons(pageNumber){
+    const URL = `${BASE_URL}/pokemon/?offset=40&Limit=20`;
+    return fetch(URL).then(gotResonseACB).then(returnObjectACB)
+
+    function gotResonseACB(response){
+        if (!response.ok) {
+            throw new Error('not ok');
+        }
+        const result = response.json();
+        //console.log("response", result)
+        return result;
+    }
+
+    function returnObjectACB(objectResponse){
+        //console.log("objectResponse", objectResponse)
+        return objectResponse
     }
 }
 

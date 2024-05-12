@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 
 import { SearchResultsView } from "../views/searchResultsView";
 import { SearchFormView } from "../views/searchFormView";
+import { InfinitePokemonView } from "../views/infinitePokemonView";
 
 const Main = observer(function MainRender(props){
     return (
@@ -54,8 +55,16 @@ const Main = observer(function MainRender(props){
                 detailsChosenACB = {setResultChosenACB}
             />
             {conditionalRender(props.model.searchResultsPromiseState)}
+            <InfinitePokemonView
+              searchPaginationACB = {paginationACB}
+              paginationResults = {props.model.paginationPromiseState}
+            />
         </div>
     )
+    function paginationACB(evt){
+      props.model.getPaginationPokemons()
+    }
+
     function setResultChosenACB(evt){
         props.model.setcurrentPokemonId(evt);
         console.log("EVT",evt);
