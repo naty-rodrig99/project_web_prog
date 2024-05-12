@@ -211,6 +211,25 @@ function readFromFirebaseUser(model, uid){
     
     return get(ref(db, PATH_user+"/"+uid)).then(convertDataCB).then(changeModelReadyCB);
 }
+
+function readCommentsFromFirebase(pokemonId) {
+    const commentsRef = ref(db, `pokemons/${pokemonId}/comments`);
+
+    return get(commentsRef).then(snapshot => {
+        if (snapshot.exists()) {
+            const commentsData = snapshot.val();
+            console.log("Comments for Pokemon ID", pokemonId, ":", commentsData);
+            return commentsData;
+        } else {
+            console.log("No comments found for Pokemon ID", pokemonId);
+            return [];
+        }
+    }).catch(error => {
+        console.error("Failed to fetch comments:", error);
+        throw error;
+    });
+}
+
 function connectToFirebaseUser(model, watchFunction){
     onAuthStateChanged(auth, loginOutACB);
     function loginOutACB(user){
@@ -263,4 +282,4 @@ function connectToFirebaseUser(model, watchFunction){
 }
 
 // Remember to uncomment the following line:
-export { connectToFirebaseUser, pokemonModelToPersistence, userModelToPersistence, persistenceToUserModel, persistenceToPokemonModel, saveToFirebasePokemon, saveToFirebaseUser, readFromFirebaseUser, readFromFirebasePokemon }
+export { connectToFirebaseUser, pokemonModelToPersistence, userModelToPersistence, persistenceToUserModel, persistenceToPokemonModel, saveToFirebasePokemon, saveToFirebaseUser, readFromFirebaseUser, readFromFirebasePokemon, readCommentsFromFirebase }

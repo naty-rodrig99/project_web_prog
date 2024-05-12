@@ -4,10 +4,26 @@ import { DetailsViewSpecies } from "../views/detialsView_Species";
 import { DetailsViewForum } from "../views/detailsView_Forum";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react"; 
+import { readCommentsFromFirebase } from '../firebaseModel';
+
 
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
+        const [comments, setComments] = useState([]);
+
+        useEffect(() => {
+            if (currentView === 'forum' && props.model.currentPokemonId) {
+                readCommentsFromFirebase(props.model.currentPokemonId)
+                    .then(fetchedComments => {
+                        setComments(fetchedComments);  // Update state with the fetched comments
+                    })
+                    .catch(error => {
+                        console.error('Error fetching comments:', error);
+                    });
+            }
+        }, [currentView, props.model.currentPokemonId]);        
+
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
         }
@@ -68,8 +84,10 @@ const Details = observer(
             }
             viewToShow = ( 
                 <DetailsViewForum
+                user={props.user}
                 addComment={addCommentACB}
                 pokemon = {props.model.currentPokemonPromiseState.data}
+                comments={comments}
                 />
             );
         }

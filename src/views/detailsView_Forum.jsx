@@ -1,127 +1,60 @@
+import React, { useState, useEffect } from 'react';
+import { readCommentsFromFirebase } from '../firebaseModel';
 
-export function DetailsViewForum(props){
+export function DetailsViewForum(props) {
+    const [commentText, setCommentText] = useState('');
+    const [comments, setComments] = useState([]);
 
-    //Comment
-    function addCommentACB(){
-        const inputElement = document.querySelector('.team_input_teamName');
-        const commentArea = inputElement.value;
-        //var commentArea = document.getElementById("comment-area");
-        //commentArea.classList.remove("hide");
-        props.addComment(commentArea, props.pokemon.id, "12:00");  
+    useEffect(() => {
+        if (props.pokemon && props.pokemon.id) {
+            readCommentsFromFirebase(props.pokemon.id)
+                .then(fetchedComments => {
+                    setComments(fetchedComments);
+                })
+                .catch(error => {
+                    console.error('Failed to fetch comments:', error);
+                });
+        }
+    }, [props.pokemon]);
+
+    function handleCommentChange(event) {
+        setCommentText(event.target.value);
     }
 
-    //Reply
-    function showReply(){
-        console.log("user wanna reply")
-        replyArea.classList.remove("hide");
+    function addCommentACB() {
+        const timestamp = new Date().toLocaleTimeString();
+        props.addComment(commentText, props.pokemon.id, timestamp);
+        setComments(prevComments => [...prevComments, {comment: commentText, username: "Current User", timestamp: timestamp}]);
+        setCommentText('');
     }
 
-    function showDetailsACB(){
-        props.setCurrentView("details")
-        //props.pokemonFunction()
-    }
-    function showSpeciesACB(){
-        props.setCurrentView("species")
-    }
-
-    function showForumACB(){
-        props.setCurrentView("forum")
-    }
-
-    
     return (
         <div>
-            {/* <div class="details_part2">
-                <button onClick={showDetailsACB} class="details_part2_abilities">Details</button>
-                <button onClick={showSpeciesACB} class="details_part2_abilities">Species</button>
-                <button onClick={showForumACB} class="details_part2_abilities">Forum</button>
-                <div class="details_part2_line"></div>
-                <div class="details_part2_smallLine3"></div>
-            </div> */}
-            <div class="details_forum">
+            <div className="details_forum">
                 <ul>
-                    <li>
-                        <div class="forum_card">
-                            {/* <!--Another Comment With replies--> */}
-                            <div class="comments-container">
-                                <div class="comments-body">
-                                    <div class="username">John</div>
-                                    <div class="content">
-                                    <input class="team_input_teamName" type="text" />
-                                        <div class="comment">
-                                            <button onClick={addCommentACB}>Add comment</button>
-                                        </div>
+                    {comments.map((comment, index) => (
+                        <li key={index}>
+                            <div className="forum_card">
+                                <div className="comments-container">
+                                    <div className="comments-body">
+                                        <div className="username">{comment.username || "Anonymous"}</div>
+                                        <div className="comment" type="text">{comment.comment}</div>
                                     </div>
                                 </div>
                             </div>
-                            {/* <!--Reply Area--> */}
-                            <div class="comment-area hide" id="reply-area">
-                                <textarea name="reply" id="" placeholder="reply here ... "></textarea>
-                                <input type="submit" value="submit"/>
-                            </div>
-                        </div>
-                    </li>
-
+                        </li>
+                    ))}
                     <li>
-                        <div class="forum_card">
-                            {/* <!--Another Comment With replies--> */}
-                            <div class="comments-container">
-                                <div class="comments-body">
-                                    <div class="authors">
-                                        <div class="username">Julie</div>
-                                        <div class="comment" type="text">I love this pokemon!</div>
-                                        <div class="comment">
-                                            <button onClick={addCommentACB}>Reply</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* <!--Reply Area--> */}
-                            <div class="comment-area hide" id="reply-area">
-                                <textarea name="reply" id="" placeholder="reply here ... "></textarea>
-                                <input type="submit" value="submit"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="forum_card">
-                            {/* <!--Another Comment With replies--> */}
-                            <div class="comments-container">
-                                <div class="comments-body">
-                                    <div class="authors">
-                                        <div class="username">Bob</div>
-                                        <div class="comment" type="text">Hi guys!!</div>
-                                        <div class="comment">
-                                            <button onClick={addCommentACB}>Reply</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* <!--Reply Area--> */}
-                            <div class="comment-area hide" id="reply-area">
-                                <textarea name="reply" id="" placeholder="reply here ... "></textarea>
-                                <input type="submit" value="submit"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="forum_card">
-                            {/* <!--Another Comment With replies--> */}
-                            <div class="comments-container">
-                                <div class="comments-body">
-                                    <div class="authors">
-                                        <div class="username">Robert</div>
-                                        <div class="comment" type="text">It's so strong!</div>
-                                        <div class="comment">
-                                            <button onClick={addCommentACB}>Reply</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* <!--Reply Area--> */}
-                            <div class="comment-area hide" id="reply-area">
-                                <textarea name="reply" id="" placeholder="reply here ... "></textarea>
-                                <input type="submit" value="submit"/>
+                        <div className="forum_card">
+                            <div className="comments-container">
+                                <input
+                                    className="team_input_teamName"
+                                    type="text"
+                                    value={commentText}
+                                    onChange={handleCommentChange}
+                                    placeholder="Add a comment..."
+                                />
+                                <button onClick={addCommentACB}>Add comment</button>
                             </div>
                         </div>
                     </li>
