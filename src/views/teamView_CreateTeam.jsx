@@ -40,7 +40,7 @@ export function CreateTeamView(props){
             props.detailsChosenACB(pokemon.id);
             window.location.hash="#/details";
         }
-
+        console.log("selectedPokemonsCB",pokemon)
         return <div key={pokemon.id} className="team_carouselItem">
                     <div className="team_resultCard">
                         <img src={pokemon.sprites.front_default}/>
@@ -52,6 +52,7 @@ export function CreateTeamView(props){
 
                 </div>;
     }
+
     
     return (
         <div>

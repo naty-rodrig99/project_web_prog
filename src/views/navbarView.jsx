@@ -11,7 +11,10 @@ export function NavbarView(props){
                     <li class="float_right"><a href="#/main">Home</a></li>
                     <li class="float_right"><a href="#/team">Team</a></li>
                     {/* <li class="float_right"><a href="#/signin">Sign in</a></li> */}
-                    <li class="float_right"><a href="#/user"><i class="fa-solid fa-user"></i></a></li>
+                    <li class="float_right"><a href="#/user">
+                        {props.user!==null?<i class="fa-solid fa-user"></i>:"SignIn"}
+                        
+                        </a></li>
                 </ul>
             </nav>
         </body>

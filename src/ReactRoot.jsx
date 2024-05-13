@@ -65,7 +65,7 @@ const ReactRoot = observer((props)=>{
     return (<div className="MainPage">
                 <title>Pokemon</title>
                 <div className="NavPage">
-                    <Navigator></Navigator>
+                    <Navigator model={props.model}/>
                 </div>
                 <RouterProvider router={makeRouter(props.model)}/>
             </div>
