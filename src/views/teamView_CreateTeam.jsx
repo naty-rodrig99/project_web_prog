@@ -73,7 +73,11 @@ export function CreateTeamView(props){
                     </div>
                 </div>
             </div>
-            <div>{props.showErrorMessage && <div className="team_ErrorMsg">Error: You already have 4 pokemons in your team</div>}
+            <div>
+                {props.showErrorMessage && <div className="team_ErrorMsg">Error: You already have 4 pokemons in your team</div>}
+            </div>
+            <div>
+                {props.emptyTeamName && <div className="team_ErrorMsg">Error: First you need to write the team name</div>}
             </div>
             <div class="team_teamName">Team Members:</div>
             <div class="team_box_members">

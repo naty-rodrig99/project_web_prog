@@ -5,6 +5,7 @@ import React, { useState,useEffect } from 'react';
 const CreateTeam = observer(             // needed for the presenter to update (its view) when relevant parts of the model change
     function CreateTeamRender(props){
         const [showErrorMessage, setShowErrorMessage] = useState(false);
+        const [emptyTeamName, setEmptyTeamName] = useState(false);
 
         /*const [temporalPokemonList, setPokemonList] = useState([]);
 
@@ -19,11 +20,15 @@ const CreateTeam = observer(             // needed for the presenter to update (
           }
 
         function addToTeamsListACB(teamName, pokemon){
-            if(props.model.checkPokemonsLength(teamName, pokemon) == true){
-                console.log("showError");
-                setShowErrorMessage(true);
+            if(props.model.isTeamNameEmpty(teamName, pokemon) == false){
+                setEmptyTeamName(false); 
+                if(props.model.checkPokemonsLength(teamName, pokemon) == true){
+                    setShowErrorMessage(true);
+                } else{
+                    props.model.addTemporalTeam(teamName, pokemon);
+                }
             } else{
-                props.model.addTemporalTeam(teamName, pokemon);
+                setEmptyTeamName(true);  
             }
         }
 
@@ -39,6 +44,7 @@ const CreateTeam = observer(             // needed for the presenter to update (
             newTeamACB={createTeamACB}
             temporalTeamsList={props.model.temporalTeamsList}
             showErrorMessage={showErrorMessage}
+            emptyTeamName={emptyTeamName}
             //pokemonList={temporalPokemonList}
         />
         
