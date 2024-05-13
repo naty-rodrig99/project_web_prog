@@ -107,8 +107,8 @@ const model = {
         resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
     },
 
-    setSearchText(name){
-        this.searchParams.name = name;
+    setSearchText(newName){
+        this.searchParams.name = newName;
     },
 
     doSearch(params){

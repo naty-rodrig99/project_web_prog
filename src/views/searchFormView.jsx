@@ -21,8 +21,6 @@ export function SearchFormView(props){
         props.searchNowACB()
     }
     function dropDownGameVersionACB(evt){
-        console.log("queryParams.gameVersion:", props.queryParams)
-        console.log("dropDownGameVersionACB", evt)
         props.setGameVersion(evt.target.value)
         props.searchNowACB()
     }

@@ -58,6 +58,9 @@ const Main = observer(function MainRender(props){
             {conditionalRender(props.model.searchResultsPromiseState)}
             <InfiniteScrollView
               detailsChosenACB = {setDetailsChosenACB}
+              searchTextACB = {setSearchTextACB}
+              searchNowACB = {searchACB}
+              currentSearchName = {props.model.searchParams.name}
             />
         </div>
     )
