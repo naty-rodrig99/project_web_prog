@@ -172,6 +172,24 @@ const model = {
         }
     },
 
+    checkPokemonsLength(teamName,pokemon){
+        function isTeamNameMatch(team) {
+            return team.teamName === teamName;
+        }
+        if(this.isPokemonInTeam(teamName, pokemon) == false){
+            const team = this.temporalTeamsList.find(isTeamNameMatch);
+            if (!team) {
+                //console.log("false",team.pokemons);
+                return false
+            } else {
+                console.log("true",team.pokemons);
+                if(team.pokemons.length >= 4){
+                    return true
+                }
+            }
+        }
+    },
+
     addComment(comment, pokemon, timestamp) {
         this.commentList= [...this.commentList,{comment, pokemon, timestamp}];
     },

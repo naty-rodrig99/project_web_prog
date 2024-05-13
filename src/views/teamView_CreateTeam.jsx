@@ -73,10 +73,12 @@ export function CreateTeamView(props){
                     </div>
                 </div>
             </div>
+            <div>{props.showErrorMessage && <div className="team_ErrorMsg">Error: You already have 4 pokemons in your team</div>}
+            </div>
             <div class="team_teamName">Team Members:</div>
             <div class="team_box_members">
                 <div className="team_carousel">
-                {props.temporalTeamsList.map(team => team.pokemons.map(pokemon => selectedPokemonsCB(pokemon)))}
+                {props.temporalTeamsList.flatMap(team => team.pokemons.map(pokemon => selectedPokemonsCB(pokemon)))}
                 </div>
             </div>
             
