@@ -40,7 +40,7 @@ export function CreateTeamView(props){
             props.detailsChosenACB(pokemon.id);
             window.location.hash="#/details";
         }
-
+        console.log("selectedPokemonsCB",pokemon)
         return <div key={pokemon.id} className="team_carouselItem">
                     <div className="team_resultCard">
                         <img src={pokemon.sprites.front_default}/>
@@ -52,6 +52,7 @@ export function CreateTeamView(props){
 
                 </div>;
     }
+
     
     return (
         <div>
@@ -76,7 +77,8 @@ export function CreateTeamView(props){
             <div class="team_teamName">Team Members:</div>
             <div class="team_box_members">
                 <div className="team_carousel">
-                    {props.temporalTeamsList && props.temporalTeamsList.pokemons && props.temporalTeamsList.pokemons.map(selectedPokemonsCB)}
+                    {/* { props.temporalTeamsList[0]!==undefined ? (props.temporalTeamsList[0].pokemons!==undefined ? props.temporalTeamsList[0].pokemons.map(selectedPokemonsCB):null):null} */}
+                    {props.temporalTeamsList[0]!==undefined ? props.temporalTeamsList[0].pokemons.map(selectedPokemonsCB):"haha"}
                 </div>
             </div>
             
