@@ -613,6 +613,20 @@ input[type=button] {
         color: black;
         text-align: center;
     }
+
+    .team_ErrorMsg{
+        color: red;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-align: center;
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+
     .team_teamName{
         color: #000;
         font-size: 20px;
@@ -626,7 +640,7 @@ input[type=button] {
         margin-bottom: 10px;
     }
 
-    .team_input_teamName {
+    .team_input_teamName1 {
         width: 200px;
         height: 30px;
         padding: 8px;

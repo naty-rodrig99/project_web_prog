@@ -15,7 +15,7 @@ export function CreateTeamView(props){
             window.location.hash="#/details";
         }
         function createTeam(evt){
-            const inputElement = document.querySelector('.team_input_teamName');
+            const inputElement = document.querySelector('.team_input_teamName1');
             const teamName = inputElement.value;
             props.addToTeamsACB(teamName,pokemon);
         }
@@ -65,7 +65,7 @@ export function CreateTeamView(props){
             <div>
                 <div class="team_teamName">
                     Team Name:
-                    <input class="team_input_teamName" type="text" />
+                    <input class="team_input_teamName1" type="text" />
                 </div>
                 <div class="team_teamName">Select from your favorite list 4 pokemon to add to your team:</div>
                 <div class="team_box">
@@ -74,11 +74,16 @@ export function CreateTeamView(props){
                     </div>
                 </div>
             </div>
+            <div>
+                {props.showErrorMessage && <div className="team_ErrorMsg">Error: You already have 4 pokemons in your team</div>}
+            </div>
+            <div>
+                {props.emptyTeamName && <div className="team_ErrorMsg">Error: First you need to write the team name</div>}
+            </div>
             <div class="team_teamName">Team Members:</div>
             <div class="team_box_members">
                 <div className="team_carousel">
-                    {/* { props.temporalTeamsList[0]!==undefined ? (props.temporalTeamsList[0].pokemons!==undefined ? props.temporalTeamsList[0].pokemons.map(selectedPokemonsCB):null):null} */}
-                    {props.temporalTeamsList[0]!==undefined ? props.temporalTeamsList[0].pokemons.map(selectedPokemonsCB):"haha"}
+                {props.temporalTeamsList.flatMap(team => team.pokemons.map(pokemon => selectedPokemonsCB(pokemon)))}
                 </div>
             </div>
             

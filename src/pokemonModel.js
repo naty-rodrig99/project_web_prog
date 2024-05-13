@@ -145,11 +145,18 @@ const model = {
         function isTeamNameMatch(team) {
             return team.teamName === teamName;
         }
-        const team = this.temporalTeamsList.find(isTeamNameMatch);
-        if (!team || !team.pokemon || !team.pokemon.includes(pokemon)) {
-            return false;
+        function isPokemonIDMatch(p) {
+            return p.id === pokemon.id;
         }
-        return true;
+        const team = this.temporalTeamsList.find(isTeamNameMatch);
+        if (!team || !team.pokemons) {
+            return false; // Team doesn't exist or team's pokemons array is not defined
+        }
+        return team.pokemons.some(isPokemonIDMatch); // Returns true if the Pokemon is already in the team
+    },
+
+    isTeamNameEmpty(teamName, pokemon){
+        return teamName == "";
     },
 
     addTemporalTeam(teamName, pokemon) {
@@ -166,7 +173,26 @@ const model = {
                 //console.log("LIST",this.temporalTeamsList[0]);
             } else {
                 // If the team already exists, add the Pokemon;
+                //console.log("ADDING",teamName,pokemon);
                 team.pokemons.push(pokemon);
+            }
+        }
+    },
+
+    checkPokemonsLength(teamName,pokemon){
+        function isTeamNameMatch(team) {
+            return team.teamName === teamName;
+        }
+        if(this.isPokemonInTeam(teamName, pokemon) == false){
+            const team = this.temporalTeamsList.find(isTeamNameMatch);
+            if (!team) {
+                //console.log("false",team.pokemons);
+                return false
+            } else {
+                console.log("true",team.pokemons);
+                if(team.pokemons.length >= 4){
+                    return true
+                }
             }
         }
     },
