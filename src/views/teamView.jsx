@@ -8,12 +8,18 @@ export function TeamView(props){
         window.location.hash="#/createTeam";
     }
 
+    
     function teamsListCB(team){
+        
+        function showSeeTeamView(){
+            props.teamChosenACB(team.teamName);
+            window.location.hash="#/seeTeam";
+        }
         const pokemonNames = team.pokemons.map(pokemon => pokemon.name).join(', ');
         return  <tr key={team.teamName}>
                         <td>{team.teamName}</td>
                         <td>{pokemonNames}</td>
-                        <td><button class="team_seedetails_button">See Details</button></td>
+                        <td><button class="team_seedetails_button" onClick={showSeeTeamView}>See Details</button></td>
                     </tr>
                 
     }

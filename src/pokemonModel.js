@@ -8,7 +8,7 @@ import { resolvePromise } from './resolvePromise.js';
 
 const model = {  
     user: null,
-    currentPokemonId: null, 
+    currentPokemonId: null,
     //currentReadPokemon: [null, 0, []], //pokemon Id, Like number, Comment List
     currentReadPokemonId: null,
     currentPokemonLikeNumber: 0,
@@ -18,6 +18,7 @@ const model = {
     favoriteList:[],
     teamsList: [],
     temporalTeamsList: [],
+    currentTeam: null,
     commentList: [],
     // favoriteList:[],
     //team: [],
@@ -197,6 +198,13 @@ const model = {
         }
     },
 
+    setcurrentTeam(team){
+        console.log("Team",team);
+        if(team != this.currentTeam){
+            this.currentTeam = this.teamsList.find(t => t.teamName === team);
+        }
+    },
+
     addComment(comment, pokemon, timestamp) {
         this.commentList= [...this.commentList,{comment, pokemon, timestamp}];
     },
@@ -206,6 +214,17 @@ const model = {
         this.teamsList = [...this.teamsList,...this.temporalTeamsList];
         this.temporalTeamsList = [];
         //console.log("NEW",this.teamsList);
+    },
+
+    resetTemporalList(){
+        this.temporalTeamsList = [];
+    },
+
+    deleteTeam(teamName){
+        const index = this.teamsList.findIndex(t => t.teamName === teamName);
+        if (index !== -1) {
+            this.teamsList.splice(index, 1); // Remove the team from the teamsList array
+        }
     },
 
     addToTeamsList(teamName, pokemon){
@@ -220,6 +239,7 @@ const model = {
             } else {
                 team.pokemons.push(pokemon); // If the team already exists, add the Pokemon;
             }
+            console.log("NEWTEAMLIST",this.teamsList);
         } 
     },
 

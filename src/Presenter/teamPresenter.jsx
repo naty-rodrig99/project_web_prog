@@ -1,5 +1,4 @@
 import { TeamView } from "../views/teamView.jsx";
-import { TeamViewSeeTeam } from "../views/teamView_SeeTeam.jsx";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react"; 
 
@@ -20,9 +19,15 @@ const TeamPage = observer(             // needed for the presenter to update (it
             );
         }
 
+        function setResultChosenACB(evt){
+            props.model.setcurrentTeam(evt);
+            //console.log("EVT",evt);
+          }
+
         return <>
         <TeamView
             teamsList={props.model.teamsList}
+            teamChosenACB = {setResultChosenACB}
         />
         </>
         

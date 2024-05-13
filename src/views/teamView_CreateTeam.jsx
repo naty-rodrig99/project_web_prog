@@ -2,6 +2,7 @@ export function CreateTeamView(props){
 
     function backtoTeamPage(evt){
         window.location.hash="#/team";
+        props.resetTemporal();
     }
     function newTeam(){
         props.newTeamACB();
@@ -80,10 +81,13 @@ export function CreateTeamView(props){
             <div>
                 {props.emptyTeamName && <div className="team_ErrorMsg">Error: First you need to write the team name</div>}
             </div>
+            <div>
+                {props.showPokemons && <div className="team_Msg">The selected pokemon has been added to the team.</div>}
+            </div>
             <div class="team_teamName">Team Members:</div>
             <div class="team_box_members">
                 <div className="team_carousel">
-                {props.temporalTeamsList.flatMap(team => team.pokemons.map(pokemon => selectedPokemonsCB(pokemon)))}
+                {props.temporalTeamsList.map(team => team.pokemons.map(pokemon => selectedPokemonsCB(pokemon)))}
                 </div>
             </div>
             
