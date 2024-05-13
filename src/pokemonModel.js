@@ -161,11 +161,12 @@ const model = {
             // If the team doesn't exist, create a new team
             if (!team) {
                 this.temporalTeamsList= [...this.temporalTeamsList,{teamName, pokemons: [pokemon]}];
-                //console.log("CREATING NEW",teamName,pokemon);
+                console.log("CREATING NEW",teamName,pokemon);
                 //this.teamsList.push({ teamName, pokemons: [pokemon] });
                 //console.log("LIST",this.temporalTeamsList[0]);
             } else {
                 // If the team already exists, add the Pokemon;
+                console.log("ADDING",teamName,pokemon);
                 team.pokemons.push(pokemon);
             }
         }

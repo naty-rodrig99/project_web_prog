@@ -15,7 +15,7 @@ export function CreateTeamView(props){
             window.location.hash="#/details";
         }
         function createTeam(evt){
-            const inputElement = document.querySelector('.team_input_teamName');
+            const inputElement = document.querySelector('.team_input_teamName1');
             const teamName = inputElement.value;
             props.addToTeamsACB(teamName,pokemon);
         }
@@ -64,7 +64,7 @@ export function CreateTeamView(props){
             <div>
                 <div class="team_teamName">
                     Team Name:
-                    <input class="team_input_teamName" type="text" />
+                    <input class="team_input_teamName1" type="text" />
                 </div>
                 <div class="team_teamName">Select from your favorite list 4 pokemon to add to your team:</div>
                 <div class="team_box">
@@ -76,7 +76,7 @@ export function CreateTeamView(props){
             <div class="team_teamName">Team Members:</div>
             <div class="team_box_members">
                 <div className="team_carousel">
-                    {props.temporalTeamsList && props.temporalTeamsList.pokemons && props.temporalTeamsList.pokemons.map(selectedPokemonsCB)}
+                {props.temporalTeamsList.map(team => team.pokemons.map(pokemon => selectedPokemonsCB(pokemon)))}
                 </div>
             </div>
             

@@ -1,9 +1,19 @@
 import { CreateTeamView } from "../views/teamView_CreateTeam.jsx";
 import { observer } from "mobx-react-lite";
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 
 const CreateTeam = observer(             // needed for the presenter to update (its view) when relevant parts of the model change
     function CreateTeamRender(props){
+
+        const [temporalPokemonList, setPokemonList] = useState([]);
+        /*useEffect(() => {
+            console.log("UPDATED", props.temporalTeamsList);
+            // Update the local state pokemonList when props.temporalTeamsList changes
+            if (props.temporalTeamsList && props.temporalTeamsList.pokemons) {
+                setPokemonList(props.temporalTeamsList);
+                console.log("Updated pokemonList:", temporalPokemonList);
+            }
+        }, [props.temporalTeamsList]); */
 
         useEffect(() => {
             // This code will execute whenever props.temporalTeamsList changes
@@ -17,6 +27,7 @@ const CreateTeam = observer(             // needed for the presenter to update (
 
         function addToTeamsListACB(teamName, pokemon){
             //console.log("TEAM NAME",teamName);
+            //here I add items to temporalTeamsList
             props.model.addTemporalTeam(teamName, pokemon);
             //props.model.addTeam(props.model.currentPokemonPromiseState.data);
             //props.model.addTeam(props.model.currentPokemonPromiseState.data);
@@ -34,6 +45,7 @@ const CreateTeam = observer(             // needed for the presenter to update (
             addToTeamsACB={addToTeamsListACB}
             newTeamACB={createTeamACB}
             temporalTeamsList={props.model.temporalTeamsList}
+            pokemonList={temporalPokemonList}
         />
         
     }
