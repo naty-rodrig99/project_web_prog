@@ -25,6 +25,8 @@ export function UserPageView(props){
 
     return (
         <div>
+            <div className="team_view1_title">My Favorite Pokemons</div>
+            <div className="team_Msg">You can create teams with your favorite pokemons</div>
             <div className="favoriteList">
             <MasonryInfiniteGrid
             className="favoriteListContainer"

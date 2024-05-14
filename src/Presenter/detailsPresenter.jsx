@@ -11,6 +11,26 @@ const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
         const [comments, setComments] = useState([]);
+        const [showPopupExperience, setShowPopupExperience] = useState(false);
+        const [showPopupCaptureRate, setShowPopupCaptureRate] = useState(false);
+        const [showPopupHappiness, setShowPopupHappiness] = useState(false);
+        const [showPopupGrowthRate, setShowPopupGrowthRate] = useState(false);
+
+        function togglePopupExperience() {
+            setShowPopupExperience(!showPopupExperience);
+        }
+
+        function togglePopupCaptureRate() {
+            setShowPopupCaptureRate(!showPopupCaptureRate);
+        }
+
+        function togglePopupHappiness() {
+            setShowPopupHappiness(!showPopupHappiness);
+        }
+
+        function togglePopupGrowthRate() {
+            setShowPopupGrowthRate(!showPopupGrowthRate);
+        }
 
         useEffect(() => {
             if (currentView === 'forum' && props.model.currentPokemonId) {
@@ -67,6 +87,8 @@ const Details = observer(
                     abilitiesFunction = {searchAbilityACB}
                     species={props.model.speciesPromiseState.data}
                     searchSpecies={searchSpicies}
+                    togglePopupExperience={togglePopupExperience}
+                    showPopupExperience={showPopupExperience}
                     
                 />
             );
@@ -76,6 +98,12 @@ const Details = observer(
                 <DetailsViewSpecies
                     species={props.model.speciesPromiseState.data}
                     searchSpecies={searchSpicies}
+                    togglePopupCaptureRate={togglePopupCaptureRate}
+                    showPopupCaptureRate={showPopupCaptureRate}
+                    togglePopupHappiness={togglePopupHappiness}
+                    showPopupHappiness={showPopupHappiness}
+                    togglePopupGrowthRate={togglePopupGrowthRate}
+                    showPopupGrowthRate={showPopupGrowthRate}
                 />
             );
         } else if(currentView === 'forum'){

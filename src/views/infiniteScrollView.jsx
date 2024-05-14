@@ -72,6 +72,7 @@ export function InfiniteScrollView(props){
     
     return(
         <div>
+            <div class="inifinite_subtitle">Other Pokémon Suggestions</div>
             <div className="favoriteList">
                 <MasonryInfiniteGrid className="favoriteListContainer" gap={3}>
                     {pokemonData.map(cardMakerCB)}
