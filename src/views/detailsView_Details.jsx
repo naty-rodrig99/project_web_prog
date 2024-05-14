@@ -1,47 +1,31 @@
 
 export function DetailsViewDetails(props){
 
-    // function showDetailsACB(){
-    //     props.setCurrentView("details")
-    //     //props.pokemonFunction()
-    // }
-
-    // function showSpeciesACB(){
-    //     props.setCurrentView("species")
-    // }
-
-    // function showForumACB(){
-    //     props.setCurrentView("forum")
-    // }
-
-    // function showAbilitiesACB(){
-    //     props.abilitiesFunction()
-    // }
+    function showBaseExperience(){
+        props.togglePopupExperience();
+    }
 
     return (
         <div>
-            {/* <div class="details_part2">
-                <button onClick={showDetailsACB} class="details_part2_abilities">Details</button>
-                <button onClick={showSpeciesACB} class="details_part2_abilities">Species</button>
-                <button onClick={showForumACB} class="details_part2_abilities">Forum</button>
-                <div class="details_part2_line"></div>
-                <div class="details_part2_smallLine"></div>
-            </div> */}
-
             <div class="details_part2_rectangle2">General</div>
-
             <div >
                 <div class="details_part2_div1">
+                    <span><button class="team_info_button" onClick={showBaseExperience}>i</button></span>
                     <span class="details_part2_headline2">Base Experience:</span>
                     <span class="details_part2_item1">{props.pokemon.base_experience}</span>
                   </div>
                 <div class="details_part2_div1">
+                    {props.showPopupExperience && <div className="details_part2_popup">The base experience gained for defeating this Pokémon.</div>}
+                </div>
+                <div class="details_part2_div1">
                     <span class="details_part2_headline2">Height:</span>
                     <span class="details_part2_item1">{props.pokemon.height}</span>
+                    <span class="details_part2_item_units"> decimetres</span>
                 </div>
                 <div class="details_part2_div1">
                     <span class="details_part2_headline2">Weight:</span>
                     <span class="details_part2_item1">{props.pokemon.weight}</span>
+                    <span class="details_part2_item_units"> hectograms</span>
                 </div>
             </div>
 
