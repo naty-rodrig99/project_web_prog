@@ -5,9 +5,9 @@ import React, { useState } from "react";
 const TeamPage = observer(             // needed for the presenter to update (its view) when relevant parts of the model change
     function TeamRender(props){
         const [currentView, setCurrentView] = useState('team');
-        if ( props.model.user===null){
+        /*if ( props.model.user===null){
             window.location.hash="#/user";
-        }
+        }*/
 
         let viewToShow;
 
