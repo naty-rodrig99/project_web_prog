@@ -20,14 +20,11 @@ const model = {
     temporalTeamsList: [],
     currentTeam: null,
     commentList: [],
-    // favoriteList:[],
-    //team: [],
     searchResultsPromiseState: {},
     currentPokemonPromiseState: {},
     abilitiesPromiseState: {},
     speciesPromiseState: {},
     paginationPromiseState: {},
-    //pokemons: [],
 
     getPokemonImage(name){
         let promiseState = {};
@@ -38,7 +35,6 @@ const model = {
     getPaginationPokemons(offSet, limit){
         resolvePromise(getPaginatedPokemons(offSet, limit), this.paginationPromiseState);
         //this.pokemons = this.paginationPromiseState.data
-
     },
 
     setUser(user){
@@ -59,17 +55,13 @@ const model = {
     },
 
     addcurrentPokemonLikeNumber(){
-        //console.log("before add: ", this.likeNumber);
         this.currentPokemonLikeNumber++;
-        //this.currentReadPokemon[1]++;
-        //console.log("after add: ", this.currentPokemonLikeNumber);
     },
 
     minuscurrentPokemonLikeNumber(){
         if(this.currentPokemonLikeNumber>0){
             this.currentPokemonLikeNumber--;
         }
-        // this.currentPokemonLikeNumber--;
     },
 
     clearModel(){
@@ -127,12 +119,9 @@ const model = {
     },
 
     addToFavoriteList(pokemonToAdd){
-        // array spread syntax example. Make sure you understand the code below.
-        // It sets this.dishes to a new array [   ] where we spread (...) the elements of the existing this.dishes
         if(!this.favoriteList.includes(pokemonToAdd)){
             this.favoriteList= [...this.favoriteList, pokemonToAdd];
         }
-        //console.log("Current the favorite list is: ", this.favoriteList);
     },
 
     removeFromFavoriteList(pokemonToRemove){
@@ -169,12 +158,7 @@ const model = {
             // If the team doesn't exist, create a new team
             if (!team) {
                 this.temporalTeamsList= [...this.temporalTeamsList,{teamName, pokemons: [pokemon]}];
-                //console.log("CREATING NEW",teamName,pokemon);
-                //this.teamsList.push({ teamName, pokemons: [pokemon] });
-                //console.log("LIST",this.temporalTeamsList[0]);
             } else {
-                // If the team already exists, add the Pokemon;
-                //console.log("ADDING",teamName,pokemon);
                 team.pokemons.push(pokemon);
             }
         }
@@ -187,7 +171,6 @@ const model = {
         if(this.isPokemonInTeam(teamName, pokemon) == false){
             const team = this.temporalTeamsList.find(isTeamNameMatch);
             if (!team) {
-                //console.log("false",team.pokemons);
                 return false
             } else {
                 console.log("true",team.pokemons);
@@ -210,10 +193,8 @@ const model = {
     },
 
     createTeam(){
-        //this.teamsList = [...this.teamsList,this.temporalTeamsList];
         this.teamsList = [...this.teamsList,...this.temporalTeamsList];
         this.temporalTeamsList = [];
-        //console.log("NEW",this.teamsList);
     },
 
     resetTemporalList(){
@@ -239,42 +220,34 @@ const model = {
             } else {
                 team.pokemons.push(pokemon); // If the team already exists, add the Pokemon;
             }
-            console.log("NEWTEAMLIST",this.teamsList);
         } 
     },
 
+    removeFromTeam(teamName, pokemonToRemove){
+        const teamIndex = this.teamsList.findIndex(team => team.teamName === teamName);
+
+        //If team exists
+        if (teamIndex !== -1) {
+            const team = this.teamsList[teamIndex];
+            const pokemonIndex = team.pokemons.findIndex(pokemon => pokemon === pokemonToRemove);
+
+            if (pokemonIndex !== -1) {
+                //Remove the pokemon from the team
+                team.pokemons.splice(pokemonIndex, 1);
+
+                //If the team has no more pokemon, remove the team from the list
+                if (team.pokemons.length === 0) {
+                    this.teamsList.splice(teamIndex, 1);
+                }
+                return true; //Removed successfully
+            } else {
+                return false; //Pokemon was not found
+            }
+        } else {
+            return false; //Team was not found
+        }
+    },
+
 };
-
-// const PokenmonModel = {
-//     pokemonId: null,
-//     likeNumber: 0,
-//     commentList: [],
-
-//     setPokemonId(pokemonId){
-//         this.pokemonId= pokemonId;
-//     },
-
-//     setlikeNumber(number){
-//         this.likeNumber= number;
-//     },
-
-//     addLikeNumber(){
-//         //console.log("before add: ", this.likeNumber);
-//         this.likeNumber++;
-//         //console.log("after add: ", this.likeNumber);
-//     },
-
-//     minusLikeNumber(){
-//         this.likeNumber--;
-//     },
-
-//     addToCommentList(comment){
-//         // array spread syntax example. Make sure you understand the code below.
-//         // It sets this.dishes to a new array [   ] where we spread (...) the elements of the existing this.dishes
-//         this.commentList= [...this.commentList, comment];
-//         //console.log("Current the favorite list is: ", this.favoriteList);
-//     },
-
-// };
 
 export {model};
