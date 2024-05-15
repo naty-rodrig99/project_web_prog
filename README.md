@@ -7,6 +7,9 @@
 :woman_technologist: Natalia Rodriguez Arias   
 :woman_technologist: Yujing Zhang
 
+## :bell: Deployed Web Link
+https://ddrela-filfor-rodrig-yujingzh.web.app/
+
 
 ## :eyes: Brief Introduction
 Pokémon Encyclopedia is  comprehensive webpage designed to be your ultimate guide to all things Pokémon!
@@ -17,6 +20,20 @@ Pokémon Encyclopedia is  comprehensive webpage designed to be your ultimate gui
 Whether you're a seasoned trainer or just starting your journey, The Pokémon Encyclopedia is your ultimate companion in the quest to become the very best. Start exploring now and embark on an unforgettable adventure!  
 
 The framework used in this project are: Mobx & React  
+
+
+## :key: Setup for the project
+```
+cd [location of project folder in your computer]
+```
+install the packages used in the website
+```
+npm install
+```
+run the website
+```
+npm run dev
+```
 
 
 ## :bookmark: API & third componant used
