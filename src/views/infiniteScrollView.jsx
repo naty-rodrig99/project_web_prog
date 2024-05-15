@@ -49,13 +49,17 @@ export function InfiniteScrollView(props){
         window.addEventListener('scroll', handleScroll)
     }, [])
 
-    function highlightPokemon(evt){
+    function highlightPokemonACB(evt){
         props.detailsChosenACB(evt.target.value)
         props.searchTextACB(evt.target.name)
         if (evt.target.name !== props.currentSearchName){
             props.searchNowACB()
         }
-        console.log(evt.target)
+        scrollToTopACB();
+    }
+
+    function scrollToTopACB(){
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
     function cardMakerCB(pokemon, i){
@@ -64,7 +68,7 @@ export function InfiniteScrollView(props){
                         <img src={pokemon.img}/>
                         <ul>
                             <li className="resultCardName">{i+1}. {pokemon.name}</li>
-                            <li><button value={i+1} name={pokemon.name.toString()} onClick={highlightPokemon}>Search</button></li>
+                            <li><button value={i+1} name={pokemon.name.toString()} onClick={highlightPokemonACB}>Search</button></li>
                         </ul>
                     </div>
                 </span>;
