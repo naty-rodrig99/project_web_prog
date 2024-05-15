@@ -23,7 +23,7 @@ export function searchPokemon(searchParams){
     //aynchronous callback to handle response
     function gotResponseACB(response) {
         if (!response.ok) {
-            throw new Error('not ok');
+            throw new Error('No Pokémon that matches your search string was found. Try using the full Pokémon name or its pokedex number.');
         }
         const result = response.json();
         //console.log("json", result)
