@@ -1,6 +1,10 @@
 import { signInWithGooglePopup} from "../firebaseModel.js"
 
 export function SignInView(props){
+    function backtoLastPage(evt){
+        history.back();
+    }
+
     // const logGoogleUser = async () => {
     //     const response = await signInWithGooglePopup();
     //     //props.loginUser(response.user.uid);
@@ -18,6 +22,7 @@ export function SignInView(props){
     // // }
     return (
         <div>
+             <button className="team_backbutton" onClick={backtoLastPage}>Back</button>
             <div className="signInNotification">
                 You have to signin first to use the further functions!
             </div>

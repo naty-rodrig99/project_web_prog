@@ -26,6 +26,7 @@ const TeamPage = observer(             // needed for the presenter to update (it
 
         return <>
         <TeamView
+            user={props.model.user}
             teamsList={props.model.teamsList}
             teamChosenACB = {setResultChosenACB}
         />

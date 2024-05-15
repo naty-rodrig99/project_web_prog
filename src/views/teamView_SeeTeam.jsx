@@ -1,7 +1,8 @@
 export function SeeTeamView(props){
 
     function backtoTeamsPage(evt){
-        window.location.hash="#/team";
+        history.back();
+        //window.location.hash="#/team";
     }
 
     function deleteTeam(evt){
@@ -23,8 +24,6 @@ export function SeeTeamView(props){
                         <ul>
                             <li className="team_resultCardName">{pokemon.name}</li>
                             <li><button className="team_cardButtonLearnMore" onClick={changeToDetails}>Learn More</button></li>
-                        </ul>
-                        <ul>
                             <li><button className="team_cardButtonAdd" onClick={removeFromTeam}>Remove</button></li>
                         </ul>
                     </div>

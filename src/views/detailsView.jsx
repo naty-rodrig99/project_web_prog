@@ -17,7 +17,8 @@ export function DetailsView(props){
         
     }
     function backtoHomePage(evt){
-        window.location.hash="#/main";
+        history.back();
+        //window.location.hash="#/main";
     }
 
     //used to show the animation between tab selection
@@ -74,7 +75,7 @@ export function DetailsView(props){
                     {/* <img src={props.isInFavorite ? 'red_heart.png': 'empty_heart.png'}></img> */}
                     {/* <img class="details_part1_img2" src={heartImgSrc}></img> */}
                 </button>
-                <div>{props.user? props.likeNumber: "You need to login first to check the like number"}</div>
+                <div>{props.user? props.likeNumber+" user(s) like it": "You need to login first to check the like number"}</div>
             </div>
             <div className="details_selector">
                 <button className="detail_selector_item" style ={defaultStyle} onClick={onChange0}>Details</button>
