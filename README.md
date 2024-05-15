@@ -19,16 +19,16 @@ Whether you're a seasoned trainer or just starting your journey, The Pokémon En
 The framework used in this project are: Mobx & React  
 
 
-## :bookmark: API & useful tool link
-- [Pokemon](https://pokeapi.co/docs/v2)
-- [awesome-react-components](https://github.com/brillout/awesome-react-components)
-- [Font Awesome](https://fontawesome.com/)
-- [InfiniteGrid](https://naver.github.io/egjs-infinitegrid/docs/api/InfiniteGrid#renderItems)
-- [Navigation History](https://github.com/remix-run/history/tree/dev/docs)
+## :bookmark: API & third componant used
+- [API - Pokemon](https://pokeapi.co/docs/v2)
+- [Third Componant - Font Awesome](https://fontawesome.com/) Used for all the icons in the website.
+- [Third Componant - InfiniteGrid](https://naver.github.io/egjs-infinitegrid/docs/api/InfiniteGrid#renderItems) Used for the favorite list in user page and the infinite scroll of pokemon in main/search page
+- [Third Componant - Navigation History](https://github.com/remix-run/history/tree/dev/docs) Used for all the "back" button
 
 
-## :bookmark_tabs: Project Structure
--[click here to see the short description/purpose of each file](https://docs.google.com/document/d/15WNZWTjmEm05WJ_LjdbOl7XcZwXwoR028H1pFV2Ln-g/edit?usp=sharing)
+## :speech_balloon: User Evalution
+- [User Study on Prototype before website deployed](https://docs.google.com/document/d/1z8lEWtBtgkDQrijkQyNEqKfBiCkhUq1my2ks4m-Ob7c/edit)
+- [User Evaluation after website finished](https://docs.google.com/document/d/1i4LkbkQbSuTJIikHt5hthV2u05fHpr46a2I_P2dz56s/edit)
 
 
 ## :white_check_mark: Todo List
@@ -37,6 +37,7 @@ The framework used in this project are: Mobx & React
 - [x] User Study
 - [x] API Trial [Pokemon](https://pokeapi.co/docs/v2)
 - [x] Web framework building
+- [x] [Mid project description](https://docs.google.com/document/d/15WNZWTjmEm05WJ_LjdbOl7XcZwXwoR028H1pFV2Ln-g/edit?usp=sharing)
 - [x] [Firebase setting](https://console.firebase.google.com/u/0/project/ddrela-filfor-rodrig-yujingzh/overview)
 - [x] User Page - favorite list, using [infinite grid componant](https://naver.github.io/egjs-infinitegrid/docs/api/InfiniteGrid#renderItems)
 - [x] User Page - login & logout via google accounts
