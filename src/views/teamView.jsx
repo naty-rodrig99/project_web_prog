@@ -5,7 +5,12 @@ export function TeamView(props){
     }
 
     function showCreateTeamView(){
-        window.location.hash="#/createTeam";
+        if(props.user===null){
+            window.location.hash="#/user";
+        }
+        else{
+            window.location.hash="#/createTeam";
+        }
     }
 
     

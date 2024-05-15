@@ -1,7 +1,8 @@
 export function CreateTeamView(props){
 
     function backtoTeamPage(evt){
-        window.location.hash="#/team";
+        history.back();
+        //window.location.hash="#/team";
         props.resetTemporal();
     }
     function newTeam(){

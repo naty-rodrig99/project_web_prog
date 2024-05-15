@@ -220,7 +220,7 @@ input[type=button] {
     .resultCardName{
         margin: 5px 0px;
         font-weight: bolder;
-        font-size: 24px;
+        font-size: 22px;
         width: 260px;
         word-break:keep-all;/* do not change the line */   
         white-space:nowrap;/* do not change the line */  
@@ -365,6 +365,11 @@ input[type=button] {
         text-decoration: none;
         margin-left: 15px;
         margin-top: 15px;
+    }
+
+    .details_part1_backbutton:hover{
+        background-color: #2e7bc3;
+        color: rgb(255, 252, 252);
     }
 
     .details_part1_img2 {
@@ -534,6 +539,10 @@ input[type=button] {
         margin-left: 15px;
         margin-top: 15px;
     }
+    .team_backbutton:hover{
+        background-color: #2e7bc3;
+        color: rgb(255, 255, 255);
+    }
 
     .team_view1_title{
         color: #000;
@@ -561,6 +570,10 @@ input[type=button] {
         text-decoration: none;
         margin-left: 150px;
         margin-top: 15px;
+    }
+    .team_createteam_button:hover{
+        background-color: #2e7bc3;
+        color: white;
     }
 
     .team_table-container {
@@ -601,6 +614,10 @@ input[type=button] {
         border-radius: 20px;
         color: black;
         text-align: center;
+    }
+
+    .team_seedetails_button:hover{
+        background-color: #f3d967;
     }
 
     .team_ErrorMsg{
