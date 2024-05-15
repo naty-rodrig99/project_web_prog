@@ -692,8 +692,10 @@ input[type=button] {
     }
 
     .team_box{
-        width: 50%;
-        height: 300px;
+        width: 60%;
+        max-width: max-content;
+        min-width:200px;
+        height: 320px;
         background: 'white';
         border-radius: 20px;
         border: 3px #4489C9 solid;
@@ -703,7 +705,7 @@ input[type=button] {
 
     .team_submit_button{
         background-color: white;
-        border: 3px solid #2e7bc3;
+        border: 3px solid #f3d967;
         height: 35px;
         width: 140px;
         font-size: 18px;
@@ -720,10 +722,15 @@ input[type=button] {
         margin-bottom: 40px;
     }
 
+    .team_submit_button:hover{
+        background-color: #f3d967;
+        color: black;
+    }
+
     .team_carousel {
         display: flex;
         overflow-x: auto;
-        height: 300px;
+        height: 320px;
         margin: 0px 10px;
     }
 
@@ -742,7 +749,7 @@ input[type=button] {
     
     .team_carouselItem {
         flex: 0 0 auto;
-        margin-right: 10px;
+        height: 300px;
     }
 
     .team_resultCard{
@@ -831,12 +838,14 @@ input[type=button] {
 
     .team_box_members{
         width: 75%;
-        height: 45%;
+        max-width: max-content;
+        height: 300px;
         background: 'white';
         border-radius: 20px;
         border: 3px #4489C9 transparent;
         margin-top: 40px;
         margin: auto;
+        align-content: center;
     }
 
     .comments-section {

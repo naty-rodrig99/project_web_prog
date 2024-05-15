@@ -10,6 +10,7 @@ export function CreateTeamView(props){
         window.location.hash="#/team";
     }
 
+    console.log("favorite list: ", props.favoriteList.length)
     function favoriteListCB(pokemon){
         //console.log("userPage pokemon: ", pokemon);
         function changeToDetails(evt){
@@ -28,8 +29,6 @@ export function CreateTeamView(props){
                         <ul>
                             <li className="team_resultCardName">{pokemon.name}</li>
                             <li><button className="team_cardButtonLearnMore" onClick={changeToDetails}>Learn More</button></li>
-                        </ul>
-                        <ul>
                             <li><button className="team_cardButtonAdd" onClick={createTeam}>Add to team</button></li>
                         </ul>
                     </div>
@@ -72,7 +71,7 @@ export function CreateTeamView(props){
                 <div class="team_teamName">Select from your favorite list 4 pokemon to add to your team:</div>
                 <div class="team_box">
                     <div className="team_carousel">
-                        {props.favoriteList.map(favoriteListCB)}
+                        {props.favoriteList.length>0?props.favoriteList.map(favoriteListCB):"You should first add at least 4 pokemons to create the team"}
                     </div>
                 </div>
             </div>
@@ -92,7 +91,7 @@ export function CreateTeamView(props){
                 </div>
             </div>
             
-            <button class="team_submit_button" onClick={newTeam}>Create</button>
+            <button class="team_submit_button" disabled={props.temporalTeamsList.length<4} onClick={newTeam}>Create</button>
         </div>
         
     );
