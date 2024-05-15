@@ -93,7 +93,7 @@ const Main = observer(function MainRender(props){
     function conditionalRender(promiseState) {
         function promiseNoData(promiseState) {
           if (promiseState == null || promiseState.promise == null) {
-            return <div>No Pokémon found that matches your search string and filter.</div>;
+            return <div>No Pokémon that matches your search string was found. <br/> Try using the full Pokémon name or its pokedex number.</div>;
           } else if (promiseState.error == null) {
             return <img src="https://brfenergi.se/iprog/loading.gif"></img>;
           } else {
