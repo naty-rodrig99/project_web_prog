@@ -180,13 +180,13 @@ input[type=button] {
         border-radius: 15px;
         margin: 20px 5px;
         width: 280px;
-        height: 350px;
-
+        height: 360px;
+        text-align: center; 
     }
 
     .resultCard img{
         width: 260px;
-        margin: 10px;
+        margin: 10px 10px 0px 10px;
         object-fit: cover;
         border-radius: 15px;
         background-color: #ffffff;
@@ -202,9 +202,10 @@ input[type=button] {
 
     .resultCard ul{
         list-style-type: none;
-        margin: 10px;
+        margin: 2px 10px;
+        width: 260px;
         padding: 0px;
-        height: 60px;
+        height: 120px;
         overflow: hidden;
     }
 
@@ -217,11 +218,10 @@ input[type=button] {
     }
 
     .resultCardName{
-        float: left;
-        margin: 2px 10px;
+        margin: 5px 0px;
         font-weight: bolder;
-        font-size: 28px;
-        width: 120px;
+        font-size: 24px;
+        width: 260px;
         word-break:keep-all;/* do not change the line */   
         white-space:nowrap;/* do not change the line */  
         overflow:hidden;/* hide the content if it exceed the width */   
@@ -231,16 +231,19 @@ input[type=button] {
 
     .resultCard button{
         background-color:#2e7bc3;
-        float: right;
-        height: 45px;
-        width: 120px;
-        font-size: 18px;
+        height: 35px;
+        width: 260px;
+        font-size: 16px;
         border-radius: 25px;
         border: 0;
         color: white;
         text-align: center;
         text-decoration: none;
+        
+    }
 
+    .resultCard button:hover {
+        background-color: #103e87;
     }
 
     .signInNotification{
@@ -271,6 +274,10 @@ input[type=button] {
         color: white;
         text-align: center;
         text-decoration: none;
+    }
+
+    .signInOutButton:hover{
+        background-color:#328b11;
     }
 
     .float_left{
@@ -635,7 +642,6 @@ input[type=button] {
         margin-bottom: 10px;
     }
 
-    
     .team_teamName2{
         color: #000;
         font-size: 20px;
@@ -700,6 +706,8 @@ input[type=button] {
     .team_carousel {
         display: flex;
         overflow-x: auto;
+        height: 300px;
+        margin: 0px 10px;
     }
 
     .team_carousel::-webkit-scrollbar {
@@ -724,16 +732,15 @@ input[type=button] {
         background-color:#F3D967;
         border: 2px solid rgb(189, 189, 189);
         border-radius: 15px;
-        margin: 20px 5px;
-        width: 210px;
-        height: 220px;
+        margin: 15px 5px;
+        width: 180px;
+        height: 265px;
         text-align: center; 
     }
 
     .team_resultCard img{
-        height: 110px;
-        width: 190px;
-        margin: 5px;
+        width: 160px;
+        margin: 10px 10px 0px 10px;
         object-fit: cover;
         border-radius: 15px;
         background-color: #ffffff;
@@ -741,9 +748,9 @@ input[type=button] {
 
     .team_resultCard ul{
         list-style-type: none;
-        margin: 10px;
+        margin: 2px 10px;
         padding: 0px;
-        height: 40px;
+        height: 100px;
         overflow: hidden;
     }
 
@@ -756,18 +763,21 @@ input[type=button] {
     }
 
     .team_resultCardName{
-        float: left;
         margin: 2px 10px;
         font-weight: bolder;
-        font-size: 15px;
+        font-size: 16px;
+        word-break:keep-all;/* do not change the line */   
+        white-space:nowrap;/* do not change the line */  
+        overflow:hidden;/* hide the content if it exceed the width */   
+        text-overflow:ellipsis;/* use "..." to represend the hiden part*/
     }
 
     .team_cardButtonLearnMore{
         background-color: #2e7bc3;
-        border: 3px solid #2e7bc3;
+        border: 0;
         height: 25px;
-        width: 90px;
-        font-size: 12px;
+        width: 160px;
+        font-size: 13px;
         font-weight: 500;
         font-family: 'Roboto Slab';
         border-radius: 20px;
@@ -775,26 +785,31 @@ input[type=button] {
         text-align: center;
         display: flex;
         justify-content: center;
-        margin-right: auto;
-        margin-left: auto;
-        margin-top: 5px;
+        margin: 5px 0px;
+    }
+
+    .team_cardButtonLearnMore:hover {
+        background-color: #103e87;
     }
 
     .team_cardButtonAdd{
-        background-color: white;
-        border: 3px solid #2e7bc3;
-        height: 30px;
-        width: 100px;
+        background-color: rgb(189, 83, 83);
+        border: 0;
+        height: 25px;
+        width: 160px;
         font-size: 13px;
         font-weight: 500;
         font-family: 'Roboto Slab';
         border-radius: 20px;
-        color: black;
+        color: rgb(255, 255, 255);
         text-align: center;
         display: flex;
         justify-content: center;
-        margin-right: auto;
-        margin-left: auto;
+        margin: 5px 0px;
+    }
+
+    .team_cardButtonAdd:hover {
+        background-color: rgb(144, 1, 1);
     }
 
     .team_box_members{
