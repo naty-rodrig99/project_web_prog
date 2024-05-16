@@ -8,12 +8,12 @@ export function InfiniteScrollView(props){
     //const [pokemonData, setPokemonData] = useState([]);
     function handleScroll(e){
         if (document.body.scrollTop + window.innerHeight + 500 >= e.target.documentElement.scrollHeight){
-            props.loadMorePokemon(props.setPokemonData)
+            props.loadMorePokemon()
         }
     }
 
     useEffect(() => {
-        props.loadMorePokemon(props.setPokemonData)
+        props.loadMorePokemon()
         window.addEventListener('scroll', handleScroll)
     }, [])
 

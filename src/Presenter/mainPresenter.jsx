@@ -57,6 +57,7 @@ const Main = observer(function MainRender(props){
                 detailsChosenACB = {setResultChosenACB}
             />
             {conditionalRender(props.model.searchResultsPromiseState)}
+            {loadPokemonACB()}
             <InfiniteScrollView
               detailsChosenACB = {setDetailsChosenACB}
               searchTextACB = {setSearchTextACB}

@@ -43,12 +43,12 @@ const model = {
         this.pokemonData = value
     },
     
-    loadMorePokemon(setPokemonData){
+    loadMorePokemon(){
         axios
             .get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${this.offset}`)
             .then(({data}) => {
                 const newPokemon = data.results.map(pokemon => pokemon.name);
-                setPokemonData(oldData => [
+                this.setPokemonData(oldData => [
                     ...oldData,
                     ...newPokemon.map(name => ({
                         name: name,
