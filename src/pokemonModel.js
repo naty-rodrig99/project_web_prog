@@ -33,29 +33,24 @@ const model = {
     showPopupHappiness: false,
     showPopupGrowthRate: false,
     offset: 0,
-    pokemonData: [],
 
     resetOffset(){
         this.offset = 0;
     },
-
-    setPokemonData(value){
-        this.pokemonData = value
-    },
     
-    loadMorePokemon(){
+    loadMorePokemon(pokemonData, setPokemonData){
         axios
             .get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${this.offset}`)
             .then(({data}) => {
                 const newPokemon = data.results.map(pokemon => pokemon.name);
-                this.setPokemonData(oldData => [
+                setPokemonData(oldData => [
                     ...oldData,
                     ...newPokemon.map(name => ({
                         name: name,
                         img: null
                     }))
                 ]);
-                Promise.all(data.results.map(({name}) => this.loadImage(name, setPokemonData)));
+                Promise.all(data.results.map(({name}) => loadImage(name, setPokemonData)));
             })
             this.offset += 10;
     },

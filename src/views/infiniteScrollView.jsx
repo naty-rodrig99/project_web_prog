@@ -5,16 +5,15 @@ import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 
 
 export function InfiniteScrollView(props){
-    //const [pokemonData, setPokemonData] = useState([]);
+    const [pokemonData, setPokemonData] = useState([]);
     function handleScroll(e){
         if (document.body.scrollTop + window.innerHeight + 500 >= e.target.documentElement.scrollHeight){
-            props.loadMorePokemon(setPokemonData)
-            console.log("Loading pokemons")
+            props.loadMorePokemon(pokemonData, setPokemonData)
         }
     }
 
     useEffect(() => {
-        props.loadMorePokemon()
+        //props.loadMorePokemon(pokemonData, setPokemonData)
         window.addEventListener('scroll', handleScroll)
     }, [])
 
@@ -48,7 +47,7 @@ export function InfiniteScrollView(props){
             <div class="inifinite_subtitle">Other Pokémon Suggestions</div>
             <div className="favoriteList">
                 <MasonryInfiniteGrid className="favoriteListContainer" gap={3}>
-                    {props.pokemonData.map(cardMakerCB)}
+                    {pokemonData.map(cardMakerCB)}
                 </MasonryInfiniteGrid>;
             </div>
         </div>     
