@@ -3,7 +3,9 @@ import { observer } from "mobx-react-lite";
 import { SearchResultsView } from "../views/searchResultsView";
 import { SearchFormView } from "../views/searchFormView";
 import { InfinitePokemonView } from "../views/infinitePokemonView";
+import { InfiniteScrollView_1 } from "../views/infiniteScrollView_1";
 import { InfiniteScrollView } from "../views/infiniteScrollView";
+import axios from "axios";
 
 const Main = observer(function MainRender(props){
     return (
@@ -59,15 +61,18 @@ const Main = observer(function MainRender(props){
             />
             {conditionalRender(props.model.searchResultsPromiseState)}
             <InfiniteScrollView
+              offset = {props.model.offset}
               detailsChosenACB = {setDetailsChosenACB}
               searchTextACB = {setSearchTextACB}
               searchNowACB = {searchACB}
               currentSearchName = {props.model.searchParams.name}
+              loadMorePokemon = {loadPokemonACB}
             />
         </div>
     )
-    function paginationACB(){
-      props.model.getPaginationPokemons()
+
+    function loadPokemonACB(a, b){
+      props.model.loadMorePokemon(a, b)
     }
 
     function setResultChosenACB(evt){
@@ -123,5 +128,13 @@ export {Main}
               searchPaginationACB = {paginationACB}
               paginationPromiseState = {props.model.paginationPromiseState}
               getImage = {props.model.getPokemonImage}
+            />
+*/
+/*
+            <InfiniteScrollView_1
+              detailsChosenACB = {setDetailsChosenACB}
+              searchTextACB = {setSearchTextACB}
+              searchNowACB = {searchACB}
+              currentSearchName = {props.model.searchParams.name}
             />
 */

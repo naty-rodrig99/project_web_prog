@@ -4,7 +4,7 @@
 */
 import { searchPokemon, getPokemonAbilities, getPokemonSpecies, getPaginatedPokemons, getPokemonByName } from './pokemonSource.js';
 import { resolvePromise } from './resolvePromise.js';
-
+import axios from 'axios';
 
 const model = {  
     user: null,
@@ -25,7 +25,39 @@ const model = {
     abilitiesPromiseState: {},
     speciesPromiseState: {},
     paginationPromiseState: {},
+    offset: 0,
+    
+    loadMorePokemon(setPokemonData){
+        axios
+            .get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${this.offset}`)
+            .then(({data}) => {
+                const newPokemon = data.results.map(pokemon => pokemon.name);
+                setPokemonData(oldData => [
+                    ...oldData,
+                    ...newPokemon.map(name => ({
+                        name: name,
+                        img: null
+                    }))
+                ]);
+                Promise.all(data.results.map(({name}) => this.loadImage(name, setPokemonData)));
+            })
+            this.offset += 10;
+    },
 
+    async loadImage(name, setPokemonData){
+        const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+            setPokemonData(oldData => {
+                const newData = [...oldData];
+                const index = newData.findIndex(pokemon => pokemon.name === name);
+                if (index !== -1){
+                    newData[index].img = data.sprites.front_default
+                }
+                return newData
+            })
+            
+    },
+
+    // INFINITE SCROLL FUNCTIONS --- END 
     getPokemonImage(name){
         let promiseState = {};
         resolvePromise(getPokemonByName(name), promiseState);

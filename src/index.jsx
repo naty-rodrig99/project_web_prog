@@ -9,7 +9,6 @@ const reactiveModel= observable(model);
 //reactiveModel.setSearchName("cheetah")
 reactiveModel.setSearchText(reactiveModel.searchParams.name?reactiveModel.searchParams.name:"ditto");
 reactiveModel.doSearch(reactiveModel.searchParams.name);
-reactiveModel.getPaginationPokemons(20, 20);
 
 import { createElement } from "react";
 window.React= {createElement:createElement}; // needed in the lab because it works with both React and Vue
