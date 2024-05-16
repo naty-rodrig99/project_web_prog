@@ -36,7 +36,7 @@ const CreateTeam = observer(
                     }
                 }
             } else{
-                //props.model.setEmptyTeamName(true);  
+                props.model.setEmptyTeamName(true);  
             }
         }
 
