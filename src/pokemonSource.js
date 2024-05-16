@@ -68,25 +68,6 @@ export function getPokemonByName(name){
         }
 }
 
-export function getPaginatedPokemons(offSet, limit){
-    const URL = `${BASE_URL}/pokemon/?offset=${offSet}&Limit=${limit}`;
-    return fetch(URL).then(gotResonseACB).then(returnObjectACB)
-
-    function gotResonseACB(response){
-        if (!response.ok) {
-            throw new Error('not ok');
-        }
-        const result = response.json();
-        //console.log("response", result)
-        return result;
-    }
-
-    function returnObjectACB(objectResponse){
-        //console.log("objectResponse", objectResponse)
-        return objectResponse
-    }
-}
-
 export function getPokemonAbilities(abilityName){
     //console.log("searchParams", abilityName)
     const URL = `${BASE_URL}/ability/${abilityName}`;

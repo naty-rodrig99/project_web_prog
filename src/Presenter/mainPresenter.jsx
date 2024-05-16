@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite";
 
 import { SearchResultsView } from "../views/searchResultsView";
 import { SearchFormView } from "../views/searchFormView";
-import { InfinitePokemonView } from "../views/infinitePokemonView";
 import { InfiniteScrollView } from "../views/infiniteScrollView";
 
 const Main = observer(function MainRender(props){
@@ -63,11 +62,13 @@ const Main = observer(function MainRender(props){
               searchTextACB = {setSearchTextACB}
               searchNowACB = {searchACB}
               currentSearchName = {props.model.searchParams.name}
+              loadMorePokemon = {loadPokemonACB}
             />
         </div>
     )
-    function paginationACB(){
-      props.model.getPaginationPokemons()
+
+    function loadPokemonACB(a, b){
+      props.model.loadMorePokemon(a, b)
     }
 
     function setResultChosenACB(evt){
