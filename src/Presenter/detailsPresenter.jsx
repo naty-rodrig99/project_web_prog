@@ -29,16 +29,18 @@ const Details = observer(
         }
 
         useEffect(() => {
-            if (currentView === 'forum' && props.model.currentPokemonId) {
-                readCommentsFromFirebase(props.model.currentPokemonId)
+            if (currentView === 'forum' && props.model.currentPokemonId && props.model.user) {
+                readCommentsFromFirebase(props.model.user, props.model.currentPokemonId)
                     .then(fetchedComments => {
-                        setComments(fetchedComments);  // Update state with the fetched comments
+                        setComments(fetchedComments);
+                        //console.log(props.model.commentList);  // Update state with the fetched comments
                     })
                     .catch(error => {
                         console.error('Error fetching comments:', error);
                     });
             }
-        }, [currentView, props.model.currentPokemonId]);        
+        }, [currentView, props.model.currentPokemonId, props.model.user]);
+            
 
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
@@ -110,7 +112,7 @@ const Details = observer(
                 user={props.user}
                 addComment={addCommentACB}
                 pokemon = {props.model.currentPokemonPromiseState.data}
-                comments={comments}
+                comments={props.model.commentList}
                 />
             );
         }

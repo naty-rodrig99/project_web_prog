@@ -5,17 +5,18 @@ export function DetailsViewForum(props) {
     const [commentText, setCommentText] = useState('');
     const [comments, setComments] = useState([]);
 
-    useEffect(() => {
-        if (props.pokemon && props.pokemon.id) {
-            readCommentsFromFirebase(props.pokemon.id)
-                .then(fetchedComments => {
-                    setComments(fetchedComments);
-                })
-                .catch(error => {
-                    console.error('Failed to fetch comments:', error);
-                });
-        }
-    }, [props.pokemon]);
+    // useEffect(() => {
+    //     if (props.user && props.pokemon && props.pokemon.id) {
+    //         readCommentsFromFirebase(props.user, props.pokemon.id)
+    //             .then(fetchedComments => {
+    //                 setComments(fetchedComments);
+                    
+    //             })
+    //             .catch(error => {
+    //                 console.error('Failed to fetch comments:', error);
+    //             });
+    //     }
+    // }, [props.user, props.pokemon]);
 
     function handleCommentChange(event) {
         setCommentText(event.target.value);
@@ -24,8 +25,9 @@ export function DetailsViewForum(props) {
     function addCommentACB() {
         const timestamp = new Date().toLocaleTimeString();
         props.addComment(commentText, props.pokemon.id, timestamp);
-        setComments(prevComments => [...prevComments, {comment: commentText, username: "Current User", timestamp: timestamp}]);
+        setComments(prevComments => [...prevComments, { comment: commentText, pokemon: props.pokemon.id, timestamp }]);
         setCommentText('');
+        console.log("hello", props.comments);
     }
 
     return (
@@ -37,8 +39,9 @@ export function DetailsViewForum(props) {
                             <div className="forum_card">
                                 <div className="comments-container">
                                     <div className="comments-body">
-                                        <div className="username">{comment.username || "Anonymous"}</div>
+                                        <div className="username">{comment.username || "You"}</div>
                                         <div className="comment" type="text">{comment.comment}</div>
+                                        <div className="timestamp">{comment.timestamp}</div>
                                     </div>
                                 </div>
                             </div>

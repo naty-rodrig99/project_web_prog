@@ -150,13 +150,13 @@ const model = {
         this.searchParams={};
         this.queryParams={};
         this.currentPokemonLikeNumber=0;
-        this.currentPokemonCommentList=[];
+        this.commentList=[];
     },
 
     clearPokemonModel(){
         this.currentReadPokemonId = null;
         this.currentPokemonLikeNumber = 0;
-        this.currentPokemonCommentList = [];
+        this.commentList = [];
     },
 
     setcurrentPokemonId(pokemonId){
@@ -197,6 +197,13 @@ const model = {
     addToFavoriteList(pokemonToAdd){
         if(!this.favoriteList.includes(pokemonToAdd)){
             this.favoriteList= [...this.favoriteList, pokemonToAdd];
+        }
+    },
+
+    addToCommentList(commentToAdd, pokemonId, timestamp){
+        if(!this.commentList.includes(commentToAdd)){
+            this.commentList= [...this.commentList, {commentToAdd, pokemonId, timestamp}];
+            console.log(commentToAdd, pokemonId, timestamp);
         }
     },
 
@@ -286,6 +293,13 @@ const model = {
         const index = this.teamsList.findIndex(t => t.teamName === teamName);
         if (index !== -1) {
             this.teamsList.splice(index, 1); // Remove the team from the teamsList array
+        }
+    },
+
+    deleteComment(comment) {
+        const index = this.commentList.findIndex(c => c.comment === comment);
+        if (index !== -1) {
+            this.commentList.splice(index, 1); // Remove the comment from the commentList array
         }
     },
 

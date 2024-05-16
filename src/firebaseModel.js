@@ -36,7 +36,7 @@ const PATH_user="users"; //save users'favorite list and team
 function pokemonModelToPersistence(model){
     const pokemonData = {
         pokemonId:model.currentReadPokemonId,
-        comments: model.currentPokemonCommentList,//how to save it 
+        comments: model.currentPokemonCommentList,
         likeNumber: model.currentPokemonLikeNumber,
     }
     return pokemonData;
@@ -71,7 +71,6 @@ function userModelToPersistence(objectUser){
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
     const userTeams = objectUser.teamsList.map(transformTeamCB).sort();
     const userComments = objectUser.commentList.map(transformCommentCB).sort();
-  
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
         currentSearchName: objectUser.searchParams.name,
@@ -89,7 +88,7 @@ function persistenceToPokemonModel(pokemondata_from_firebase, model){
     }
     else{
         model.currentReadPokemonId=model.currentPokemonId;
-        model.currentPokemonCommentList = model.currentPokemonCommentList;
+        model.currentPokemonCommentList = pokemondata_from_firebase.comments || [];
         model.currentPokemonLikeNumber=pokemondata_from_firebase.likeNumber;
     }
     return model;
@@ -101,12 +100,32 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
             userModel.addToFavoriteList(response);
         }
     }
+
+    function responseCommentACB(response){
+        if(response){
+            userModel.addToCommentList(response);
+            console.log(userModel.response, "response");
+        }
+    }
+
+    function searchPokemonCommentList(id){
+        searchPokemon(id).then(responseCommentACB);
+        console.log(id, "printing id");
+    }
+
     function searchPokemonList(id){
         searchPokemon(id).then(responseFavoriteACB);
     }
+
     function searchPokemonFavorite(id_arrays){
         userModel.favoriteList=[];
         return id_arrays.map(searchPokemonList);
+    }
+
+    function searchPokemonComment(id_arrays){
+        userModel.commentList=[];
+        console.log(id_arrays, "prt array");
+        return id_arrays.map(searchPokemonCommentList);       
     }
 
     function responseTeamsACB(response){
@@ -155,6 +174,15 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
         else{
             searchTeams(userdata_from_firebase.teamsList);
         }
+        if(!userdata_from_firebase.commentList || userdata_from_firebase.commentList === 'undefined'){
+            console.log(userdata_from_firebase.commentList, "hellooooo");
+            searchPokemonComment([]);
+        }
+        else{
+            console.log(userdata_from_firebase.commentList, "hey");
+            searchPokemonComment(userdata_from_firebase.commentList);
+        }
+        //userModel.commentList = userdata_from_firebase.commentList || [];
     }
 }
 
@@ -164,9 +192,14 @@ function saveToFirebaseUser(model, uid){
     }
 }
 
-function saveToFirebasePokemon(PokenmonModel){
-    set(ref(db, PATH_Pokenmon+"/"+PokenmonModel.currentPokemonId), pokemonModelToPersistence(PokenmonModel));//check the model to persistence 
+function saveToFirebasePokemon(userId, PokenmonModel) {
+    const pokemonData = {
+        comments: PokenmonModel.currentPokemonCommentList,
+        likeNumber: PokenmonModel.currentPokemonLikeNumber
+    };
+    set(ref(db, `users/${userId}/commentList`), pokemonData);
 }
+
 
 function readFromFirebasePokemon(model){
     function convertDataCB(snapshot){
@@ -191,16 +224,17 @@ function readFromFirebaseUser(model, uid){
     return get(ref(db, PATH_user+"/"+uid)).then(convertDataCB).then(changeModelReadyCB);
 }
 
-function readCommentsFromFirebase(pokemonId) {
-    const commentsRef = ref(db, `pokemons/${pokemonId}/comments`);
+function readCommentsFromFirebase(userId, pokemonId) {
+    const commentsRef = ref(db, `users/${userId}/commentList`);
 
     return get(commentsRef).then(snapshot => {
         if (snapshot.exists()) {
             const commentsData = snapshot.val();
-            console.log("Comments for Pokemon ID", pokemonId, ":", commentsData);
-            return commentsData;
+            const filteredComments = Object.values(commentsData).filter(comment => comment.pokemon === pokemonId);
+            console.log("Comments for user ID", userId, ":", filteredComments);
+            return filteredComments;
         } else {
-            console.log("No comments found for Pokemon ID", pokemonId);
+            console.log("No comments found for user ID", userId);
             return [];
         }
     }).catch(error => {
