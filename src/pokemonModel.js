@@ -33,6 +33,15 @@ const model = {
     showPopupHappiness: false,
     showPopupGrowthRate: false,
     offset: 0,
+    pokemonData: [],
+
+    resetOffset(){
+        this.offset = 0;
+    },
+
+    setPokemonData(value){
+        this.pokemonData = value
+    },
     
     loadMorePokemon(setPokemonData){
         axios

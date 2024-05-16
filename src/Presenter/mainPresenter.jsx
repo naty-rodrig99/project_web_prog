@@ -63,9 +63,20 @@ const Main = observer(function MainRender(props){
               searchNowACB = {searchACB}
               currentSearchName = {props.model.searchParams.name}
               loadMorePokemon = {loadPokemonACB}
+              reset = {resetOffsetCB}
+              pokemonData = {props.model.pokemonData}
+              setPokemonData = {setPokemonDataACB}
             />
         </div>
     )
+
+    function setPokemonDataACB(value){
+      props.model.setPokemonData(value)
+    }
+
+    function resetOffsetCB(){
+      props.model.resetOffset()
+    }
 
     function loadPokemonACB(a, b){
       props.model.loadMorePokemon(a, b)
