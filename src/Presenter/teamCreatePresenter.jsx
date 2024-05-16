@@ -7,6 +7,7 @@ const CreateTeam = observer(
         const [showErrorMessage, setShowErrorMessage] = useState(false);
         const [emptyTeamName, setEmptyTeamName] = useState(false);
         const [showPokemons, setShowPokemons] = useState(false);
+        const [existingTeamName, setExistingTeamName] = useState(false);
 
         function setResultChosenACB(evt){
             props.model.setcurrentPokemonId(evt);
@@ -16,12 +17,17 @@ const CreateTeam = observer(
             setShowPokemons(false);
             if(props.model.isTeamNameEmpty(teamName, pokemon) == false){
                 setEmptyTeamName(false); 
-                if(props.model.checkPokemonsLength(teamName, pokemon) == true){
-                    setShowErrorMessage(true);
-                    setShowPokemons(false);
+                if(props.model.isTeamNameInTeam(teamName) == true){
+                    setExistingTeamName(true);
                 } else{
-                    props.model.addTemporalTeam(teamName, pokemon);
-                    setShowPokemons(true);
+                    setExistingTeamName(false);
+                    if(props.model.checkPokemonsLength(teamName, pokemon) == true){
+                        setShowErrorMessage(true);
+                        setShowPokemons(false);
+                    } else{
+                        props.model.addTemporalTeam(teamName, pokemon);
+                        setShowPokemons(true);
+                    }
                 }
             } else{
                 setEmptyTeamName(true);  
@@ -47,6 +53,7 @@ const CreateTeam = observer(
             emptyTeamName={emptyTeamName}
             showPokemons={showPokemons}
             resetTemporal={resetTemporalListACB}
+            existingTeamName={existingTeamName}
         />
         
     }

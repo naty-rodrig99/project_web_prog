@@ -197,6 +197,13 @@ const model = {
         this.temporalTeamsList = [];
     },
 
+    isTeamNameInTeam(teamName) {
+        function isTeamNameMatch(team) {
+            return team.teamName === teamName;
+        }
+        return this.teamsList.some(isTeamNameMatch);
+    },
+
     resetTemporalList(){
         this.temporalTeamsList = [];
     },
