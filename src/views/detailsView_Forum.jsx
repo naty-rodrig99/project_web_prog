@@ -1,40 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { readCommentsFromFirebase } from '../firebaseModel';
 
 export function DetailsViewForum(props) {
     const [commentText, setCommentText] = useState('');
-    const [comments, setComments] = useState([]);
-
-    // useEffect(() => {
-    //     if (props.user && props.pokemon && props.pokemon.id) {
-    //         readCommentsFromFirebase(props.user, props.pokemon.id)
-    //             .then(fetchedComments => {
-    //                 setComments(fetchedComments);
-                    
-    //             })
-    //             .catch(error => {
-    //                 console.error('Failed to fetch comments:', error);
-    //             });
-    //     }
-    // }, [props.user, props.pokemon]);
 
     function handleCommentChange(event) {
         setCommentText(event.target.value);
     }
+   
+    function commentsCB(pokemon){
+        function addCommentViewACB(evt){
+            props.addComment(commentText, props.pokemon.id, timestamp)
+        }
+        return <div key={pokemon.id} className="team_carouselItem">
+                    <div className="team_resultCard">
+                        <ul>
+                            <li className="team_resultCardName">{pokemon.name}</li>
+                            <li><button className="team_cardButtonLearnMore" onClick={changeToDetails}>Learn More</button></li>
+                        </ul>
+                    </div>
 
-    function addCommentACB() {
-        const timestamp = new Date().toLocaleTimeString();
-        props.addComment(commentText, props.pokemon.id, timestamp);
-        setComments(prevComments => [...prevComments, { comment: commentText, pokemon: props.pokemon.id, timestamp }]);
-        setCommentText('');
-        console.log("hello", props.comments);
+                </div>;
     }
 
     return (
         <div>
             <div className="details_forum">
                 <ul>
-                    {comments.map((comment, index) => (
+                    {props.comments.map((comment, index) => (
                         <li key={index}>
                             <div className="forum_card">
                                 <div className="comments-container">
@@ -57,7 +49,10 @@ export function DetailsViewForum(props) {
                                     onChange={handleCommentChange}
                                     placeholder="Add a comment..."
                                 />
-                                <button onClick={addCommentACB}>Add comment</button>
+                                <button onClick={addCommentViewACB}>Add comment</button>
+                            </div>
+                            <div className="team_carousel">
+                                {props.commentList.map(commentsCB)}
                             </div>
                         </div>
                     </li>

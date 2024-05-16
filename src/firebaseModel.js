@@ -58,9 +58,6 @@ function userModelToPersistence(objectUser){
     }
 
     function transformCommentCB(commentData) {
-        function getPokemonId(pokemon) {
-            return pokemon.id;
-        }
         return {
             comment: commentData.comment,
             pokemon: commentData.pokemon,
@@ -71,6 +68,7 @@ function userModelToPersistence(objectUser){
     const pokemonFavoriteIds = objectUser.favoriteList.map(transformerCB).sort();
     const userTeams = objectUser.teamsList.map(transformTeamCB).sort();
     const userComments = objectUser.commentList.map(transformCommentCB).sort();
+
     const userData = {
         currentPokemonId: objectUser.currentPokemonId,
         currentSearchName: objectUser.searchParams.name,
@@ -103,38 +101,28 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
 
     function responseCommentACB(response){
         if(response){
-            userModel.addToCommentList(response);
-            console.log(userModel.response, "response");
+            userModel.addToCommentList(response.comment,response.pokemon,response.timestamp);
+            console.log(response, "response");
         }
     }
 
-    function searchPokemonCommentList(id){
-        searchPokemon(id).then(responseCommentACB);
-        console.log(id, "printing id");
+    function responseTeamsACB(response) {
+        if (response) {
+            userModel.addToTeamsList(response.teamName, response.response);
+        }
     }
 
-    function searchPokemonList(id){
+    function searchPokemonCommentList(data){
+        searchPokemon(data.pokemon).then(pokemonResult => responseCommentACB({ comment: data.comment, pokemon: pokemonResult, timestamp:data.timestamp }));
+        //searchPokemon(data.pokemon).then(responseCommentACB);
+        console.log(data, "printing id");
+    }
+
+    function searchPokemonList(id) {
         searchPokemon(id).then(responseFavoriteACB);
     }
 
-    function searchPokemonFavorite(id_arrays){
-        userModel.favoriteList=[];
-        return id_arrays.map(searchPokemonList);
-    }
-
-    function searchPokemonComment(id_arrays){
-        userModel.commentList=[];
-        console.log(id_arrays, "prt array");
-        return id_arrays.map(searchPokemonCommentList);       
-    }
-
-    function responseTeamsACB(response){
-        if(response){
-            userModel.addToTeamsList(response.teamName,response.response);
-        }
-    }
-
-    function searchPokemonListforTeams(data){
+    function searchPokemonListforTeams(data) {
         const id = data.id;
         const teamName = data.teamName;
         searchPokemon(id).then(response => responseTeamsACB({ response: response, teamName: teamName }));
@@ -147,9 +135,20 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
         };
     }
 
-    function searchTeams(id_arrays){
-        userModel.teamsList=[];
-        return id_arrays.map(transformTeamCB);
+    function searchPokemonFavorite(id_arrays) {
+        userModel.favoriteList = [];
+        id_arrays.forEach(searchPokemonList);
+    }
+
+    function searchPokemonComment(id_arrays){
+        userModel.commentList=[];
+        console.log(id_arrays, "prt array");
+        return id_arrays.map(searchPokemonCommentList);
+    }
+
+    function searchTeams(id_arrays) {
+        userModel.teamsList = [];
+        id_arrays.forEach(transformTeamCB);
     }
     
     //user do not exist
