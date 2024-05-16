@@ -1,10 +1,19 @@
 import { SeeTeamView } from "../views/teamView_SeeTeam.jsx";
 import { observer } from "mobx-react-lite";
-import React, { useState } from 'react';
+import { reaction } from 'mobx';
 
 const SeeTeam = observer(      
     function SeeTeamRender(props){
-        const [showRemovedTeamMsg, setShowRemovedTeamMsg] = useState(false);
+
+        reaction(checkACB, effectACB)
+
+        function checkACB(){
+            return [props.model.teamsList.pokemons];
+        }
+
+        function effectACB(){ 
+            props.model.teamsList;
+        }
 
         function setResultChosenACB(evt){
             props.model.setcurrentPokemonId(evt);
@@ -16,9 +25,9 @@ const SeeTeam = observer(
 
         function removeFromTeamACB(evt){
             if(props.model.removeFromTeam(props.model.currentTeam.teamName,evt) == true){
-                setShowRemovedTeamMsg(true);
+                props.model.setShowRemovedTeamMsg(true);
             }else{
-                setShowRemovedTeamMsg(false);
+                props.model.setShowRemovedTeamMsg(false);
             }
         }
 
@@ -27,7 +36,7 @@ const SeeTeam = observer(
             detailsChosenACB = {setResultChosenACB}
             deleteTeamACB={deleteTeamACB}
             removeFromTeamACB={removeFromTeamACB}
-            showRemovedTeamMsg={showRemovedTeamMsg}
+            showRemovedTeamMsg={props.model.showRemovedTeamMsg}
         />
         
     }

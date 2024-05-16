@@ -9,10 +9,10 @@ export function InfinitePokemonView(props){
     let promiseState = {};
 
     const handleScroll = (e) => {
-        console.log("top:", document.body.scrollTop)
-        console.log("win:", window.innerHeight)
-        console.log("Height:", e.target.documentElement.scrollHeight)
-        console.log("sum", window.innerHeight + document.body.scrollTop)
+        //console.log("top:", document.body.scrollTop)
+        //console.log("win:", window.innerHeight)
+        //console.log("Height:", e.target.documentElement.scrollHeight)
+        //console.log("sum", window.innerHeight + document.body.scrollTop)
     }
     useEffect(() => {
         //window.addEventListener("scroll", handleScroll);
@@ -60,9 +60,9 @@ export function InfinitePokemonView(props){
         const newPokemon = []
         props.paginationPromiseState.data.results.forEach((pokemon) => newPokemon.push(pokemon))
         setPokemon(newPokemon)
-        console.log("pokemon", pokemon)
-        console.log("promiseState.data.sprites.front_default", promiseState.data.sprites.front_default);
-        console.log("model.pokemons", props.test)
+        //console.log("pokemon", pokemon)
+        //console.log("promiseState.data.sprites.front_default", promiseState.data.sprites.front_default);
+        //console.log("model.pokemons", props.test)
     }
 
     function testPaginationSearchACB(){

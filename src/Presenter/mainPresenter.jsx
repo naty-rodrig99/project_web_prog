@@ -117,11 +117,3 @@ const Main = observer(function MainRender(props){
 )
 
 export {Main}
-
-/*
-            <InfinitePokemonView
-              searchPaginationACB = {paginationACB}
-              paginationPromiseState = {props.model.paginationPromiseState}
-              getImage = {props.model.getPokemonImage}
-            />
-*/

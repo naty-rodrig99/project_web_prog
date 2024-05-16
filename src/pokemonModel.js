@@ -9,7 +9,6 @@ import { resolvePromise } from './resolvePromise.js';
 const model = {  
     user: null,
     currentPokemonId: null,
-    //currentReadPokemon: [null, 0, []], //pokemon Id, Like number, Comment List
     currentReadPokemonId: null,
     currentPokemonLikeNumber: 0,
     currentPokemonCommentList: [],
@@ -25,6 +24,15 @@ const model = {
     abilitiesPromiseState: {},
     speciesPromiseState: {},
     paginationPromiseState: {},
+    showErrorMessage: false,
+    emptyTeamName: false,
+    showPokemons: false,
+    existingTeamName: false,
+    showRemovedTeamMsg: false,
+    showPopupExperience: false,
+    showPopupCaptureRate: false,
+    showPopupHappiness: false,
+    showPopupGrowthRate: false,
 
     getPokemonImage(name){
         let promiseState = {};
@@ -34,7 +42,6 @@ const model = {
 
     getPaginationPokemons(offSet, limit){
         resolvePromise(getPaginatedPokemons(offSet, limit), this.paginationPromiseState);
-        //this.pokemons = this.paginationPromiseState.data
     },
 
     setUser(user){
@@ -52,6 +59,46 @@ const model = {
 
     setcurrentPokemonlikeNumber(number){
         this.currentPokemonLikeNumber= number;
+    },
+
+    setEmptyTeamName(value){
+        this.emptyTeamName=value;
+    },
+
+    setShowErrorMessage(value){
+        this.showErrorMessage=value;
+    },
+
+    setEmptyTeamName(value){
+        this.emptyTeamName=value;
+    },
+
+    setShowPokemons(value){
+        this.showPokemons=value;
+    },
+
+    setExistingTeamName(value){
+        this.emptyTeamName=value;
+    },
+
+    setShowRemovedTeamMsg(value){
+        this.showRemovedTeamMsg=value;
+    },
+
+    setShowPopupExperience(value){
+        this.showPopupExperience=value;
+    },
+
+    setShowPopupCaptureRate(value){
+        this.showPopupCaptureRate=value;
+    },
+
+    setShowPopupHappiness(value){
+        this.showPopupHappiness=value;
+    },
+
+    setShowPopupGrowthRate(value){
+        this.showPopupGrowthRate=value;
     },
 
     addcurrentPokemonLikeNumber(){
@@ -173,7 +220,6 @@ const model = {
             if (!team) {
                 return false
             } else {
-                console.log("true",team.pokemons);
                 if(team.pokemons.length >= 4){
                     return true
                 }
@@ -182,7 +228,6 @@ const model = {
     },
 
     setcurrentTeam(team){
-        console.log("Team",team);
         if(team != this.currentTeam){
             this.currentTeam = this.teamsList.find(t => t.teamName === team);
         }
@@ -232,16 +277,13 @@ const model = {
 
     removeFromTeam(teamName, pokemonToRemove){
         const teamIndex = this.teamsList.findIndex(team => team.teamName === teamName);
-
         //If team exists
         if (teamIndex !== -1) {
             const team = this.teamsList[teamIndex];
             const pokemonIndex = team.pokemons.findIndex(pokemon => pokemon === pokemonToRemove);
-
             if (pokemonIndex !== -1) {
                 //Remove the pokemon from the team
                 team.pokemons.splice(pokemonIndex, 1);
-
                 //If the team has no more pokemon, remove the team from the list
                 if (team.pokemons.length === 0) {
                     this.teamsList.splice(teamIndex, 1);

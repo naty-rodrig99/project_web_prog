@@ -2,7 +2,6 @@ export function SeeTeamView(props){
 
     function backtoTeamsPage(evt){
         history.back();
-        //window.location.hash="#/team";
     }
 
     function deleteTeam(evt){

@@ -75,7 +75,7 @@ export function CreateTeamView(props){
                 {props.showErrorMessage && <div className="team_ErrorMsg">Error: You already have 4 pokemons in your team</div>}
             </div>
             <div>
-                {props.emptyTeamName && <div className="team_ErrorMsg">Error: First you need to write the team name</div>}
+                {props.emptyTeamName && <div className="team_ErrorMsg">Error: The team name is empty or already exists.</div>}
             </div>
             <div>
                 {props.showPokemons && <div className="team_Msg">The selected pokemon has been added to the team.</div>}

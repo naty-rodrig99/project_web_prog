@@ -25,8 +25,7 @@ export function TeamView(props){
                         <td>{team.teamName}</td>
                         <td>{pokemonNames}</td>
                         <td><button class="team_seedetails_button" onClick={showSeeTeamView}>See Details</button></td>
-                    </tr>
-                
+                    </tr>   
     }
     
     return (

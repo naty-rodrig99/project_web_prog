@@ -1,36 +1,42 @@
 import { CreateTeamView } from "../views/teamView_CreateTeam.jsx";
 import { observer } from "mobx-react-lite";
-import React, { useState } from 'react';
+import { reaction } from 'mobx';
 
 const CreateTeam = observer(            
     function CreateTeamRender(props){
-        const [showErrorMessage, setShowErrorMessage] = useState(false);
-        const [emptyTeamName, setEmptyTeamName] = useState(false);
-        const [showPokemons, setShowPokemons] = useState(false);
-        const [existingTeamName, setExistingTeamName] = useState(false);
+
+        reaction(checkACB, effectACB)
+
+        function checkACB(){
+            return [props.model.temporalTeamsList.pokemons];
+        }
+
+        function effectACB(){
+            props.model.temporalTeamsList;
+        }
 
         function setResultChosenACB(evt){
             props.model.setcurrentPokemonId(evt);
           }
 
         function addToTeamsListACB(teamName, pokemon){
-            setShowPokemons(false);
+            props.model.setShowPokemons(false);
             if(props.model.isTeamNameEmpty(teamName, pokemon) == false){
-                setEmptyTeamName(false); 
+                props.model.setEmptyTeamName(false); 
                 if(props.model.isTeamNameInTeam(teamName) == true){
-                    setExistingTeamName(true);
+                    props.model.setExistingTeamName(true);
                 } else{
-                    setExistingTeamName(false);
+                    props.model.setExistingTeamName(false);
                     if(props.model.checkPokemonsLength(teamName, pokemon) == true){
-                        setShowErrorMessage(true);
-                        setShowPokemons(false);
+                        props.model.setShowErrorMessage(true);
+                        props.model.setShowPokemons(false);
                     } else{
                         props.model.addTemporalTeam(teamName, pokemon);
-                        setShowPokemons(true);
+                        props.model.setShowPokemons(true);
                     }
                 }
             } else{
-                setEmptyTeamName(true);  
+                //props.model.setEmptyTeamName(true);  
             }
         }
 
@@ -49,11 +55,11 @@ const CreateTeam = observer(
             addToTeamsACB={addToTeamsListACB}
             newTeamACB={createTeamACB}
             temporalTeamsList={props.model.temporalTeamsList}
-            showErrorMessage={showErrorMessage}
-            emptyTeamName={emptyTeamName}
-            showPokemons={showPokemons}
+            showErrorMessage={props.model.showErrorMessage}
+            emptyTeamName={props.model.emptyTeamName}
+            showPokemons={props.model.showPokemons}
             resetTemporal={resetTemporalListACB}
-            existingTeamName={existingTeamName}
+            existingTeamName={props.model.existingTeamName}
         />
         
     }
