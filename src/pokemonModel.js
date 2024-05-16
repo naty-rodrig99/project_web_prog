@@ -32,15 +32,14 @@ const model = {
     showPopupCaptureRate: false,
     showPopupHappiness: false,
     showPopupGrowthRate: false,
-    offset: 0,
 
     resetOffset(){
         this.offset = 0;
     },
     
-    loadMorePokemon(pokemonData, setPokemonData){
+    loadMorePokemon(offset, setPokemonData){
         axios
-            .get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${this.offset}`)
+            .get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${offset}`)
             .then(({data}) => {
                 const newPokemon = data.results.map(pokemon => pokemon.name);
                 setPokemonData(oldData => [
@@ -50,7 +49,7 @@ const model = {
                         img: null
                     }))
                 ]);
-                Promise.all(data.results.map(({name}) => loadImage(name, setPokemonData)));
+                Promise.all(data.results.map(({name}) => this.loadImage(name, setPokemonData)));
             })
             this.offset += 10;
     },

@@ -57,14 +57,13 @@ const Main = observer(function MainRender(props){
                 detailsChosenACB = {setResultChosenACB}
             />
             {conditionalRender(props.model.searchResultsPromiseState)}
-            {loadPokemonACB()}
             <InfiniteScrollView
               detailsChosenACB = {setDetailsChosenACB}
               searchTextACB = {setSearchTextACB}
               searchNowACB = {searchACB}
               currentSearchName = {props.model.searchParams.name}
               loadMorePokemon = {loadPokemonACB}
-              //reset = {resetOffsetCB}
+              reset = {resetOffsetCB}
               //pokemonData = {props.model.pokemonData}
               //setPokemonData = {setPokemonDataACB}
             />
@@ -79,8 +78,8 @@ const Main = observer(function MainRender(props){
       props.model.resetOffset()
     }
 
-    function loadPokemonACB(a, b){
-      props.model.loadMorePokemon(a, b)
+    function loadPokemonACB(offset, setPokemonData){
+      props.model.loadMorePokemon(offset, setPokemonData)
     }
 
     function setResultChosenACB(evt){

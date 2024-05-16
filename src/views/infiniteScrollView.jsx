@@ -5,15 +5,20 @@ import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 
 
 export function InfiniteScrollView(props){
+    let offset = 0;
     const [pokemonData, setPokemonData] = useState([]);
     function handleScroll(e){
         if (document.body.scrollTop + window.innerHeight + 500 >= e.target.documentElement.scrollHeight){
-            props.loadMorePokemon(pokemonData, setPokemonData)
+            props.loadMorePokemon(offset, setPokemonData);
+            console.log("Hello handlescroll")
+            offset += 10;
         }
     }
 
     useEffect(() => {
-        //props.loadMorePokemon(pokemonData, setPokemonData)
+        props.loadMorePokemon(offset, setPokemonData)
+        console.log("Hello, useEffect")
+        offset += 10;
         window.addEventListener('scroll', handleScroll)
     }, [])
 
