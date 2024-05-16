@@ -2,7 +2,7 @@
    The Model keeps the state of the application (Application State). 
    It is an abstract object, i.e. it knows nothing about graphics and interaction.
 */
-import { searchPokemon, getPokemonAbilities, getPokemonSpecies, getPaginatedPokemons, getPokemonByName } from './pokemonSource.js';
+import { searchPokemon, getPokemonAbilities, getPokemonSpecies, getPokemonByName } from './pokemonSource.js';
 import { resolvePromise } from './resolvePromise.js';
 import axios from 'axios';
 
@@ -24,7 +24,6 @@ const model = {
     currentPokemonPromiseState: {},
     abilitiesPromiseState: {},
     speciesPromiseState: {},
-    paginationPromiseState: {},
     offset: 0,
     
     loadMorePokemon(setPokemonData){
@@ -55,18 +54,6 @@ const model = {
                 return newData
             })
             
-    },
-
-    // INFINITE SCROLL FUNCTIONS --- END 
-    getPokemonImage(name){
-        let promiseState = {};
-        resolvePromise(getPokemonByName(name), promiseState);
-        return promiseState
-    },
-
-    getPaginationPokemons(offSet, limit){
-        resolvePromise(getPaginatedPokemons(offSet, limit), this.paginationPromiseState);
-        //this.pokemons = this.paginationPromiseState.data
     },
 
     setUser(user){

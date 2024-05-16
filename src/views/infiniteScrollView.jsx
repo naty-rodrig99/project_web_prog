@@ -6,7 +6,7 @@ import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 
 export function InfiniteScrollView(props){
     const [pokemonData, setPokemonData] = useState([]);
-    
+
     function handleScroll(e){
         if (document.body.scrollTop + window.innerHeight >= e.target.documentElement.scrollHeight){
             props.loadMorePokemon(setPokemonData)
@@ -45,7 +45,6 @@ export function InfiniteScrollView(props){
     
     return(
         <div>
-            {props.offset}
             <div class="inifinite_subtitle">Other Pokémon Suggestions</div>
             <div className="favoriteList">
                 <MasonryInfiniteGrid className="favoriteListContainer" gap={3}>
