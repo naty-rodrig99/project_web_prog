@@ -10,7 +10,6 @@ export function InfiniteScrollView(props){
     function handleScroll(e){
         if (document.body.scrollTop + window.innerHeight + 500 >= e.target.documentElement.scrollHeight){
             props.loadMorePokemon(setPokemonData)
-            console.log("Loading pokemons")
         }
     }
 
