@@ -7,7 +7,6 @@ body{
     scrollbar-width: none; /* for Firefox */
     /*overflow-y: scroll;*/ 
     /* overflow: hidden; Hide scrollbars */
-
 }
 :root::-webkit-scrollbar{
     display: none;
@@ -222,10 +221,10 @@ input[type=button] {
         font-weight: bolder;
         font-size: 22px;
         width: 260px;
-        word-break:keep-all;/* do not change the line */   
-        white-space:nowrap;/* do not change the line */  
-        overflow:hidden;/* hide the content if it exceed the width */   
-        text-overflow:ellipsis;/* use "..." to represend the hiden part*/
+        word-break:keep-all; 
+        white-space:nowrap;
+        overflow:hidden;  
+        text-overflow:ellipsis;
 
     }
 
@@ -301,11 +300,9 @@ input[type=button] {
     .detail_selector_item{
         width: 27vw;
         height: 60px;
-        /* border-radius: 5px; */
         font-family: 'Roboto Slab';
         font-size: 23px;
         background-color: #ffffff;
-        /* font-weight: 350; */
         text-align: center;
         padding:5px 0;
         box-sizing: border-box;
@@ -320,7 +317,6 @@ input[type=button] {
         border-right: none;
         border-bottom: none;
         transition: linear 0.5s;
-        /* margin-top: -30px; */
         position: relative;
     }
     
@@ -332,7 +328,6 @@ input[type=button] {
 
     .details_part1_name {
         color: #253237;
-        /*font-family: "Luckiest Guy", cursive;*/
         font-size: 25px;
         font-weight: 550;
         text-transform: uppercase;
@@ -402,10 +397,8 @@ input[type=button] {
         width: 80vw;
         height: 75px;
         padding: 10px;
-        /*background: #C2DFE3;*/
         display: flex; 
         flex-wrap: wrap; 
-        /*justify-content: space-between; */
         border-radius: 10px;
     }
     
@@ -421,7 +414,6 @@ input[type=button] {
         width: 300px; 
         padding: 10px; 
         margin-bottom: 10px; 
-        /*background-color: #C2DFE3; */
         border-radius: 10px; 
         text-align: center; 
     }
@@ -790,10 +782,10 @@ input[type=button] {
         margin: 2px 10px;
         font-weight: bolder;
         font-size: 16px;
-        word-break:keep-all;/* do not change the line */   
-        white-space:nowrap;/* do not change the line */  
-        overflow:hidden;/* hide the content if it exceed the width */   
-        text-overflow:ellipsis;/* use "..." to represend the hiden part*/
+        word-break:keep-all; 
+        white-space:nowrap;
+        overflow:hidden;  
+        text-overflow:ellipsis;
     }
 
     .team_cardButtonLearnMore{
@@ -945,35 +937,4 @@ input[type=button] {
         margin-bottom: 10px;
     }
 
-    /* button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 4px;
-        cursor: pointer;
-        align-self: flex-start;
-    }
-
-    button:hover {
-        background-color: #45a049;
-    } */
-
-    /* input[type="text"], input[type="submit"], textarea {
-        width: calc(100% - 20px);
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-    } */
-
-    /* input[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        cursor: pointer;
-    }
-
-    input[type="submit"]:hover {
-        background-color: #369636;
-    } */
 }

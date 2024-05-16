@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
 import React from "react"; 
-
 import { UserPageView } from "../views/userPageView";
 import { SignInView } from "../views/signInView";
 import { SignOutView } from "../views/signOutView";
@@ -9,7 +8,6 @@ const UserPage = observer(function UserPageRender(props){
 
     function setResultChosenACB(evt){
         props.model.setcurrentPokemonId(evt);
-        //console.log("EVT",evt);
       }
 
     function setUser(user){
@@ -19,7 +17,6 @@ const UserPage = observer(function UserPageRender(props){
 
     let viewToShow;
     if(props.model.user===null){
-        //console.log("no user")
         viewToShow = ( 
             <div className="signInorOutView">
                 <SignInView
@@ -30,7 +27,6 @@ const UserPage = observer(function UserPageRender(props){
     }
 
     else{
-        //console.log("have user")
         viewToShow = ( 
             <div className="signInorOutView">
             <SignOutView

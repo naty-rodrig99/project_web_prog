@@ -2,7 +2,6 @@ export function CreateTeamView(props){
 
     function backtoTeamPage(evt){
         history.back();
-        //window.location.hash="#/team";
         props.resetTemporal();
     }
     function newTeam(){
@@ -10,9 +9,7 @@ export function CreateTeamView(props){
         window.location.hash="#/team";
     }
 
-    console.log("favorite list: ", props.favoriteList.length)
     function favoriteListCB(pokemon){
-        //console.log("userPage pokemon: ", pokemon);
         function changeToDetails(evt){
             props.detailsChosenACB(pokemon.id);
             window.location.hash="#/details";
@@ -41,7 +38,6 @@ export function CreateTeamView(props){
             props.detailsChosenACB(pokemon.id);
             window.location.hash="#/details";
         }
-        console.log("selectedPokemonsCB",pokemon)
         return <div key={pokemon.id} className="team_carouselItem">
                     <div className="team_resultCard">
                         <img src={pokemon.sprites.front_default}/>
@@ -79,10 +75,13 @@ export function CreateTeamView(props){
                 {props.showErrorMessage && <div className="team_ErrorMsg">Error: You already have 4 pokemons in your team</div>}
             </div>
             <div>
-                {props.emptyTeamName && <div className="team_ErrorMsg">Error: First you need to write the team name</div>}
+                {props.emptyTeamName && <div className="team_ErrorMsg">Error: The team name is empty or already exists.</div>}
             </div>
             <div>
                 {props.showPokemons && <div className="team_Msg">The selected pokemon has been added to the team.</div>}
+            </div>
+            <div>
+                {props.existingTeamName && <div className="team_ErrorMsg">Error: The team name already exists.</div>}
             </div>
             <div class="team_teamName">Team Members:</div>
             <div class="team_box_members">
@@ -90,8 +89,7 @@ export function CreateTeamView(props){
                 {props.temporalTeamsList.map(team => team.pokemons.map(pokemon => selectedPokemonsCB(pokemon)))}
                 </div>
             </div>
-            
-            <button class="team_submit_button" disabled={props.temporalTeamsList.length<4} onClick={newTeam}>Create</button>
+            <button class="team_submit_button" /*disabled={props.temporalTeamsList.length<4}*/ onClick={newTeam}>Create</button>
         </div>
         
     );

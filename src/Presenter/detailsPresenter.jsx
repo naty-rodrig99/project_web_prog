@@ -11,25 +11,21 @@ const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
         const [comments, setComments] = useState([]);
-        const [showPopupExperience, setShowPopupExperience] = useState(false);
-        const [showPopupCaptureRate, setShowPopupCaptureRate] = useState(false);
-        const [showPopupHappiness, setShowPopupHappiness] = useState(false);
-        const [showPopupGrowthRate, setShowPopupGrowthRate] = useState(false);
 
         function togglePopupExperience() {
-            setShowPopupExperience(!showPopupExperience);
+            props.model.setShowPopupExperience(!props.model.showPopupExperience);
         }
 
         function togglePopupCaptureRate() {
-            setShowPopupCaptureRate(!showPopupCaptureRate);
+            props.model.setShowPopupCaptureRate(!props.model.showPopupCaptureRate);
         }
 
         function togglePopupHappiness() {
-            setShowPopupHappiness(!showPopupHappiness);
+            props.model.setShowPopupHappiness(!props.model.showPopupHappiness);
         }
 
         function togglePopupGrowthRate() {
-            setShowPopupGrowthRate(!showPopupGrowthRate);
+            props.model.setShowPopupGrowthRate(!props.model.showPopupGrowthRate);
         }
 
         useEffect(() => {
@@ -88,22 +84,21 @@ const Details = observer(
                     species={props.model.speciesPromiseState.data}
                     searchSpecies={searchSpicies}
                     togglePopupExperience={togglePopupExperience}
-                    showPopupExperience={showPopupExperience}
+                    showPopupExperience={props.model.showPopupExperience}
                     
                 />
             );
         } else if(currentView === 'species'){
-            console.log("species", props.model.speciesPromiseState);
             viewToShow = ( 
                 <DetailsViewSpecies
                     species={props.model.speciesPromiseState.data}
                     searchSpecies={searchSpicies}
                     togglePopupCaptureRate={togglePopupCaptureRate}
-                    showPopupCaptureRate={showPopupCaptureRate}
+                    showPopupCaptureRate={props.model.showPopupCaptureRate}
                     togglePopupHappiness={togglePopupHappiness}
-                    showPopupHappiness={showPopupHappiness}
+                    showPopupHappiness={props.model.showPopupHappiness}
                     togglePopupGrowthRate={togglePopupGrowthRate}
-                    showPopupGrowthRate={showPopupGrowthRate}
+                    showPopupGrowthRate={props.model.showPopupGrowthRate}
                 />
             );
         } else if(currentView === 'forum'){
@@ -128,7 +123,6 @@ const Details = observer(
         <DetailsView
             user={props.model.user}
             setCurrentView={setCurrentView}
-            //pokemonFunction = {searchPokemonACB}
             isInFavorite={props.model.favoriteList.find(isInFavoriteCB)}
             pokemon = {props.model.currentPokemonPromiseState.data}
             ability = {props.model.abilitiesPromiseState.data}
