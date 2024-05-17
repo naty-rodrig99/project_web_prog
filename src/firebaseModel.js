@@ -76,6 +76,7 @@ function userModelToPersistence(objectUser){
         currentPokemonId: objectUser.currentPokemonId,
         currentSearchName: objectUser.searchParams.name,
         favoriteList: pokemonFavoriteIds,
+        currentTeam: objectUser.currentTeam,
         teamsList: userTeams,
         commentList: userComments
     }
@@ -143,6 +144,14 @@ function persistenceToUserModel(userdata_from_firebase, userModel){
     else{
         userModel.setcurrentPokemonId(userdata_from_firebase.currentPokemonId);
         userModel.searchParams.name=(userdata_from_firebase.currentSearchName);
+        if(!userdata_from_firebase.currentTeam || userdata_from_firebase.currentTeam === 'undefined'){
+            console.log("team undefined")
+            userModel.currentTeam=[];
+        }
+        else{
+            userModel.currentTeam=userdata_from_firebase.currentTeam;
+        }
+
         if(!userdata_from_firebase.favoriteList || userdata_from_firebase.favoriteList === 'undefined'){
             searchPokemonFavorite([]);
         }
@@ -228,7 +237,7 @@ function connectToFirebaseUser(model, watchFunction){
     watchFunction(checkPokemonACB, effectPokemonACB);
 
     function checkUserACB(){
-        return [model.currentPokemonId, model.favoriteList, model.teamsList, model.searchParams.name, model.commentList];
+        return [model.currentPokemonId, model.favoriteList, model.currentTeam,model.teamsList, model.searchParams.name, model.commentList];
     }
     function effectUserACB(){
         if(model.user!==null){

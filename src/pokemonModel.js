@@ -280,6 +280,7 @@ const model = {
                 if (team.pokemons.length === 0) {
                     this.teamsList.splice(teamIndex, 1);
                 }
+                this.currentTeam=team
                 return true; //Removed successfully
             } else {
                 return false; //Pokemon was not found

@@ -37,11 +37,11 @@ export function SeeTeamView(props){
             </div>
             <div className="team_teamNameContainer">
                 <span className="team_teamName2">Team Name </span>
-                <span className="team_teamNameNoBold">{props.currentTeam.teamName}</span></div>
+                <span className="team_teamNameNoBold">{props.currentTeam?props.currentTeam.teamName:null}</span></div>
             <div class="team_teamName">Team Members</div>
             <div class="team_box">
                 <div className="team_carousel">
-                    {props.currentTeam.pokemons.map(pokemonsInTeamCB)}
+                    {props.currentTeam?(props.currentTeam.pokemons?props.currentTeam.pokemons.map(pokemonsInTeamCB):null):null}
                 </div>
             </div>
             {props.showRemovedTeamMsg && <div className="team_Msg">The selected pokemon has been removed from the team.</div>}

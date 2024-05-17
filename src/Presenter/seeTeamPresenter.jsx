@@ -8,11 +8,12 @@ const SeeTeam = observer(
         reaction(checkACB, effectACB)
 
         function checkACB(){
-            return [props.model.teamsList.pokemons];
+            return props.model.currentTeam;
         }
 
-        function effectACB(){ 
-            props.model.teamsList;
+        function effectACB(){
+            console.log("change current Team") 
+            //props.model.teamsList;
         }
 
         function setResultChosenACB(evt){
@@ -31,6 +32,7 @@ const SeeTeam = observer(
             }
         }
 
+        console.log("currentPokon",props.model.currentTeam?props.model.currentTeam:"no");
         return <SeeTeamView
             currentTeam={props.model.currentTeam}
             detailsChosenACB = {setResultChosenACB}
