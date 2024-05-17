@@ -237,7 +237,7 @@ function connectToFirebaseUser(model, watchFunction){
     watchFunction(checkPokemonACB, effectPokemonACB);
 
     function checkUserACB(){
-        return [model.currentPokemonId, model.favoriteList, model.currentTeam,model.teamsList, model.searchParams.name, model.commentList];
+        return [model.currentPokemonId, model.favoriteList, model.currentTeam,model.teamsList, model.teamsList.length,model.searchParams.name, model.commentList];
     }
     function effectUserACB(){
         if(model.user!==null){
