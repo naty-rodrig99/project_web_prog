@@ -2,9 +2,8 @@
    The Model keeps the state of the application (Application State). 
    It is an abstract object, i.e. it knows nothing about graphics and interaction.
 */
-import { searchPokemon, getPokemonAbilities, getPokemonSpecies, getPokemonByName } from './pokemonSource.js';
+import { searchPokemon, getPokemonAbilities, getPokemonSpecies, loadPaginationPokemon } from './pokemonSource.js';
 import { resolvePromise } from './resolvePromise.js';
-import axios from 'axios';
 
 const model = {  
     user: null,
@@ -33,38 +32,8 @@ const model = {
     showPopupHappiness: false,
     showPopupGrowthRate: false,
 
-    resetOffset(){
-        this.offset = 0;
-    },
-    
     loadMorePokemon(offset, setPokemonData){
-        axios
-            .get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${offset}`)
-            .then(({data}) => {
-                const newPokemon = data.results.map(pokemon => pokemon.name);
-                setPokemonData(oldData => [
-                    ...oldData,
-                    ...newPokemon.map(name => ({
-                        name: name,
-                        img: null
-                    }))
-                ]);
-                Promise.all(data.results.map(({name}) => this.loadImage(name, setPokemonData)));
-            })
-            this.offset += 10;
-    },
-
-    async loadImage(name, setPokemonData){
-        const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-            setPokemonData(oldData => {
-                const newData = [...oldData];
-                const index = newData.findIndex(pokemon => pokemon.name === name);
-                if (index !== -1){
-                    newData[index].img = data.sprites.front_default
-                }
-                return newData
-            })
-            
+        loadPaginationPokemon(offset, setPokemonData)
     },
 
     setUser(user){
