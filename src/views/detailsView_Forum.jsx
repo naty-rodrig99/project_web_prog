@@ -1,62 +1,43 @@
-import React, { useState, useEffect } from 'react';
-
 export function DetailsViewForum(props) {
-    const [commentText, setCommentText] = useState('');
 
     function handleCommentChange(event) {
-        setCommentText(event.target.value);
+        setCommentText(event.target.value); //get specific comments for the user
+    }
+
+    function addCommentViewACB(evt){
+        const inputElement = document.querySelector('.team_input_teamName');
+        const timestamp = new Date().toLocaleTimeString();
+        props.addComment(inputElement.value, props.pokemon.id, timestamp)
     }
    
-    function commentsCB(pokemon){
-        function addCommentViewACB(evt){
-            props.addComment(commentText, props.pokemon.id, timestamp)
-        }
-        return <div key={pokemon.id} className="team_carouselItem">
-                    <div className="team_resultCard">
-                        <ul>
-                            <li className="team_resultCardName">{pokemon.name}</li>
-                            <li><button className="team_cardButtonLearnMore" onClick={changeToDetails}>Learn More</button></li>
-                        </ul>
+    function commentsCB(comment){
+        console.log(comment)
+        return <li key={comment.pokemon}>
+                    <div className="forum_card">
+                        <div className="comments-container">
+                            <div className="comments-body">
+                                <div className="username">{/*comment.username || "You"*/}</div>
+                                <div className="comment" type="text">{comment.comment}</div>
+                                <div className="timestamp">{comment.timestamp}</div>
+                            </div>
+                        </div>
                     </div>
-
-                </div>;
+                </li>
     }
-
+    console.log('commentList'+props.comments)
     return (
         <div>
             <div className="details_forum">
-                <ul>
-                    {props.comments.map((comment, index) => (
-                        <li key={index}>
-                            <div className="forum_card">
-                                <div className="comments-container">
-                                    <div className="comments-body">
-                                        <div className="username">{comment.username || "You"}</div>
-                                        <div className="comment" type="text">{comment.comment}</div>
-                                        <div className="timestamp">{comment.timestamp}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    ))}
-                    <li>
-                        <div className="forum_card">
-                            <div className="comments-container">
-                                <input
-                                    className="team_input_teamName"
-                                    type="text"
-                                    value={commentText}
-                                    onChange={handleCommentChange}
-                                    placeholder="Add a comment..."
-                                />
-                                <button onClick={addCommentViewACB}>Add comment</button>
-                            </div>
-                            <div className="team_carousel">
-                                {props.commentList.map(commentsCB)}
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <div className="forum_card">
+                    <div className="comments-container">
+                        <input
+                            className="team_input_teamName" type="text"placeholder="Add a comment..."/>
+                        <button onClick={addCommentViewACB}>Add comment</button>
+                    </div>
+                    <div >
+                        {props.comments ? props.comments.map(commentsCB) : null}
+                    </div>
+                </div>
             </div>
         </div>
     );

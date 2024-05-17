@@ -10,7 +10,9 @@ import { readCommentsFromFirebase } from '../firebaseModel';
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
-        const [comments, setComments] = useState([]);
+        const [comments, setComments] = useState(props.model.fetchComments());
+        //const [newCommentText, setNewCommentText] = useState(props.model.writeComment(props.writeComment));
+        //const fetchedComments = props.model.fetchComments();
 
         function togglePopupExperience() {
             props.model.setShowPopupExperience(!props.model.showPopupExperience);
@@ -30,6 +32,7 @@ const Details = observer(
 
         useEffect(() => {
             if (currentView === 'forum' && props.model.currentPokemonId && props.model.user) {
+                //console.log('useEffectFunction ' + props.model.currentPokemonId, props.model.user)
                 readCommentsFromFirebase(props.model.user, props.model.currentPokemonId)
                     .then(fetchedComments => {
                         setComments(fetchedComments);
@@ -41,7 +44,28 @@ const Details = observer(
             }
         }, [currentView, props.model.currentPokemonId, props.model.user]);
             
-
+        function handleSubmitComment() {
+            if (newCommentText.trim() !== '') {
+                props.model.writeComment(props.model.user.id, props.model.currentPokemonId, newCommentText)
+                    .then(() => {
+                        // Optionally, fetch comments again to include the new comment
+                        readCommentsFromFirebase(props.model.user.id, props.model.currentPokemonId)
+                            .then(fetchedComments => {
+                                setComments(fetchedComments);
+                            })
+                            .catch(error => {
+                                console.error('Error fetching comments:', error);
+                            });
+    
+                        // Clear the new comment text
+                        setNewCommentText('');
+                    })
+                    .catch(error => {
+                        console.error('Error writing comment:', error);
+                    });
+            }
+        }
+    
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
         }
@@ -61,7 +85,8 @@ const Details = observer(
             props.model.minuscurrentPokemonLikeNumber();
         }
 
-        function addCommentACB(comment, pokemon, timestamp){
+        function addCommentACB(comment, pokemon, timestamp){// needed?
+            console.log("addcomment")
             props.model.addComment(comment, pokemon, timestamp);
         }
 
@@ -110,9 +135,9 @@ const Details = observer(
             viewToShow = ( 
                 <DetailsViewForum
                 user={props.user}
-                addComment={addCommentACB}
+                addComment={handleSubmitComment}
                 pokemon = {props.model.currentPokemonPromiseState.data}
-                comments={props.model.commentList}
+                comments={comments}
                 />
             );
         }

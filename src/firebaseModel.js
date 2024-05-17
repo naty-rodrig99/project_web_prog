@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {getAuth,GoogleAuthProvider, signInWithPopup,signOut,onAuthStateChanged } from "firebase/auth";
-import { getDatabase, ref, get, set, child, onValue} from "firebase/database";
+import { getDatabase, ref, get, set, child, onValue, push} from "firebase/database";
 import { searchPokemon } from "./pokemonSource";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -36,7 +36,7 @@ const PATH_user="users"; //save users'favorite list and team
 function pokemonModelToPersistence(model){
     const pokemonData = {
         pokemonId:model.currentReadPokemonId,
-        comments: model.currentPokemonCommentList,
+        comments: model.commentList,
         likeNumber: model.currentPokemonLikeNumber,
     }
     return pokemonData;
@@ -86,7 +86,7 @@ function persistenceToPokemonModel(pokemondata_from_firebase, model){
     }
     else{
         model.currentReadPokemonId=model.currentPokemonId;
-        model.currentPokemonCommentList = pokemondata_from_firebase.comments || [];
+        model.commentList = pokemondata_from_firebase.comments || [];//here
         model.currentPokemonLikeNumber=pokemondata_from_firebase.likeNumber;
     }
     return model;
@@ -193,7 +193,7 @@ function saveToFirebaseUser(model, uid){
 
 function saveToFirebasePokemon(userId, PokenmonModel) {
     const pokemonData = {
-        comments: PokenmonModel.currentPokemonCommentList,
+        comments: PokenmonModel.commentList,
         likeNumber: PokenmonModel.currentPokemonLikeNumber
     };
     set(ref(db, `users/${userId}/commentList`), pokemonData);
@@ -223,7 +223,8 @@ function readFromFirebaseUser(model, uid){
     return get(ref(db, PATH_user+"/"+uid)).then(convertDataCB).then(changeModelReadyCB);
 }
 
-function readCommentsFromFirebase(userId, pokemonId) {
+function readCommentsFromFirebase(userId, pokemonId) {//readcomments
+    console.log("Reading comments for: ", { userId, pokemonId });
     const commentsRef = ref(db, `users/${userId}/commentList`);
 
     return get(commentsRef).then(snapshot => {
@@ -240,6 +241,27 @@ function readCommentsFromFirebase(userId, pokemonId) {
         console.error("Failed to fetch comments:", error);
         throw error;
     });
+}
+
+function writeCommentToFirebase(userId, pokemonId, comment) {
+    console.log("Writing comment: ", { userId, pokemonId, comment });
+    const commentsRef = ref(db, `users/${userId}/commentList`);
+    const newCommentRef = push(commentsRef); // Generate a new unique key
+
+    const commentData = {
+        pokemon: pokemonId,
+        text: comment,
+        timestamp: Date.now() // Optionally, add a timestamp
+    };
+
+    return set(newCommentRef, commentData)
+        .then(() => {
+            console.log("Comment data written to Firebase:", commentData);
+        })
+        .catch(error => {
+            console.error("Failed to write comment:", error);
+            throw error;
+        });
 }
 
 function connectToFirebaseUser(model, watchFunction){
@@ -280,7 +302,7 @@ function connectToFirebaseUser(model, watchFunction){
         if(model.currentPokemonId!==model.currentReadPokemonId){
             readFromFirebasePokemon(model)
         }
-        return [model.currentPokemonId, model.currentPokemonLikeNumber, model.currentPokemonCommentList];
+        return [model.currentPokemonId, model.currentPokemonLikeNumber, model.commentList];
     }
     function effectPokemonACB(){
         if(model.currentReadPokemonId!==null && model.currentPokemonId===model.currentReadPokemonId){
@@ -289,4 +311,4 @@ function connectToFirebaseUser(model, watchFunction){
     }
 }
 
-export { connectToFirebaseUser, pokemonModelToPersistence, userModelToPersistence, persistenceToUserModel, persistenceToPokemonModel, saveToFirebasePokemon, saveToFirebaseUser, readFromFirebaseUser, readFromFirebasePokemon, readCommentsFromFirebase }
+export { connectToFirebaseUser, pokemonModelToPersistence, userModelToPersistence, persistenceToUserModel, persistenceToPokemonModel, saveToFirebasePokemon, saveToFirebaseUser, readFromFirebaseUser, readFromFirebasePokemon, readCommentsFromFirebase, writeCommentToFirebase }
