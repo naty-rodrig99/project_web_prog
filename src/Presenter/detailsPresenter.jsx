@@ -10,7 +10,8 @@ import { readCommentsFromFirebase } from '../firebaseModel';
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
-        const [comments, setComments] = useState(props.model.fetchComments());
+        const [commentText, setComments] = useState('');
+        //const [comments, setComments] = useState(props.model.fetchComments());
         //const [newCommentText, setNewCommentText] = useState(props.model.writeComment(props.writeComment));
         //const fetchedComments = props.model.fetchComments();
 
@@ -29,45 +30,18 @@ const Details = observer(
         function togglePopupGrowthRate() {
             props.model.setShowPopupGrowthRate(!props.model.showPopupGrowthRate);
         }
-
-        useEffect(() => {
-            if (currentView === 'forum' && props.model.currentPokemonId && props.model.user) {
-                //console.log('useEffectFunction ' + props.model.currentPokemonId, props.model.user)
-                readCommentsFromFirebase(props.model.user, props.model.currentPokemonId)
-                    .then(fetchedComments => {
-                        setComments(fetchedComments);
-                        //console.log(props.model.commentList);  // Update state with the fetched comments
-                    })
-                    .catch(error => {
-                        console.error('Error fetching comments:', error);
-                    });
-            }
-        }, [currentView, props.model.currentPokemonId, props.model.user]);
             
         function handleSubmitComment() {
-            if (newCommentText.trim() !== '') {
-                props.model.writeComment(props.model.user.id, props.model.currentPokemonId, newCommentText)
-                    .then(() => {
-                        // Optionally, fetch comments again to include the new comment
-                        readCommentsFromFirebase(props.model.user.id, props.model.currentPokemonId)
-                            .then(fetchedComments => {
-                                setComments(fetchedComments);
-                            })
-                            .catch(error => {
-                                console.error('Error fetching comments:', error);
-                            });
-    
-                        // Clear the new comment text
-                        setNewCommentText('');
-                    })
-                    .catch(error => {
-                        console.error('Error writing comment:', error);
-                    });
-            }
+            debugger
+            props.model.writeComment(commentText, Date.now());
         }
     
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
+        }
+
+        function saveCommentTextACB(commentText){
+            setComments(commentText);
         }
 
         function searchSpicies(){
@@ -137,7 +111,9 @@ const Details = observer(
                 user={props.user}
                 addComment={handleSubmitComment}
                 pokemon = {props.model.currentPokemonPromiseState.data}
-                comments={comments}
+                commentText = {commentText}
+                saveCommentTextACB = {saveCommentTextACB}
+                //comments={props.comments}
                 />
             );
         }

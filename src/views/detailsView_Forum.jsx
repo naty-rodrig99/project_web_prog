@@ -1,13 +1,18 @@
 export function DetailsViewForum(props) {
 
-    function handleCommentChange(event) {
-        setCommentText(event.target.value); //get specific comments for the user
+    function handleCommentSubmitionACB(event) {
+        console.log('handle '+event.target.value);
+        props.addComment();
+        //get specific comments for the user
     }
 
     function addCommentViewACB(evt){
-        const inputElement = document.querySelector('.team_input_teamName');
-        const timestamp = new Date().toLocaleTimeString();
-        props.addComment(inputElement.value, props.pokemon.id, timestamp)
+        //console.log('addCommentView '+inputElement.value);
+        //const inputElement = document.querySelector('.team_input_teamName');
+        //const timestamp = new Date().toLocaleTimeString();
+        // props.addComment(inputElement.value, props.pokemon.id, timestamp)
+        //debugger
+        props.saveCommentTextACB(evt.target.value)
     }
    
     function commentsCB(comment){
@@ -31,8 +36,9 @@ export function DetailsViewForum(props) {
                 <div className="forum_card">
                     <div className="comments-container">
                         <input
+                            onChange={addCommentViewACB}
                             className="team_input_teamName" type="text"placeholder="Add a comment..."/>
-                        <button onClick={addCommentViewACB}>Add comment</button>
+                        <button onClick={handleCommentSubmitionACB}>Add comment</button>
                     </div>
                     <div >
                         {props.comments ? props.comments.map(commentsCB) : null}

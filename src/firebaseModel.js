@@ -36,7 +36,7 @@ const PATH_user="users"; //save users'favorite list and team
 function pokemonModelToPersistence(model){
     const pokemonData = {
         pokemonId:model.currentReadPokemonId,
-        comments: model.commentList,
+        commentList: model.commentList,
         likeNumber: model.currentPokemonLikeNumber,
     }
     return pokemonData;
@@ -86,7 +86,7 @@ function persistenceToPokemonModel(pokemondata_from_firebase, model){
     }
     else{
         model.currentReadPokemonId=model.currentPokemonId;
-        model.commentList = pokemondata_from_firebase.comments || [];//here
+        model.commentList = pokemondata_from_firebase.commentList || [];//here
         model.currentPokemonLikeNumber=pokemondata_from_firebase.likeNumber;
     }
     return model;
@@ -193,7 +193,7 @@ function saveToFirebaseUser(model, uid){
 
 function saveToFirebasePokemon(userId, PokenmonModel) {
     const pokemonData = {
-        comments: PokenmonModel.commentList,
+        commentList: PokenmonModel.commentList,
         likeNumber: PokenmonModel.currentPokemonLikeNumber
     };
     set(ref(db, `users/${userId}/commentList`), pokemonData);
@@ -280,7 +280,7 @@ function connectToFirebaseUser(model, watchFunction){
 
     readFromFirebasePokemon(model)
     watchFunction(checkPokemonChangeACB, effectPokemonChangeACB);
-    watchFunction(checkPokemonACB, effectPokemonACB);
+    watchFunction(checkPokemonACB, effectPokemonACB(model));
 
     function checkUserACB(){
         return [model.currentPokemonId, model.favoriteList, model.teamsList, model.searchParams.name, model.commentList];
@@ -304,7 +304,7 @@ function connectToFirebaseUser(model, watchFunction){
         }
         return [model.currentPokemonId, model.currentPokemonLikeNumber, model.commentList];
     }
-    function effectPokemonACB(){
+    function effectPokemonACB(model){
         if(model.currentReadPokemonId!==null && model.currentPokemonId===model.currentReadPokemonId){
             saveToFirebasePokemon(model);
         }

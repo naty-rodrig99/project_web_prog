@@ -175,8 +175,8 @@ const model = {
             readCommentsFromFirebase(this.user.id, this.currentPokemonId)//issue
                 //console.log(this.user.id, this.currentPokemonId)
                 .then(comments => {
-                    if(this.commentList){
-
+                    if(this.model && this.commentList){
+                        console.log(this.model && this.commentList)
                         this.commentList = comments;//here
                     }                
                 })
@@ -184,18 +184,14 @@ const model = {
         }
     },
     
-    writeComment(commentText) {
-        if (this.currentPokemonId) {
-            writeCommentToFirebase(this.user.id, this.currentPokemonId, commentText)
-                .then(() => {
-                    console.log("Comment successfully written!");
-                    // Optionally, fetch the updated comments list
-                    this.fetchComments();
-                })
-                .catch(error => console.error("Error writing comment: ", error));
-        }
+    writeComment(commentText, timestamp) {
+        debugger
+        //var x = {"comment": commentList}
+        //console.log(commentText, timestamp);
+        this.commentList.push({"comment": commentText});   
+        console.log(this.commentList)
     },
-
+    
     getAbilities(){
         resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
     },
