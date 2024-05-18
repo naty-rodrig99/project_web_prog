@@ -4,18 +4,22 @@
 */
 import { searchPokemon, getPokemonAbilities, getPokemonSpecies, loadPaginationPokemon } from './pokemonSource.js';
 import { resolvePromise } from './resolvePromise.js';
+import { reaction } from "mobx";
+import { readCommentsFromFirebase, writeCommentToFirebase } from './firebaseModel.js';
+import axios from 'axios';
 
 const model = {  
     user: null,
     currentPokemonId: null,
     currentReadPokemonId: null,
     currentPokemonLikeNumber: 0,
-    currentPokemonCommentList: [],
+    //currentPokemonCommentList: [],
     searchParams: {},
     queryParams: {},
     favoriteList:[],
     teamsList: [],
     temporalTeamsList: [],
+    //temporalCommentList: [],
     currentTeam: null,
     commentList: [],
     searchResultsPromiseState: {},
@@ -113,13 +117,12 @@ const model = {
         this.searchParams={};
         this.queryParams={};
         this.currentPokemonLikeNumber=0;
-        this.currentPokemonCommentList=[];
     },
 
     clearPokemonModel(){
         this.currentReadPokemonId = null;
         this.currentPokemonLikeNumber = 0;
-        this.currentPokemonCommentList = [];
+        this.commentList = [];
     },
 
     setcurrentPokemonId(pokemonId){
@@ -131,6 +134,28 @@ const model = {
         this.currentPokemonId = pokemonId;
     },
 
+    fetchComments() {
+        if (this.currentPokemonId) {
+            readCommentsFromFirebase(this.user.id, this.currentPokemonId)//issue
+                //console.log(this.user.id, this.currentPokemonId)
+                .then(comments => {
+                    if(this.model && this.commentList){
+                        console.log(this.model && this.commentList)
+                        this.commentList = comments;//here
+                    }                
+                })
+                .catch(error => console.error("Error fetching comments: ", error));
+        }
+    },
+    
+    writeComment(commentText, timestamp) {
+        debugger
+        //var x = {"comment": commentList}
+        //console.log(commentText, timestamp);
+        this.commentList.push({"comment": commentText});   
+        console.log(this.commentList)
+    },
+    
     getAbilities(){
         resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
     },
@@ -160,6 +185,13 @@ const model = {
     addToFavoriteList(pokemonToAdd){
         if(!this.favoriteList.includes(pokemonToAdd)){
             this.favoriteList= [...this.favoriteList, pokemonToAdd];
+        }
+    },
+
+    addToCommentList(commentToAdd, pokemonId, timestamp){
+        if(!this.commentList.includes(commentToAdd)){
+            this.commentList= [...this.commentList, {commentToAdd, pokemonId, timestamp}];
+            console.log(commentToAdd, pokemonId, timestamp);
         }
     },
 
@@ -226,6 +258,7 @@ const model = {
     },
 
     addComment(comment, pokemon, timestamp) {
+        console.log("addcommentmodel")
         this.commentList= [...this.commentList,{comment, pokemon, timestamp}];
     },
 
@@ -292,4 +325,53 @@ const model = {
 
 };
 
-export {model};
+// function watchOrReaction(checkCB, effectCB, interval = 1000) {
+//     let lastCheck = checkCB();
+//     setInterval(() => {
+//         const currentCheck = checkCB();
+//         if (JSON.stringify(lastCheck) !== JSON.stringify(currentCheck)) {
+//             lastCheck = currentCheck;
+//             effectCB();
+//         }
+//     }, interval);
+// }
+
+function checkPokemonIdChangeACB() {
+    return model.currentPokemonId; //pokemon list 
+}
+
+function sideEffectFetchCommentsACB() {
+    if (model.user) {
+        readCommentsFromFirebase(model.user, model.currentPokemonId)
+            .then(comments => {
+                model.commentList = comments;
+            })
+            .catch(error => console.error("Error fetching comments: ", error));
+    }
+}
+
+function checkCommentListChangeACB() {
+    return model.commentList; //pokemon list 
+}
+
+function sideEffectWriteCommentsACB(newComment) {
+    if (model.user) {
+        writeCommentToFirebase(model.user, model.currentPokemonId, newComment)
+            .then(() => {
+                console.log("Comment successfully written!");
+            })
+            .catch(error => console.error("Error writing comment: ", error));
+    }
+}
+
+
+
+
+function initializeSideEffects() {
+    reaction(checkPokemonIdChangeACB, sideEffectFetchCommentsACB);
+    reaction(checkCommentListChangeACB, sideEffectWriteCommentsACB);
+}
+
+initializeSideEffects();
+
+export {model, initializeSideEffects};

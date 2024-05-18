@@ -10,7 +10,10 @@ import { readCommentsFromFirebase } from '../firebaseModel';
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
-        const [comments, setComments] = useState([]);
+        const [commentText, setComments] = useState('');
+        //const [comments, setComments] = useState(props.model.fetchComments());
+        //const [newCommentText, setNewCommentText] = useState(props.model.writeComment(props.writeComment));
+        //const fetchedComments = props.model.fetchComments();
 
         function togglePopupExperience() {
             props.model.setShowPopupExperience(!props.model.showPopupExperience);
@@ -27,21 +30,18 @@ const Details = observer(
         function togglePopupGrowthRate() {
             props.model.setShowPopupGrowthRate(!props.model.showPopupGrowthRate);
         }
-
-        useEffect(() => {
-            if (currentView === 'forum' && props.model.currentPokemonId) {
-                readCommentsFromFirebase(props.model.currentPokemonId)
-                    .then(fetchedComments => {
-                        setComments(fetchedComments);  // Update state with the fetched comments
-                    })
-                    .catch(error => {
-                        console.error('Error fetching comments:', error);
-                    });
-            }
-        }, [currentView, props.model.currentPokemonId]);        
-
+            
+        function handleSubmitComment() {
+            debugger
+            props.model.writeComment(commentText, Date.now());
+        }
+    
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
+        }
+
+        function saveCommentTextACB(commentText){
+            setComments(commentText);
         }
 
         function searchSpicies(){
@@ -59,7 +59,8 @@ const Details = observer(
             props.model.minuscurrentPokemonLikeNumber();
         }
 
-        function addCommentACB(comment, pokemon, timestamp){
+        function addCommentACB(comment, pokemon, timestamp){// needed?
+            console.log("addcomment")
             props.model.addComment(comment, pokemon, timestamp);
         }
 
@@ -108,9 +109,11 @@ const Details = observer(
             viewToShow = ( 
                 <DetailsViewForum
                 user={props.user}
-                addComment={addCommentACB}
+                addComment={handleSubmitComment}
                 pokemon = {props.model.currentPokemonPromiseState.data}
-                comments={comments}
+                commentText = {commentText}
+                saveCommentTextACB = {saveCommentTextACB}
+                //comments={props.comments}
                 />
             );
         }
