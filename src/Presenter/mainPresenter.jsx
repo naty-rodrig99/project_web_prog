@@ -3,8 +3,15 @@ import { observer } from "mobx-react-lite";
 import { SearchResultsView } from "../views/searchResultsView";
 import { SearchFormView } from "../views/searchFormView";
 import { InfiniteScrollView } from "../views/infiniteScrollView";
+import { useState, useEffect } from "react";
 
 const Main = observer(function MainRender(props){
+    const [pokemonData, setPokemonData] = useState([]);
+    const [offset, setOffset] = useState(0);
+    useEffect(() => {
+      loadPokemonACB(offset, setPokemonData)
+  }, [offset])
+
     return (
         <div>
             <SearchFormView
@@ -64,22 +71,24 @@ const Main = observer(function MainRender(props){
               currentSearchName = {props.model.searchParams.name}
               loadMorePokemon = {loadPokemonACB}
               reset = {resetOffsetCB}
-              pokemonData = {props.model.pokemonData}
-              setPokemonData = {setPokemonDataACB}
+              pokemonData = {pokemonData}
+              setPokemonData = {setPokemonData}
+              offset = {offset}
+              setOffset = {setOffsetACB}
             />
         </div>
     )
 
-    function setPokemonDataACB(value){
-      props.model.setPokemonData(value)
+    function setOffsetACB(value){
+      setOffset(value)
     }
 
     function resetOffsetCB(){
       props.model.resetOffset()
     }
 
-    function loadPokemonACB(a, b){
-      props.model.loadMorePokemon(a, b)
+    function loadPokemonACB(offset, setPokemonData){
+      props.model.loadMorePokemon(offset, setPokemonData)
     }
 
     function setResultChosenACB(evt){

@@ -1,5 +1,6 @@
 //import { BASE_URL } from './apiConfig.js';
 const BASE_URL = 'https://pokeapi.co/api/v2';
+import axios from "axios";
 
 export function searchPokemon(searchParams){
     //console.log("searchParams", searchParams)
@@ -34,6 +35,35 @@ export function searchPokemon(searchParams){
         //console.log("results", objectResponse)
         return objectResponse; 
     }
+}
+
+export function loadPaginationPokemon(offset, setPokemonData){
+    axios
+    .get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${offset}`)
+    .then(({data}) => {
+        const newPokemon = data.results.map(pokemon => pokemon.name);
+        setPokemonData(oldData => [
+            ...oldData,
+            ...newPokemon.map(name => ({
+                name: name,
+                img: null
+            }))
+        ]);
+        Promise.all(data.results.map(({name}) => loadImage(name, setPokemonData)));
+    })
+}
+
+async function loadImage(name, setPokemonData){
+    const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        setPokemonData(oldData => {
+            const newData = [...oldData];
+            const index = newData.findIndex(pokemon => pokemon.name === name);
+            if (index !== -1){
+                newData[index].img = data.sprites.front_default
+            }
+            return newData
+        })
+        
 }
 
 export function getPokemonByName(name){
