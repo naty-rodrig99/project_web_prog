@@ -1,19 +1,15 @@
 import { DetailsView } from "../views/detailsView";
 import { DetailsViewDetails } from "../views/detailsView_Details"
 import { DetailsViewSpecies } from "../views/detialsView_Species";
-import { DetailsViewForum } from "../views/detailsView_Forum";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react"; 
-import { readCommentsFromFirebase } from '../firebaseModel';
+import DetailsViewLocation from "../views/detailsView_Location";
 
 
 const Details = observer(
     function DetialsRender(props){
         const [currentView, setCurrentView] = useState('details');
         const [commentText, setComments] = useState('');
-        //const [comments, setComments] = useState(props.model.fetchComments());
-        //const [newCommentText, setNewCommentText] = useState(props.model.writeComment(props.writeComment));
-        //const fetchedComments = props.model.fetchComments();
 
         function togglePopupExperience() {
             props.model.setShowPopupExperience(!props.model.showPopupExperience);
@@ -31,23 +27,27 @@ const Details = observer(
             props.model.setShowPopupGrowthRate(!props.model.showPopupGrowthRate);
         }
             
-        function handleSubmitComment() {
-            debugger
-            props.model.writeComment(commentText, Date.now());
-        }
+        // function handleSubmitComment() {
+        //     debugger
+        //     props.model.writeComment(commentText, Date.now());
+        // }
     
         function searchAbilityACB(){
             props.model.getAbilities(props.model.currentPokemonId);
         }
 
-        function saveCommentTextACB(commentText){
-            setComments(commentText);
-        }
+        // function saveCommentTextACB(commentText){
+        //     setComments(commentText);
+        // }
 
         function searchSpicies(){
             props.model.getSpecies(props.model.currentPokemonId);
             props.model.setPokemon()
         }
+
+        // function searchLocations(){
+        //     props.model.getLocations(props.model.currentPokemonId);
+        // }
 
         function addToFavoriteListACB(){
             props.model.addToFavoriteList(props.model.currentPokemonPromiseState.data);
@@ -59,10 +59,10 @@ const Details = observer(
             props.model.minuscurrentPokemonLikeNumber();
         }
 
-        function addCommentACB(comment, pokemon, timestamp){// needed?
-            console.log("addcomment")
-            props.model.addComment(comment, pokemon, timestamp);
-        }
+        // function addCommentACB(comment, pokemon, timestamp){// needed?
+        //     console.log("addcomment")
+        //     props.model.addComment(comment, pokemon, timestamp);
+        // }
 
         if(!props.model.currentPokemonPromiseState.promise){
             return "no data"
@@ -102,18 +102,10 @@ const Details = observer(
                     showPopupGrowthRate={props.model.showPopupGrowthRate}
                 />
             );
-        } else if(currentView === 'forum'){
-            if (props.model.user===null){
-                window.location.hash="#/user";
-            }
+        } else if(currentView === 'locations'){
             viewToShow = ( 
-                <DetailsViewForum
-                user={props.user}
-                addComment={handleSubmitComment}
-                pokemon = {props.model.currentPokemonPromiseState.data}
-                commentText = {commentText}
-                saveCommentTextACB = {saveCommentTextACB}
-                //comments={props.comments}
+                <DetailsViewLocation
+                locations={props.model.locationPromiseState.data}
                 />
             );
         }

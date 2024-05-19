@@ -2,7 +2,7 @@
    The Model keeps the state of the application (Application State). 
    It is an abstract object, i.e. it knows nothing about graphics and interaction.
 */
-import { searchPokemon, getPokemonAbilities, getPokemonSpecies, loadPaginationPokemon } from './pokemonSource.js';
+import { searchPokemon, getPokemonAbilities, getPokemonSpecies, loadPaginationPokemon, getPokemonLocations } from './pokemonSource.js';
 import { resolvePromise } from './resolvePromise.js';
 import { reaction } from "mobx";
 import { readCommentsFromFirebase, writeCommentToFirebase } from './firebaseModel.js';
@@ -35,6 +35,7 @@ const model = {
     showPopupCaptureRate: false,
     showPopupHappiness: false,
     showPopupGrowthRate: false,
+    locationPromiseState: {},
 
     loadMorePokemon(offset, setPokemonData){
         loadPaginationPokemon(offset, setPokemonData)
@@ -130,6 +131,7 @@ const model = {
             resolvePromise(searchPokemon(pokemonId),this.currentPokemonPromiseState);
             resolvePromise(getPokemonAbilities(pokemonId),this.abilitiesPromiseState);
             resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
+            resolvePromise(getPokemonLocations(pokemonId), this.locationPromiseState);
         }
         this.currentPokemonId = pokemonId;
     },
@@ -149,7 +151,6 @@ const model = {
     },
     
     writeComment(commentText, timestamp) {
-        debugger
         //var x = {"comment": commentList}
         //console.log(commentText, timestamp);
         this.commentList.push({"comment": commentText});   
@@ -162,6 +163,10 @@ const model = {
 
     getSpecies(pokemonId){
         resolvePromise(getPokemonSpecies(pokemonId),this.speciesPromiseState);
+    },
+
+    getLocations(pokemonId){
+        resolvePromise(getPokemonLocations(pokemonId),this.locationPromiseState);
     },
 
     setSearchText(newName){
@@ -324,17 +329,6 @@ const model = {
     },
 
 };
-
-// function watchOrReaction(checkCB, effectCB, interval = 1000) {
-//     let lastCheck = checkCB();
-//     setInterval(() => {
-//         const currentCheck = checkCB();
-//         if (JSON.stringify(lastCheck) !== JSON.stringify(currentCheck)) {
-//             lastCheck = currentCheck;
-//             effectCB();
-//         }
-//     }, interval);
-// }
 
 function checkPokemonIdChangeACB() {
     return model.currentPokemonId; //pokemon list 

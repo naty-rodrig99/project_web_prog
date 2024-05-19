@@ -154,3 +154,34 @@ export function getPokemonSpecies(pokemonName){
         return objectResponse; 
     }
 }
+
+export function getPokemonLocations(pokemonId) {
+    // Define the URL for the Pokemon location area endpoint
+    const URL = `${BASE_URL}/pokemon/${pokemonId}/encounters`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:8080/',
+            'Access-Control-Allow-Credentials': 'true'
+        }
+    };
+
+    // Fetch the data from the API
+    return fetch(URL, options).then(gotResponseACB).then(someACB);
+
+    // Asynchronous callback to handle the response
+    function gotResponseACB(response) {
+        if (!response.ok) {
+            throw new Error('No location data found for the specified Pokémon.');
+        }
+        const result = response.json();
+        return result;
+    }
+
+    // Another callback to handle the JSON object response
+    function someACB(objectResponse) {
+        return objectResponse;
+    }
+}

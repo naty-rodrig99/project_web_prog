@@ -36,7 +36,7 @@ export function DetailsView(props){
             props.setCurrentView("species")
         }
         else{
-            props.setCurrentView("forum")
+            props.setCurrentView("locations")
         }
     }
     //choose details tab
@@ -71,7 +71,7 @@ export function DetailsView(props){
             <div className="details_selector">
                 <button className="detail_selector_item" style ={defaultStyle} onClick={onChange0}>Details</button>
                 <button className="detail_selector_item" onClick={onChange1}>Species</button>
-                <button className="detail_selector_item" onClick={onChange2}>Forum</button>
+                <button className="detail_selector_item" onClick={onChange2}>Locations</button>
             </div>
         </div>
     )
